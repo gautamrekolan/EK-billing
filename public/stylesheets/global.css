@@ -1,0 +1,35 @@
+body {
+    font-family: Verdana, sans-serif;
+    font-size: 1em;
+}
+
+#page {
+    text-align: center;
+    padding: 30px;
+    width: auto;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h4 {
+    padding-bottom: 40px;
+}
+
+a,
+a:hover,
+a:visited {
+    color: #990033;
+}
+
+a:hover,
+a:visited {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
