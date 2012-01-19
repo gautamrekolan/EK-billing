@@ -372,7 +372,7 @@ Ajax.Autocompleter = Class.create(Autocompleter.Base, {
 });
 
 // The local array autocompleter. Used when you'd prefer to
-// inject an array of autocompletion options into the page, rather
+// inject an array of autocompletion options into the pages, rather
 // than sending out Ajax queries, which can be quite slow sometimes.
 //
 // The constructor takes four parameters. The first two are, as usual,

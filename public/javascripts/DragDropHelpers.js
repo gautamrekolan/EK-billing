@@ -38,7 +38,7 @@ var DragDropHelpers = new function () {
 	me.showMouseoverCue = true;
 
 	/*
-	 * Run when the page is loaded.
+	 * Run when the pages is loaded.
 	 */
 	me.init = function () {
 		if (EventHelpers.hasPageLoadHappened(arguments)) {

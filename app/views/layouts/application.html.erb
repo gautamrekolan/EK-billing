@@ -18,30 +18,40 @@
             <h1><%= link_to 'Easy Keeper Billing', root_path %></h1>
         </div>
         <div id="top_nav">
-            <ul>
-                <% if session[:user].nil? == false %>
-                    <% if params[:controller] == "admin" %>
-                        <li class="on"><%= link_to 'INVOICE BUILDER', admin_path %></li>
+            <ul style="padding: 0">
+                <% #if session[:user].nil? == false %>
+                    <% if true #if session[:admin] == true %>
+                        <% if params[:controller] == "organizations" %>
+                            <li class="on"><%= link_to 'ORGANIZATIONS', organizations_path %></li>
+                        <% else %>
+                            <li class="off"><%#= link_to 'ORGANIZATIONS', organizations_path %></li>
+                        <% end %>
+                        <li class="off"><%#= link_to 'LOGOUT', '#' %></li>
+                        <li class="on">COMING SOON...</li>
                     <% else %>
-                        <li class="off"><%= link_to 'INVOICE BUILDER', admin_path %></li>
+                        <% if params[:controller] == "admin" %>
+                            <li class="on"><%= link_to 'INVOICE BUILDER', admin_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'INVOICE BUILDER', admin_path %></li>
+                        <% end %>
+                        <% if params[:controller] == "customers" %>
+                            <li class="on"><%= link_to 'CUSTOMERS', customers_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'CUSTOMERS', customers_path %></li>
+                        <% end %>
+                        <% if params[:controller] == "invoices" %>
+                            <li class="on"><%= link_to 'INVOICES', invoices_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'INVOICES', invoices_path %></li>
+                        <% end %>
+                        <% if params[:controller] == "documents" %>
+                            <li class="on"><%= link_to 'BINDER', documents_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'BINDER', documents_path %></li>
+                        <% end %>
+                        <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
                     <% end %>
-                    <% if params[:controller] == "customers" %>
-                        <li class="on"><%= link_to 'CUSTOMERS', customers_path %></li>
-                    <% else %>
-                        <li class="off"><%= link_to 'CUSTOMERS', customers_path %></li>
-                    <% end %>
-                    <% if params[:controller] == "invoices" %>
-                        <li class="on"><%= link_to 'INVOICES', invoices_path %></li>
-                    <% else %>
-                        <li class="off"><%= link_to 'INVOICES', invoices_path %></li>
-                    <% end %>
-                    <% if params[:controller] == "documents" %>
-                        <li class="on"><%= link_to 'BINDER', documents_path %></li>
-                    <% else %>
-                        <li class="off"><%= link_to 'BINDER', documents_path %></li>
-                    <% end %>
-                    <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
-                <% end %>
+                <% #end %>
             </ul>
         </div>
     </div>
@@ -53,9 +63,9 @@
             <% if session[:user].nil? == false %>
               <li><%= link_to 'MY PROFILE', edit_user_path(session[:user]) %></li>
             <% end %>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#">CONTACT</a></li>
-            <li><%= link_to 'EASY KEEPER EQUINE', 'http://www.easykeeperequine.com' %></li>
+            <li><a href="">ABOUT</a><%#= link_to 'ABOUT', about_path %></li>
+            <li><a href="">CONTACT</a><%#= link_to 'CONTACT', contact_path %></li>
+            <li><%#= link_to 'EASY KEEPER EQUINE', 'http://www.easykeeperequine.com' %></li>
         </ul>
     </div>
 </div>

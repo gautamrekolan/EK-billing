@@ -1,0 +1,62 @@
+<%= form_for(@organization) do |f| %>
+  <% if @organization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+      <ul>
+      <% @organization.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Name</label>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <label>Mailing address</label>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <label>City</label>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <label>State</label>
+    <%= f.text_field :state %>
+  </div>
+
+  <div class="field">
+    <label>Zip</label>
+    <%= f.text_field :zip %>
+  </div>
+
+  <div class="field">
+    <label>Phone</label>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <label>Website</label>
+    <%= f.text_field :website %>
+  </div>
+
+  <div class="field">
+    <label>Contact person</label>
+    <%= f.text_field :contact %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

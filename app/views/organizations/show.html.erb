@@ -1,0 +1,17 @@
+<div class="list">
+
+<h1 class="title"><%= @organization.name %></h1>
+
+<%= @organization.contact %>
+<br />
+<%= @organization.address %>
+<br />
+<%= @organization.city %>, <%= @organization.state %> <%= @organization.zip %>
+<br />
+<%= number_to_phone(@organization.phone) %>
+<br />
+<%= link_to @organization.email, "mailto:" + @organization.email %>
+<br />
+<%= link_to @organization.website, @organization.website %>
+
+</div>

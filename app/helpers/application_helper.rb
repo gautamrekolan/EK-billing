@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  # Returns a title on a per-page basis
+  # Returns a title on a per-pages basis
   def title
     base_title = "Snoopy"
     if @title.nil?

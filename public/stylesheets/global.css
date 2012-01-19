@@ -34,6 +34,7 @@ div {
     position: relative;
     top: 10px;
     padding-left: 10px;
+    font-weight: bold;
 }
 
 #logo a {
@@ -44,10 +45,17 @@ div {
 #top_nav {
     text-align: right;
     height: 60px;
-    position: relative;
+    position: absolute;
     top: 20px;
     font-weight: bold;
-    margin-left: 650px;
+    right: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#top_nav ul {
+    padding: 0;
+    margin: 0 25px 0 0;
 }
 
 #top_nav li {
@@ -136,6 +144,23 @@ h1 {
     font-size: 2em;
 }
 
+div.list {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #330000;
+    background-color: #ffffcc;
+}
+
+h1.title {
+    margin-bottom: 20px;
+    font-weight: normal;
+    font-size: 1.7em;
+}
+
+p.currently_no {
+    margin-top: 20px;
+}
+
 h4 {
     padding-bottom: 40px;
 }
@@ -149,6 +174,11 @@ a:visited {
 a:hover,
 a:visited {
     text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 li {
@@ -203,33 +233,36 @@ label {
     float: left;
     width: 170px;
     font-weight: bold;
+    height: 1em;
+    position: relative;
+    top: 5px;
 }
 
 input[type="text"] {
-    height: 14px;
     font-family: verdana, arial, helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 1em;
     width: 250px;
     position: relative;
     left: 2px;
-    background-color: #ffffcc;
+    background-color: #ffffff;
+    padding: 1px;
 }
 
 input[type="password"] {
-    height: 14px;
     font-family: verdana, arial, helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 1em;
     width: 250px;
     position: relative;
     left: 2px;
-    background-color: #ffffcc;
+    background-color: #ffffff;
+    padding: 1px;
 }
 
 input[type="submit"] {
     padding: 4px;
     background-color: #330000;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 1em;
     font-weight: bold;
     border: 2px solid black;
     cursor: pointer;
@@ -238,21 +271,12 @@ input[type="submit"] {
     -webkit-border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px 3px;
     margin-bottom: 15px !important;
+    margin-top: 15px;
 }
 
 input[type="submit"]:hover {
-    padding: 4px;
-    background-color: #ffffcc;
-    color: #330000;
-    font-size: 14px;
-    font-weight: bold;
-    border: 2px solid black;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    margin-bottom: 15px !important;
+    background-color: #cc6633;
+    color: #ffffff;
 }
 
 a.button {
@@ -260,7 +284,7 @@ a.button {
     padding: 5px;
     background-color: #CC9966;
     color: #000000 !important;
-    font-size: 14px;
+    font-size: 1em;
     font-weight: bold;
     border: 2px solid #000000;
     cursor: pointer;
@@ -275,15 +299,15 @@ select.not_date {
 
 textarea {
     font-family: verdana, arial, helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 1em;
     width: 248px;
     height: 100px;
     margin-left: 2px;
-    background-color: #ffffcc;
+    background-color: #ffffff;
 }
 
 .breadcrumb {
-    font-size: 14px;
+    font-size: 1em;
     color: #000000;
     font-weight: bold;
     padding: 5px;
@@ -319,7 +343,7 @@ textarea {
 
 p.notes {
     color: #ffff00;
-    font-size: 12px;
+    font-size: 0.8em;
 }
 
 div.single_item {
@@ -363,16 +387,13 @@ div.single_item {
 }
 
 #pastdue ul li {
-    font-size: 12px;
+    font-size: 0.8em;
     list-style: square;
     margin-left: 20px;
 }
 
 .field_with_errors {
-  padding: 0px;
-  background-color: #ff9999;
-  width: 450px;
-  /*display: table;*/
+
 }
 
 #error_explanation {
@@ -389,16 +410,16 @@ div.single_item {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 5px;
-  font-size: 14px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: 0;
   background-color: #ff9999;
   color: #330000;
 }
 
 #error_explanation ul li {
-  font-size: 12px;
+  font-size: 0.8em;
   list-style: square;
   margin-left: 20px;
 }
@@ -431,17 +452,8 @@ a.add_link {
 }
 
 a.add_link:hover {
-    padding: 4px;
-    background-color: #ffffcc;
-    color: #330000;
-    font-weight: bold;
-    border: 2px solid black;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    margin-bottom: 15px !important;
+    background-color: #cc6633;
+    color: #ffffff;
 }
 
 a.link_button {
@@ -461,18 +473,8 @@ a.link_button {
 }
 
 a.link_button:hover {
-    height: 26px;
-    padding: 5px;
-    background-color: #ffffcc;
-    color: #330000;
-    border: 2px solid black;
-    cursor: pointer;
-    text-decoration: none;
-    margin-right: 15px;
-    margin-top: 10px;
-    border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
+    background-color: #cc6633;
+    color: #ffffff;
 }
 
 #document_image {

@@ -44,7 +44,7 @@
   }
 
   if (!submitBubbles) {
-    // discover forms on the page by observing focus events which always bubble
+    // discover forms on the pages by observing focus events which always bubble
     document.on('focusin', 'form', function(focusEvent, form) {
       // special handler for the real "submit" event (one-time operation)
       if (!form.retrieve('emulated:submit')) {
@@ -59,7 +59,7 @@
   }
 
   if (!changeBubbles) {
-    // discover form inputs on the page
+    // discover form inputs on the pages
     document.on('focusin', 'input, select, texarea', function(focusEvent, input) {
       // special handler for real "change" events
       if (!input.retrieve('emulated:change')) {

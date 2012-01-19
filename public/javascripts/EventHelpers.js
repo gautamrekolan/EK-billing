@@ -235,7 +235,7 @@ var EventHelpers = new function () {
 	}
 
 	/**
-	*  Will execute a function when the page's DOM has fully loaded (and before all attached images, iframes,
+	*  Will execute a function when the pages's DOM has fully loaded (and before all attached images, iframes,
 	*  etc., are).
 	*
 	*  Usage:
@@ -359,7 +359,7 @@ var EventHelpers = new function () {
 	/* EventHelpers.init () */
 	function init() {
 		// Conditional comment alert: Do not remove comments.  Leave intact.
-		// The detection if the page is secure or not is important. If
+		// The detection if the pages is secure or not is important. If
 		// this logic is removed, Internet Explorer will give security
 		// alerts.
 		/*@cc_on @*/
