@@ -1,0 +1,20 @@
+<%= form_tag do %>
+
+  <% if flash[:warning].nil? == false %>
+    <div id="error_explanation">
+      <p><%= flash[:warning]%> </p>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label for="user_username">Username</label>
+    <%= text_field "user", "username", :size => "110px" %>
+  </div>
+  <div class="field">
+    <label for="user_password">Password</label>
+    <%= password_field "user", "password", :size => "30px" %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>

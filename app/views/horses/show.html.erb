@@ -1,0 +1,54 @@
+<div class="breadcrumb">
+  <<
+  <%= link_to "CUSTOMER", @horse.customer %>
+</div>
+
+<fieldset>
+    <legend>Horse Information</legend>
+    <p id="notice"><%= notice %></p>
+
+    <div class="field">
+      <label>Reg name:</label>
+      <% if @horse.reg_name.blank? == false %>
+        <%= @horse.reg_name %>
+      <% else %>
+        No registered name has been entered.
+      <% end %>
+    </div>
+
+    <div class="field">
+      <label>Barn name:</label>
+      <%= @horse.barn_name %>
+    </div>
+
+    <div class="field">
+      <label>Notes:</label>
+      <% if @horse.notes.blank? == false %>
+        <%= @horse.notes %>
+      <% else %>
+        No notes have been entered.
+      <% end %>
+    </div>
+
+    <div class="field">
+      <label>Customer:</label>
+      <%= link_to @horse.customer.first_name + " " + @horse.customer.last_name, customer_path(@horse.customer) %>
+    </div>
+
+    <fieldset style="margin-top: 20px; margin-bottom: 20px">
+        <legend>Documents</legend>
+        <p class="notes">Upload copies of Coggins, registration papers, membership information and more for customers and/or their horses, so you always have them on hand.</p>
+        <p class="add_link"><%= link_to 'Add a new document', new_document_path(:customer => @horse.customer_id, :horse => @horse.id) %></p>
+        <% if @horse.documents.empty? == false %>
+            <table>
+              <% @horse.documents.each do |document| %>
+                <tr>
+                    <td><%= link_to document.description, document_path(document) %></td>
+                </tr>
+              <% end %>
+            </table>
+        <% else %>
+              <p>There are no documents currently associated with this horse.</p>
+        <% end %>
+    </fieldset>
+</fieldset>

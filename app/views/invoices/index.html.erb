@@ -1,0 +1,103 @@
+<% if notice.blank? == false %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<div style="margin-bottom: 25px">
+    <%= link_to 'Add a new invoice', new_invoice_path, :class => "add_link" %>
+    <%= link_to '[ or add multiple invoices at once ]', customer_invoices_path, :style => "padding-left: 10px" %>
+</div>
+<fieldset style="margin-bottom: 20px">
+  <legend style="color: red">Pay Attention Invoices</legend>
+    <% if @attention_invoices.empty? == false %>
+        <table>
+      <% @attention_invoices.each do |invoice| %>
+        <% if invoice.status_code == 1 %>
+            <% if invoice.customer.delivery_method == 'Mail' %>
+                <tr>
+                    <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+                    <% if invoice.due_date < Date.today %>
+                        <td style="width: 150px; font-weight: bold; color: red"><%= invoice.status %></td>
+                        <td style="width: 200px; font-weight: bold; color: red">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                    <% else %>
+                        <td style="width: 150px; font-weight: bold; color: red">Mail Required</td>
+                        <td style="width: 200px">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                    <% end %>
+                    <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+                </tr>
+            <% else %>
+                <% if invoice.due_date < Date.today %>
+                    <tr>
+                        <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+                        <td style="width: 150px"><%= invoice.status %></td>
+                        <td style="width: 200px; font-weight: bold; color: red">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                        <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        <% elsif invoice.status_code == 4 %>
+            <tr>
+                <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+                <% if invoice.due_date < Date.today %>
+                    <td style="width: 150px; font-weight: bold; color: red"><%= invoice.status %></td>
+                    <td style="width: 200px; font-weight: bold; color: red">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% else %>
+                    <td style="width: 150px; font-weight: bold; color: red"><%= invoice.status %></td>
+                    <td style="width: 200px">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% end %>
+                <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+                </tr>
+        <% else %>
+            <tr>
+                <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+                <% if invoice.due_date < Date.today %>
+                    <td style="width: 150px"><%= invoice.status %></td>
+                    <td style="width: 200px; font-weight: bold; color: red">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% else %>
+                    <td style="width: 150px; font-weight: bold; color: red"><%= invoice.status %></td>
+                    <td style="width: 200px">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% end %>
+                <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+            </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <% else %>
+        <p style="margin: 0; padding: 0">No invoices need immediate attention.</p>
+    <% end %>
+</fieldset>
+
+<fieldset style="margin-bottom: 20px">
+  <legend style="color: green">Open Invoices</legend>
+    <% if @open_invoices.empty? == false %>
+        <table>
+      <% @open_invoices.each do |invoice| %>
+        <tr>
+          <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+          <td style="width: 150px"><%= invoice.status %></td>
+          <td style="width: 200px">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+          <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+        </tr>
+      <% end %>
+    </table>
+    <% else %>
+        <p style="margin: 0; padding: 0">You do not have any open invoices.</p>
+    <% end %>
+</fieldset>
+
+<fieldset style="margin-bottom: 20px">
+  <legend style="color: black">Closed Invoices</legend>
+    <% if @closed_invoices.empty? == false %>
+        <table>
+      <% @closed_invoices.each do |invoice| %>
+        <tr>
+          <td style="width: 150px"><%= link_to invoice.name, invoice_path(invoice.id) %></td>
+          <td style="width: 150px"><%= invoice.status %></td>
+          <td style="width: 200px">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+          <td style="width: 250px"><%= invoice.customer.last_name + ", " + invoice.customer.first_name %></td>
+        </tr>
+      <% end %>
+    </table>
+    <% else %>
+        <p style="margin: 0; padding: 0">You do not have any closed invoices.</p>
+    <% end %>
+</fieldset>

@@ -1,0 +1,12 @@
+<div class="breadcrumb">
+  <<
+  <%= link_to "INVOICES", invoices_path %>
+  <<
+  <%= link_to "INVOICE DETAILS", @invoice %>
+</div>
+
+<fieldset>
+    <legend>Invoice Information</legend>
+
+    <%= render 'form' %>
+</fieldset>

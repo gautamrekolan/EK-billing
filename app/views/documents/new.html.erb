@@ -1,0 +1,18 @@
+<div class="breadcrumb">
+  <<
+  <%= link_to "BINDER", documents_path %>
+  <% if @document.customer.nil? == false %>
+    <<
+    <%= link_to "CUSTOMER", customer_path(@document.customer) %>
+  <% end %>
+  <% if @document.horse.nil? == false %>
+    <<
+    <%= link_to "HORSE", horse_path(@document.horse) %>
+  <% end %>
+</div>
+
+<fieldset>
+    <legend>Document Information</legend>
+
+    <%= render 'form' %>
+</fieldset>

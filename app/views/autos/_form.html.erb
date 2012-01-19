@@ -1,0 +1,62 @@
+
+<%= form_for(@auto) do |f| %>
+  <% if @auto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@auto.errors.count, "error") %> prohibited this auto item from being saved:</h2>
+
+      <ul>
+      <% @auto.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date, :include_blank => true %>
+    <br />
+    <label>&nbsp;</label>
+    <p class="notes">Leave end date blank if this item will be ongoing.</p>
+  </div>
+  <%#= select("auto", "add_day", @days.collect {|p| [ p, p ]}) %>
+  <%= hidden_field("auto", "add_day", :value => "1") %>
+  <div class="field">
+    <%= f.label "Category" %>
+    <%= select("auto", "category_id", Category.all.collect {|p| [ p.category + " - " + p.name, p.id ]}, :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity, :style => "width: 75px" %>
+  </div>
+  <div class="field">
+    <%= f.label "Amount $" %>
+    <%= f.text_field :amount, :style => "width: 75px" %>
+  </div>
+  <div class="field">
+    <%= f.label "Customer" %>
+    <% if @auto.customer_id.nil? == false %>
+        <%= @auto.customer.first_name + " " + @auto.customer.last_name %>
+        <%= hidden_field("auto", "customer_id", :value => @auto.customer_id) %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label "Horse" %>
+    <% if @horses.empty? == false %>
+        <%= select("auto", "horse_id", @horses.collect {|p| [ p.barn_name, p.id ]}) %>
+    <% else %>
+        This customer has no horses.
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

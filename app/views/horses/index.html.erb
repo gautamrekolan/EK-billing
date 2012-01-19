@@ -1,0 +1,17 @@
+<h1>Horses</h1>
+
+<table>
+<% @horses.each do |horse| %>
+  <tr>
+    <td><%= link_to horse.barn_name, horse %></td>
+    <td><%= horse.reg_name %></td>
+    <td><%= horse.customer_id %></td>
+    <td><%= link_to 'Edit', edit_horse_path(horse) %></td>
+    <td><%= link_to 'Remove', horse, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Horse', new_horse_path %>

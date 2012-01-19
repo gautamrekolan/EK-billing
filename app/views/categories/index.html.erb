@@ -1,0 +1,22 @@
+<fieldset>
+    <legend>Categories</legend>
+
+    <%= link_to 'Add a new category', new_category_path, :class => "add_link" %>
+
+    <% if @categories.empty? == false %>
+        <table class="margin_above">
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.category %></td>
+            <td><%= link_to category.name, category %></td>
+            <td><%= number_to_currency(category.amount) %></td>
+            <td><%= link_to 'Edit', edit_category_path(category) %></td>
+            <td><a href="#" onclick="confirm('Are you sure you want to delete this category?', '<%= category_delete_url(category.id) %>')">Remove</a></td>
+          </tr>
+        <% end %>
+        </table>
+    <% else %>
+        <p style="margin-top: 15px">You do not have any categories created.</p>
+    <% end %>
+
+</fieldset>

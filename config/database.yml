@@ -1,7 +1,7 @@
 development:
   adapter: mysql
   host: localhost
-  database: ek-billing
+  database: ek_billing
   username: root
   password: root
   pool: 5
@@ -22,7 +22,7 @@ development:
 production:
   adapter: mysql
   host: localhost
-  database: ek-billing
+  database: ek_billing
   username: root
   password: root
   pool: 5

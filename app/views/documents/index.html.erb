@@ -1,0 +1,25 @@
+<fieldset>
+    <legend>Documents</legend>
+
+    <%= link_to 'Add a new document', new_document_path, :class => "add_link", :style => "margin-bottom: 20px" %>
+
+  <% if @documents.empty? == false %>
+      <table class="margin_above">
+        <% @documents.each do |document| %>
+            <tr>
+                <td><%= link_to document.description, document_path(document) %></td>
+                <td><%= document.customer.first_name + " " + document.customer.last_name %></td>
+                <% if document.horse.nil? == false %>
+                    <td><%= document.horse.barn_name %></td>
+                <% else %>
+                    <td>&nbsp;</td>
+                <% end %>
+                <td><%= link_to 'Edit', edit_document_path(document) %></td>
+                <td><a href="#" onclick="confirm('Are you sure you want to delete this document?', '<%= document_delete_path(document)%>')">Remove</a></td>
+            </tr>
+        <% end %>
+      </table>
+  <% else %>
+    <p style="margin-top: 15px">You do not have any documents created.</p>
+  <% end %>
+</fieldset>

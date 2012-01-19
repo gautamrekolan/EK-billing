@@ -1,0 +1,66 @@
+You have a new invoice!
+=============================================
+
+Hi <%= @invoice.customer.first_name %>,
+
+<% if @invoice.notes.blank? == false %>
+    **NOTE: <%= @invoice.notes %>
+<% end %>
+
+INVOICE DETAILS:
+Invoice name: <%= @invoice.name %>
+Start date: <%= @invoice.start_date.strftime("%B %d, %Y") %>
+End date: <%= @invoice.end_date.strftime("%B %d, %Y") %>
+Due date: <%= @invoice.due_date.strftime("%B %d, %Y") %>
+
+<% if @invoice.items.empty? == false %>
+ITEMS:
+<% @invoice.items.each do |item| %>
+    <%
+       horse = ""
+       if item.horse.nil? == false
+            horse = "(" + item.horse.barn_name + ")"
+       else
+            horse = ""
+       end
+    %>
+    <%= item.category.name %> - <%= item.description %> <%= horse %> = <%= number_to_currency(item.amount) %>
+<% end %>
+
+Invoice Total: <%= number_to_currency(@invoice.amount) %>
+<% else %>
+
+Invoice Total: $0
+<% end %>
+
+<% if @invoice.payments.empty? == false %>
+PAYMENTS:
+    <% @total = 0 %>
+    <% @invoice.payments.each do |payment| %>
+        <%= payment.type %> (<%= payment.notes %>) = <%= number_to_currency(payment.amount) %>
+        <% @total = @total + payment.amount %>
+    <% end %>
+
+Payments Total: <%= number_to_currency(@total) %>
+
+=============================================
+TOTAL DUE: <%= number_to_currency(@invoice.amount - @total) %>
+=============================================
+<% else %>
+=============================================
+TOTAL DUE: <%= number_to_currency(@invoice.amount) %>
+=============================================
+<% end %>
+
+Please also find a PDF of your invoice attached to this email for easier viewing.
+
+Thank you in advance for your prompt payment!
+
+Alida Burkholder
+Lower Hopewell Farm
+395 Speedwell Forge Road
+Lititz, PA 17543
+(717) 587-7421
+lhfapps@ptd.net
+
+*Please make checks payable to either Alida Burkholder or Lower Hopewell Farm.*

@@ -1,0 +1,42 @@
+<h2>Easy Add</h2>
+<p class="notes">Drag an item category from the left side onto a customer from the right side to add an item of that type to that customer's invoice.</p>
+<form>
+<div id="items" style="float: left; width: 50%; margin-right: 40px; height: 575px; overflow-y: auto;">
+<fieldset>
+  <legend>Items</legend>
+    <p class="add_link"><%= link_to 'Manage item categories', categories_path %></p>
+    <% if (@categories.count() > 0) %>
+        <% @categories.each do |category| %>
+            <div draggable="true" class="single_item">
+                <p style="font-weight: bold; margin: 0; padding: 0; font-size: 0.9em"><%= category.category %></p>
+                <p style="margin: 0; padding: 0; font-size: 0.9em"><%= category.name %></p>
+                <p style="display: none">----<%= category.id %></p>
+            </div>
+        <% end %>
+    <% else %>
+        <p>You can't build invoices without any items!</p>
+    <% end %>
+</fieldset>
+</div>
+
+<div id="customers" style="height: 575px; overflow-y: auto;">
+<fieldset>
+    <legend>Customers</legend>
+    <p class="add_link"><%= link_to 'Manage customers', customers_path %></p>
+    <% if (@customers.count() > 0) %>
+        <% index = 0 %>
+        <% @customers.each do |customer| %>
+            <% String div_id = "dropTarget" + String(index) %>
+            <div draggable="true" class="single_item" id="<%= div_id %>">
+                <% String name = customer.last_name + ", " + customer.first_name %>
+                <p style="font-weight: bold; margin: 0; padding: 0; font-size: 0.9em"><%= name %></p>
+                <p style="display: none">----<%= customer.id %></p>
+            </div>
+            <% index += 1 %>
+        <% end %>
+    <% else %>
+        <p>You can't build an invoice without any customers!</p>
+    <% end %>
+</fieldset>
+</div>
+</form>

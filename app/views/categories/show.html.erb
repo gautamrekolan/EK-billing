@@ -1,0 +1,31 @@
+<div class="breadcrumb">
+  <<
+  <%= link_to "CATEGORIES", categories_path %>
+</div>
+
+<fieldset>
+    <legend>Category Information</legend>
+    <p id="notice"><%= notice %></p>
+
+    <div class="field">
+      <label>Category type</label>
+      <%= @category.category %>
+    </div>
+
+    <div class="field">
+      <label>Category name</label>
+      <%= @category.name %>
+    </div>
+
+    <div class="field" style="padding-bottom: 15px">
+      <label>Amount $</label>
+      <% if @category.amount.blank? == false %>
+        <%= number_to_currency(@category.amount) %>
+      <% else %>
+        No amount has been entered.
+      <% end %>
+    </div>
+
+    <%= link_to 'Edit details', edit_category_path(@category), :class => 'link_button' %>
+    <%= link_to 'Remove category', @category, :confirm => 'Are you sure?', :method => :delete, :class => 'link_button' %>
+</fieldset>

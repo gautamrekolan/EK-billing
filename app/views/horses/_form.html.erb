@@ -1,0 +1,35 @@
+<%= form_for(@horse) do |f| %>
+  <% if @horse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@horse.errors.count, "error") %> prohibited this horse from being saved:</h2>
+
+      <ul>
+      <% @horse.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Registered name" %>
+    <%= f.text_field :reg_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Barn name" %>
+    <%= f.text_field :barn_name %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="field">
+    <%= f.label "Customer" %>
+    <%= link_to @horse.customer.first_name + " " + @horse.customer.last_name, customer_path(@horse.customer) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+  <%= hidden_field("horse", "customer_id", :value => @horse.customer_id) %>
+<% end %>

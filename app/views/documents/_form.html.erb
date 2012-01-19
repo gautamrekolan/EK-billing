@@ -1,0 +1,58 @@
+<%= form_for(@document, :html => {:multipart => true}) do |f| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, :style => "width: 250px; height: 75px; border: 1px solid grey" %>
+  </div>
+  <div class="field">
+    <%= f.label "File" %>
+    <%= f.file_field :filename %>
+  </div>
+  <div class="field">
+    <%= f.label "Customer" %>
+    <% if @document.customer.nil? == false %>
+        <%= link_to @document.customer.first_name + " " + @document.customer.last_name, customer_path(@document.customer) %>
+        <%= hidden_field("document", "customer_id", :value => @document.customer_id) %>
+    <% else %>
+        <%= select("document", "customer_id", Customer.all(:order => "last_name asc, first_name asc").collect { |p| [ p.last_name + ", " + p.first_name, p.id] }, :include_blank => true) %>
+    <% end %>
+  </div>
+  <div class="field">
+    <% if @document.horse.nil? == false %>
+        <%= f.label "Horse" %>
+        <% if @document.horse.reg_name.blank? == false %>
+            <%= link_to @document.horse.reg_name + " (" + @document.horse.barn_name + ")", horse_path(@document.horse) %>
+        <% else %>
+            <%= link_to @document.horse.barn_name, horse_path(@document.horse) %>
+        <% end %>
+        <%= hidden_field("document", "horse_id", :value => @document.horse_id) %>
+    <% else %>
+        <% if @document.customer.nil? == false %>
+            <%= f.label "Horse" %><br />
+            <% if @document.customer.horses.count() > 0 %>
+                <%= select("document", "horse_id", @document.customer.horses.collect {|p| [ p.barn_name, p.id ]}, :include_blank => true) %>
+            <% else %>
+                This customer does not have any horses. <%= link_to 'Add one now.', new_horse_path(:customer => @document.customer_id) %>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

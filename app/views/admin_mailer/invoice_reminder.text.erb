@@ -1,0 +1,52 @@
+Just a reminder that an invoice is due soon!
+=============================================
+
+Hi <%= @invoice.customer.first_name %>,
+
+INVOICE INFORMATION:
+Invoice name: <%= @invoice.name %>
+Start date: <%= @invoice.start_date.to_s(:long) %>
+End date: <%= @invoice.end_date.to_s(:long) %>
+Due date: <%= @invoice.due_date.to_s(:long) %>
+
+<% @invoice.items.each do |item| %>
+    <%
+       horse = ""
+       if item.horse.nil? == false
+            horse = item.horse.barn_name
+       else
+            horse = ""
+       end
+    %>
+    <%= item.category.name %> - <%= item.description %> ( <%= horse %> ) = <%= number_to_currency(item.amount) %><br />
+<% end %>
+Invoice Total: <%= number_to_currency(@invoice.amount) %>
+
+<% if @invoice.payments.empty? == false %>
+    <% @total = 0 %>
+    <% @invoice.payments.each do |payment| %>
+        <%= payment.payment_method %> (<%= payment.payment_notes %>) = <%= number_to_currency(payment.payment_amount) %>
+        <% @total = @total + payment.payment_amount %>
+    <% end %>
+    Payments Total: <%= number_to_currency(@total) %>
+
+=============================================
+
+    TOTAL DUE: <%= number_to_currency(@invoice.amount - @total) %>
+<% else %>
+
+=============================================
+
+    TOTAL DUE: <%= number_to_currency(@invoice.amount) %>
+<% end %>
+
+Please also find a PDF of your invoice attached to this email for easier viewing.
+
+Thank you in advance for your prompt payment!
+
+Alida Burkholder
+Lower Hopewell Farm
+395 Speedwell Forge Road
+Lititz, PA 17543
+(717) 587-7421
+lhfapps@ptd.net

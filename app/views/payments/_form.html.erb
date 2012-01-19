@@ -1,0 +1,44 @@
+<%= form_for(@payment) do |f| %>
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+      <% @payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Invoice" %>
+    <%= @payment.invoice.name %>
+  </div>
+  <div class="field">
+    <%= f.label "Customer" %>
+    <%= @payment.customer.first_name + " " + @payment.customer.last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :date_received %>
+    <%= f.date_select :date_received %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_method %>
+    <%= f.text_field :payment_method %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_notes %>
+    <%= f.text_field :payment_notes %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_amount %>
+    <%= f.text_field :payment_amount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+    <%= hidden_field("payment", "invoice_id", :value => @payment.invoice_id) %>
+    <%= hidden_field("payment", "customer_id", :value => @payment.customer_id) %>
+<% end %>

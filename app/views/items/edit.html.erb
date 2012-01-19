@@ -1,0 +1,17 @@
+<div class="breadcrumb">
+    <<
+    <%= link_to "INVOICE", @item.invoice %>
+</div>
+
+<fieldset>
+    <legend>Item Information</legend>
+
+    <%= render 'form' %>
+
+    <% if @item.invoice_id > 0 %>
+        <%= link_to 'Return to invoice', invoice_path(@item.invoice_id) %>
+    <% else %>
+        <%= link_to 'Return to admin panel', admin_path %>
+    <% end %>
+
+</fieldset>
