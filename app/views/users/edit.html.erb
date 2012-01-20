@@ -1,6 +1,7 @@
-<fieldset>
-  <legend>User Information</legend>
-    <a href="#" class="link_button" onclick="confirm('Deleting your account will permanently remove your access to all of your current EKE records. Are you sure you want to delete your account?', '<%= user_delete_url(@user.id) %>')">Delete my account</a>
-    <div style="height: 20px">&nbsp;</div>
-    <%= render 'form' %>
-</fieldset>
+<div class="list">
+
+<h1 class="title"><%= @user.name %></h1>
+
+<%= render 'form' %>
+
+</div>

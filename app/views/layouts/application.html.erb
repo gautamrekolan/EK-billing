@@ -19,39 +19,21 @@
         </div>
         <div id="top_nav">
             <ul style="padding: 0">
-                <% #if session[:user].nil? == false %>
-                    <% if true #if session[:admin] == true %>
+                <% if session[:user].nil? == false %>
+                    <% if session[:user][:access] == 'admin' %>
                         <% if params[:controller] == "organizations" %>
                             <li class="on"><%= link_to 'ORGANIZATIONS', organizations_path %></li>
                         <% else %>
-                            <li class="off"><%#= link_to 'ORGANIZATIONS', organizations_path %></li>
-                        <% end %>
-                        <li class="off"><%#= link_to 'LOGOUT', '#' %></li>
-                        <li class="on">COMING SOON...</li>
-                    <% else %>
-                        <% if params[:controller] == "admin" %>
-                            <li class="on"><%= link_to 'INVOICE BUILDER', admin_path %></li>
-                        <% else %>
-                            <li class="off"><%= link_to 'INVOICE BUILDER', admin_path %></li>
-                        <% end %>
-                        <% if params[:controller] == "customers" %>
-                            <li class="on"><%= link_to 'CUSTOMERS', customers_path %></li>
-                        <% else %>
-                            <li class="off"><%= link_to 'CUSTOMERS', customers_path %></li>
-                        <% end %>
-                        <% if params[:controller] == "invoices" %>
-                            <li class="on"><%= link_to 'INVOICES', invoices_path %></li>
-                        <% else %>
-                            <li class="off"><%= link_to 'INVOICES', invoices_path %></li>
-                        <% end %>
-                        <% if params[:controller] == "documents" %>
-                            <li class="on"><%= link_to 'BINDER', documents_path %></li>
-                        <% else %>
-                            <li class="off"><%= link_to 'BINDER', documents_path %></li>
+                            <li class="off"><%= link_to 'ORGANIZATIONS', organizations_path %></li>
                         <% end %>
                         <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
+                        <%#<li class="on">COMING SOON...</li>%>
+                    <% else %>
+                        <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
                     <% end %>
-                <% #end %>
+                <% else %>
+                    <li class="off"><%= link_to 'LOGIN', login_path %></li>
+                <% end %>
             </ul>
         </div>
     </div>

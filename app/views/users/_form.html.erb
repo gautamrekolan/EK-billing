@@ -20,6 +20,10 @@
     <%= f.password_field :password %>
   </div>
   <div class="field">
+    <%= f.label :password_confirmation, "Confirm password" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
@@ -27,7 +31,14 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+  <% if @user.organization.nil? == false %>
+    <div class="field">
+        <label>Organization</label>
+        <%= @user.organization.name %>
+        <%= hidden_field("user", "organization_id", :value => @user.organization_id) %>
+    </div>
+  <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Sign me up!" %>
   </div>
 <% end %>

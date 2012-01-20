@@ -144,6 +144,23 @@ h1 {
     font-size: 2em;
 }
 
+div.full {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #330000;
+    background-color: #ffffcc;
+    min-height: 560px;
+}
+
+div.full_centered {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #330000;
+    background-color: #ffffcc;
+    min-height: 560px;
+    text-align: center;
+}
+
 div.list {
     margin: 20px;
     padding: 20px;
@@ -151,10 +168,24 @@ div.list {
     background-color: #ffffcc;
 }
 
+div.sub {
+    margin: 30px 10px 10px 10px;
+    padding: 10px;
+    border: 2px dotted #330000;
+    background-color: #ffffcc;
+    color: #330000;
+}
+
 h1.title {
     margin-bottom: 20px;
     font-weight: normal;
     font-size: 1.7em;
+}
+
+h2.sub_title {
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 1.4em;
 }
 
 p.currently_no {
@@ -233,9 +264,7 @@ label {
     float: left;
     width: 170px;
     font-weight: bold;
-    height: 1em;
-    position: relative;
-    top: 5px;
+    padding: 1px;
 }
 
 input[type="text"] {
@@ -440,7 +469,7 @@ div.single_item {
 a.add_link {
     padding: 4px;
     background-color: #330000;
-    color: #ffffff;
+    color: #ffffcc;
     font-weight: bold;
     border: 2px solid black;
     cursor: pointer;
@@ -453,14 +482,41 @@ a.add_link {
 
 a.add_link:hover {
     background-color: #cc6633;
-    color: #ffffff;
+    color: #ffffcc;
+}
+
+#signup {
+    text-align: center;
+    margin-top: 30px;
+}
+
+a.signup_button {
+    padding: 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+    background-color: #330000;
+    color: #ffffcc;
+    border: 2px solid black;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a.signup_button:hover {
+    background-color: #cc6633;
+    color: #ffffcc;
 }
 
 a.link_button {
     height: 26px;
     padding: 5px;
     background-color: #330000;
-    color: #ffffff;
+    color: #ffffcc;
     font-weight: bold;
     border: 2px solid black;
     cursor: pointer;
@@ -474,7 +530,7 @@ a.link_button {
 
 a.link_button:hover {
     background-color: #cc6633;
-    color: #ffffff;
+    color: #ffffcc;
 }
 
 #document_image {

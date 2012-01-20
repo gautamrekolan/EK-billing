@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :except => [ :login, :new ]
+ before_filter :login_required, :except => [ :login ]
 
   def login
      if request.post?
@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user] = nil
+    session[:return_to] = nil
     flash[:message] = "Logged out"
     redirect_to :action => 'login'
   end
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
+    @user.organization_id = params[:organization]
   end
 
   # GET /users/1/edit
@@ -81,7 +83,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(root_path) }
+      format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
   end

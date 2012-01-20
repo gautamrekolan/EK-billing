@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
       session[:return_to]=nil
       redirect_to return_to
     else
-      redirect_to :controller => 'admin', :action => 'admin'
+      redirect_to :controller => 'pages', :action => 'home'
     end
   end
 end

@@ -1,12 +1,17 @@
 EkBilling::Application.routes.draw do
 
   resources :organizations
+  resources :users
 
   root :to => 'pages#home'
   match '/about',               :to => 'pages#about'
   match '/contact',             :to => 'pages#contact'
 
-  match 'organizations/destroy'     => "organizations#destroy", :as => :delete_organization
+  match '/login'                    => 'users#login',           :as => :login
+  match '/logout'                   => 'users#logout',          :as => :logout
+
+  match 'organizations/destroy/:id' => "organizations#destroy", :as => :delete_organization
+  match 'users/destroy/:id'         => "users#destroy",         :as => :delete_user
 
 # match '/pagename' == pagename_path as named route
 

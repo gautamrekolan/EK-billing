@@ -14,4 +14,21 @@
 <br />
 <%= link_to @organization.website, @organization.website %>
 
+  <div class="sub">
+    <h2 class="sub_title">Users</h2>
+    <%= link_to 'Add a new user', new_user_path(:organization => @organization.id), :class => "add_link" %>
+    <% if @organization.users.empty? == false %>
+        <table class="margin_above">
+            <% @organization.users.each do |user| %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><a href="#" onclick="confirm('Are you sure you want to delete this user?', '<%= delete_user_path(user) %>')">REMOVE</a></td>
+                </tr>
+            <% end %>
+        </table>
+    <% else %>
+        <p class="currently_no">There are currently no users for this organization.</p>
+    <% end %>
+  </div>
+
 </div>

@@ -1,3 +1,25 @@
-<p>This would be a listing of users, if we cared about such a thing.</p>
+<div class="list">
 
-<p>However, here's a <%= link_to 'add a new user', new_user_path %>.</p>
+<h1 class="title">Users</h1>
+
+<%= link_to 'Add a new user', new_user_path, :class => "add_link" %>
+
+<% if @users.empty? == false %>
+    <table class="margin_above">
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user %></td>
+            <% if user.organization.nil? == false %>
+                <td><%= user.organization.name %></td>
+            <% else %>
+                <td>No organization</td>
+            <% end %>
+            <td><a href="#" onclick="confirm('Are you sure you want to delete this user?', '<%= delete_user_path(user) %>')">Remove</a></td>
+          </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p class="currently_no">There are currently no users.</p>
+<% end %>
+
+</div>
