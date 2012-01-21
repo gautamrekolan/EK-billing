@@ -1,16 +1,13 @@
 <div class="breadcrumb">
-  <% if @item.invoice.nil? == false %>
-    <<
-    <%= link_to "INVOICE", @item.invoice %>
-  <% else %>
-    <<
-    <%= link_to "EASY ADD", admin_path %>
-  <% end %>
+  << <%= link_to 'CUSTOMER', customer_path(@item.customer) %> << <%= link_to 'INVOICE', invoice_path(@item.invoice) %>
 </div>
 
-<fieldset>
-    <legend>Item Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
+<h1 class="title">Items</h1>
 
-</fieldset>
+<p class="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>

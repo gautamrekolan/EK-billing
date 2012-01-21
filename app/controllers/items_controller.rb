@@ -1,45 +1,39 @@
 class ItemsController < ApplicationController
-
-  before_filter :login_required
-
   # GET /items
+  # GET /items.xml
   def index
     @items = Item.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @items }
+    end
   end
 
   # GET /items/1
+  # GET /items/1.xml
   def show
     @item = Item.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @item }
+    end
   end
 
   # GET /items/new
+  # GET /items/new.xml
   def new
     @item = Item.new
-    @item.category_id = params[:category]
-    @item.invoice_id = params[:invoice]
-    @item.customer_id = params[:customer]
-    @item.horse_id = params[:horse]
+    @invoice = Invoice.find(params[:invoice])
+    @item.invoice_id = @invoice.id
+    @item.customer_id = @invoice.customer.id
+    @item.organization_id = @invoice.organization_id
 
-    if @item.category_id.nil? == false
-      @category = Category.find_by_id(params[:category])
-      if @category.nil? == false
-        @base_amount = @category.amount
-        @item.amount = @category.amount
-      end
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @item }
     end
-
-    @item.quantity = "1"
-
-    if @item.invoice_id.nil? == false && @item.customer_id.nil?
-      @customer_id = @item.invoice.customer_id
-      @item.customer_id = @customer_id
-    end
-
-  end
-
-  def popup
-    @categories = Category.all
-    render :layout => nil
   end
 
   # GET /items/1/edit
@@ -48,39 +42,51 @@ class ItemsController < ApplicationController
   end
 
   # POST /items
+  # POST /items.xml
   def create
     @item = Item.new(params[:item])
-    if @item.save
+
+    respond_to do |format|
+      if @item.save
         @invoice = @item.invoice
         new_amount = @invoice.amount + @item.amount
         @invoice.update_attribute("amount", new_amount)
-        redirect_to(invoice_path(@invoice), :notice => 'Item was successfully created.')
-    else
-        render :action => "new"
+        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+        format.xml  { render :xml => @item, :status => :created, :location => @item }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
   # PUT /items/1
+  # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
-    if @item.update_attributes(params[:item])
-      @invoice = @item.invoice
-      items = Item.find_all_by_invoice_id(@invoice.id)
-      amount = 0
-      items.each do |item|
-        amount = amount + item.amount
+
+    respond_to do |format|
+      if @item.update_attributes(params[:item])
+        @invoice = @item.invoice
+        items = Item.find_all_by_invoice_id(@invoice.id)
+        amount = 0
+        items.each do |item|
+          amount = amount + item.amount
+        end
+        @invoice.update_attribute("amount", amount)
+        format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
-      @invoice.update_attribute("amount", amount)
-      redirect_to(invoice_path(@invoice), :notice => 'Item was successfully updated.')
-    else
-      render :action => "edit"
     end
   end
 
   # DELETE /items/1
+  # DELETE /items/1.xml
   def destroy
     @item = Item.find(params[:id])
-    @invoice = @item.invoice
     if @item.destroy
       items = Item.find_all_by_invoice_id(@invoice.id)
       amount = 0
@@ -89,6 +95,10 @@ class ItemsController < ApplicationController
       end
       @invoice.update_attribute("amount", amount)
     end
-    redirect_to(invoice_path(@invoice), :notice => 'Item was successfully removed.')
+
+    respond_to do |format|
+      format.html { redirect_to(items_url) }
+      format.xml  { head :ok }
+    end
   end
 end

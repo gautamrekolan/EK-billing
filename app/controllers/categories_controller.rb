@@ -1,41 +1,51 @@
 class CategoriesController < ApplicationController
-
-  before_filter :login_required
-
+  # GET /categories
+  # GET /categories.xml
   def index
-    @categories = Category.all(:order => "category ASC, name ASC  ")
+    @categories = Category.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @categories }
+    end
+  end
+
+  # GET /categories/1
+  # GET /categories/1.xml
+  def show
+    @category = Category.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @category }
+    end
   end
 
   # GET /categories/new
   # GET /categories/new.xml
   def new
     @category = Category.new
-    @types = [ "Farm Expenses", "Show Expenses", "Other Expenses" ]
+    @category.organization_id = session[:user][:organization_id]
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @payment }
+      format.xml  { render :xml => @category }
     end
-  end
-
-  def show
-    @category = Category.find(params[:id])
   end
 
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
-    @types = [ "Farm Expenses", "Show Expenses", "Other Expenses" ]
   end
 
-  # POST /payments
-  # POST /payments.xml
+  # POST /categories
+  # POST /categories.xml
   def create
     @category = Category.new(params[:category])
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to(@category, :notice => 'Category was successfully created.') }
+        format.html { redirect_to(edit_category_path(@category), :notice => 'Category was successfully created.') }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -51,7 +61,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        format.html { redirect_to(@category, :notice => 'Category was successfully updated.') }
+        format.html { redirect_to(edit_category_path(@category), :notice => 'Category was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

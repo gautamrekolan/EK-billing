@@ -1,13 +1,31 @@
-<h1>Horses</h1>
+<h1>Listing horses</h1>
 
 <table>
+  <tr>
+    <th>Reg name</th>
+    <th>Barn name</th>
+    <th>Breed</th>
+    <th>Age</th>
+    <th>Notes</th>
+    <th>Organization</th>
+    <th>Customer</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
 <% @horses.each do |horse| %>
   <tr>
-    <td><%= link_to horse.barn_name, horse %></td>
     <td><%= horse.reg_name %></td>
+    <td><%= horse.barn_name %></td>
+    <td><%= horse.breed %></td>
+    <td><%= horse.age %></td>
+    <td><%= horse.notes %></td>
+    <td><%= horse.organization_id %></td>
     <td><%= horse.customer_id %></td>
+    <td><%= link_to 'Show', horse %></td>
     <td><%= link_to 'Edit', edit_horse_path(horse) %></td>
-    <td><%= link_to 'Remove', horse, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', horse, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

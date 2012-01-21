@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reg_name: MyString
+  barn_name: MyString
+  breed: MyString
+  age: 1
+  notes: MyString
+  organization_id: 1
+  customer_id: 1
+
+two:
+  reg_name: MyString
+  barn_name: MyString
+  breed: MyString
+  age: 1
+  notes: MyString
+  organization_id: 1
+  customer_id: 1

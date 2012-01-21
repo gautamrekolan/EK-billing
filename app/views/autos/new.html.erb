@@ -1,7 +1,13 @@
-<fieldset>
-    <legend>Auto Item Information</legend>
+<div class="breadcrumb">
+  << <%= link_to @auto.customer.last_name.upcase, @auto.customer %>
+</div>
 
-    <%= render 'form' %>
+<div class="list">
 
-    <%= link_to 'Return to customer', customer_path(@auto.customer_id) %>
-</fieldset>
+<h1 class="title">AUTO ITEMS</h1>
+
+<p class="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>

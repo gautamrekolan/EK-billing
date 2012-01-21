@@ -1,10 +1,17 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "INVOICES", invoices_path %>
+  <% if @invoice.customer.nil? %>
+    << <%= link_to 'INVOICES', invoices_path %>
+  <% else %>
+    << <%= link_to 'INVOICES', invoices_path %> << <%= link_to @invoice.customer.last_name.upcase!, @invoice.customer %>
+  <% end %>
 </div>
 
-<fieldset>
-    <legend>Invoice Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
-</fieldset>
+<h1 class="title">Invoices</h1>
+
+<p class="notice"><%= notice %></p>
+  
+<%= render 'form' %>
+
+</div>

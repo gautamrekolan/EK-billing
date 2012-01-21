@@ -1,20 +1,18 @@
-require 'digest'
-
 class Invoice < ActiveRecord::Base
-  belongs_to :customer
-  belongs_to :horse
-  has_many :items,    :order => "category_id asc, description asc"
-  has_many :payments, :order => "date_received asc"
-  has_many :statuses, :order => "status_code asc"
+
+  belongs_to  :organization
+  belongs_to  :customer
+  has_many    :items,    :order => "category_id asc, description asc"
+  has_many    :payments, :order => "date asc"
+  has_many    :statuses, :order => "status_code asc"
 
   validates :name,        :presence => true, :length => { :maximum => 250 }
   validates :start_date,  :presence => true
   validates :end_date,    :presence => true
   validates :issued_date, :presence => true
   validates :due_date,    :presence => true
-  # TO-DO: Validate currency
   validates :amount,      :presence => true, :format => { :with => /^[0-9]*(\.[0-9]{1,2})?$|^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]{1,2})?$/ }
-  validates :customer_id, :presence => true
+  validates :customer_id, :presence => true, :numericality => true
 
   def Invoice.update_status(invoice_id, status)
     @invoice = Invoice.find(invoice_id)

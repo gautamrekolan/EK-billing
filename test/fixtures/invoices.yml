@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  start_date: 2012-01-20
+  end_date: 2012-01-20
+  issued_date: 2012-01-20
+  due_date: 2012-01-20
+  amount: 9.99
+  status_code: 1
+  status: MyString
+  notes: MyString
+  organization_id: 1
+  customer_id: 1
+
+two:
+  name: MyString
+  start_date: 2012-01-20
+  end_date: 2012-01-20
+  issued_date: 2012-01-20
+  due_date: 2012-01-20
+  amount: 9.99
+  status_code: 1
+  status: MyString
+  notes: MyString
+  organization_id: 1
+  customer_id: 1

@@ -8,7 +8,17 @@ class ApplicationController < ActionController::Base
     flash[:warning] = "Please login to continue."
     session[:return_to] = request.request_uri
     redirect_to :controller => 'users', :action => 'login'
-    return false
+  end
+  
+  def admin_required
+    if session[:user]
+      if session[:user][:access] == "admin"
+        return true
+      end
+      flash[:warning] = "You cannot access this area"
+      session[:return_to] = request.request_uri
+      redirect_to :controller => 'pages', :action => 'home'
+    end
   end
 
   def current_user

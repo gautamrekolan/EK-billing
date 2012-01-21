@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
- before_filter :login_required, :except => [ :login ]
+ before_filter :login_required, :except => [ :new, :create, :login ]
 
   def login
      if request.post?
@@ -48,11 +48,18 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    @user.update_password = true
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        session[:user] = @user
+        if session[:user][:access] == "admin"
+          format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+          format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else
+          format.html { redirect_to(root_path) }
+          format.xml  { render :xml => @user, :status => :created, :location => @user }
+        end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
@@ -64,10 +71,11 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    @user.update_password = false
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+      if @user.update_attributes(:name => params[:user][:name], :email => params[:user][:email], :username => params[:user][:username])
+        format.html { redirect_to(edit_user_path(@user), :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

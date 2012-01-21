@@ -1,54 +1,30 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "CUSTOMER", @horse.customer %>
+  << <%= link_to 'CUSTOMERS', customers_path %> << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
 </div>
 
-<fieldset>
-    <legend>Horse Information</legend>
-    <p id="notice"><%= notice %></p>
+<div class="list">
 
-    <div class="field">
-      <label>Reg name:</label>
-      <% if @horse.reg_name.blank? == false %>
-        <%= @horse.reg_name %>
-      <% else %>
-        No registered name has been entered.
-      <% end %>
-    </div>
+<% if @horse.reg_name %>
+    <h1 class="title"><%= @horse.reg_name %> (<%= @horse.barn_name %>)</h1>
+<% else %>
+    <h1 class="title"><%= @horse.barn_name %></h1>
+<% end %>
 
-    <div class="field">
-      <label>Barn name:</label>
-      <%= @horse.barn_name %>
-    </div>
+<p id="notice"><%= notice %></p>
 
-    <div class="field">
-      <label>Notes:</label>
-      <% if @horse.notes.blank? == false %>
-        <%= @horse.notes %>
-      <% else %>
-        No notes have been entered.
-      <% end %>
-    </div>
+<% if @horse.breed %>
+    <label>Breed</label>
+    <%= @horse.breed %>
+<% end %>
 
-    <div class="field">
-      <label>Customer:</label>
-      <%= link_to @horse.customer.first_name + " " + @horse.customer.last_name, customer_path(@horse.customer) %>
-    </div>
+<% if @horse.age %>
+    <label>Age</label>
+    <%= @horse.age %>
+<% end %>
 
-    <fieldset style="margin-top: 20px; margin-bottom: 20px">
-        <legend>Documents</legend>
-        <p class="notes">Upload copies of Coggins, registration papers, membership information and more for customers and/or their horses, so you always have them on hand.</p>
-        <p class="add_link"><%= link_to 'Add a new document', new_document_path(:customer => @horse.customer_id, :horse => @horse.id) %></p>
-        <% if @horse.documents.empty? == false %>
-            <table>
-              <% @horse.documents.each do |document| %>
-                <tr>
-                    <td><%= link_to document.description, document_path(document) %></td>
-                </tr>
-              <% end %>
-            </table>
-        <% else %>
-              <p>There are no documents currently associated with this horse.</p>
-        <% end %>
-    </fieldset>
-</fieldset>
+<% if @horse.notes %>
+    <label>Notes</label>
+    <%= @horse.notes %>
+<% end %>
+
+</div>

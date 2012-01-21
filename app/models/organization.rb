@@ -1,6 +1,9 @@
 class Organization < ActiveRecord::Base
 
   has_many :users
+  has_many :customers
+  has_many :horses
+  has_many :invoices
 
   validates :name, :presence => true
   validates :address, :presence => true
@@ -8,8 +11,8 @@ class Organization < ActiveRecord::Base
   validates :state, :presence => true
   validates :zip, :presence => true
   validates :phone, :presence => true
-  validates :email, :presence => true
-  validates :website, :presence => true
+  #validates :email, :presence => true
+  #validates :website, :presence => true
   validates :contact, :presence => true
 
 end

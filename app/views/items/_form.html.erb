@@ -12,81 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Category" %>
-    <%= select("item", "category_id", Category.all.collect { |p| [ p.category + " - " + p.name, p.id ] }, { :include_blank => true }, { :class => "not_date" }) %>
-    <% if @item.category_id.nil? %>
-        <%= link_to '[Base prices]', item_popup_path, :onclick => "window.open(this.href, 'base_prices', 'height=540, width=475');return false;", :style => "margin-left: 10px" %>
-    <% end %>
+    <%= f.label :category_id %>
+    <%= select("item", "category_id", Category.find_all_by_organization_id(@item.organization_id).collect {|p| [ p.category + " - " + p.name, p.id ]}) %>
   </div>
   <div class="field">
     <%= f.label :description %>
-    <%= f.text_field :description, :value => @item.description %>
+    <%= f.text_field :description %>
   </div>
   <div class="field">
     <%= f.label :quantity %>
-    <%= f.text_field :quantity, :value => @item.quantity, :style => "width: 100px", :onblur => 'CalculateAmount()' %>
+    <%= f.text_field :quantity %>
   </div>
   <div class="field">
-    <label>Amount $</label>
-    <%= f.text_field :amount, :value => number_with_precision(@item.amount, :precision => 2), :style => "width: 100px" %>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
   </div>
   <div class="field">
-    <%= f.label "Invoice" %>
-    <% if @item.invoice_id.nil? == false %>
-        <%= @item.invoice.name + " (" + @item.invoice.start_date.to_s(:long) + " - " + @item.invoice.end_date.to_s(:long) + ")" %>
-        <%= hidden_field("item", "invoice_id", :value => @item.invoice_id) %>
-    <% else %>
-        <% if @item.customer.invoices.empty? == false %>
-            <%= select("item", "invoice_id", @item.customer.invoices.collect { |p| [ p.name, p.id ] }, { :include_blank => true }, { :class => "not_date" }) %>
-        <% else %>
-            This customer has no invoices. <%= link_to 'Add an invoice now.', new_invoice_path(:customer => @item.customer_id) %>
-        <% end %>
-    <% end %>
-  </div>
-  <div class="field">
-    <%= f.label "Customer" %>
-    <% if @item.customer_id.nil? == false %>
-        <%= @item.customer.first_name + " " + @item.customer.last_name %>
-        <%= hidden_field("item", "customer_id", :value => @item.customer_id) %>
-    <% else %>
-        <%= select("item", "customer_id", Customer.all.collect { |p| [ p.last_name + ", " + p.first_name, p.id ] }, { :include_blank => true }, { :class => "not_date" }) %>
-    <% end %>
-  </div>
-
-  <div class="field">
-        <%= f.label "Horse" %>
-    <% if @item.customer.horses.empty? == false %>
-        <%= select("item", "horse_id", @item.customer.horses.collect { |p| [ p.barn_name, p.id ] }, { :include_blank => true }, { :class => "not_date" }) %>
-    <% else %>
-        This customer has no horses.
-    <% end %>
+    <%= f.label :horse_id, "Horse" %>
+    <%= select("item", "horse_id", Horse.find_all_by_customer_id(@item.customer_id).collect { |p| [ p.barn_name, p.id ] }, :include_blank => true) %>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 
-  <%= hidden_field_tag("base_amount", @base_amount) %>
+  <%= hidden_field("item", "organization_id", :value => @item.organization_id) %>
+  <%= hidden_field("item", "customer_id", :value => @item.customer_id) %>
+  <%= hidden_field("item", "horse_id", :value => @item.horse_id) %>
+  <%= hidden_field("item", "invoice_id", :value => @item.invoice_id) %>
 <% end %>
-
-<script language="javascript" type="text/javascript">
-
-    function CalculateAmount()
-    {
-        var quantity = document.getElementById("item_quantity").value;
-        var amount = document.getElementById("base_amount").value;
-        if (amount != "" && quantity != "")
-        {
-            var quantity_int = parseInt(quantity);
-            var amount_float = parseFloat(amount);
-            var calculated_amount = quantity_int * amount_float;
-            document.getElementById("item_amount").value = parseFloat(calculated_amount);
-        }
-    }
-
-    function OpenBasePrices()
-    {
-        window.open();
-    }
-
-</script>

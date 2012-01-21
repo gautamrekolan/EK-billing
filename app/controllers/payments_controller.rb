@@ -1,17 +1,32 @@
 class PaymentsController < ApplicationController
+  # GET /payments
+  # GET /payments.xml
+  def index
+    @payments = Payment.all
 
-  before_filter :login_required
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @payments }
+    end
+  end
+
+  # GET /payments/1
+  # GET /payments/1.xml
+  def show
+    @payment = Payment.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @payment }
+    end
+  end
 
   # GET /payments/new
   # GET /payments/new.xml
   def new
     @payment = Payment.new
-    @invoice = Invoice.find(params[:invoice])
-    @payment.invoice = @invoice
-    # @invoice_display = @invoice.name
-    @customer = Customer.find(@invoice.customer_id)
-    @payment.customer = @customer
-    # @customer_display = @customer.first_name + " " + @customer.last_name
+    @payment.invoice_id = params[:invoice]
+    @payment_types = [ "Cash", "Check", "Credit card", "Money order", "Other" ]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -22,6 +37,7 @@ class PaymentsController < ApplicationController
   # GET /payments/1/edit
   def edit
     @payment = Payment.find(params[:id])
+    @payment_types = [ "Cash", "Check", "Credit card", "Money order", "Other" ]
   end
 
   # POST /payments
@@ -46,9 +62,11 @@ class PaymentsController < ApplicationController
         else
           Invoice.update_status(@invoice.id, "Paid")
         end
-        format.html { redirect_to invoice_path(:id => @invoice, :notice => 'Payment was successfully created.') }
-        format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
+
+        format.html { redirect_to(edit_payment_path(@payment), :notice => 'Payment was successfully created.') }
+        format.xml  { render :xml => @payment, :status => :created, :location => @payment }
       else
+        @payment_types = [ "Cash", "Check", "Credit card", "Money order", "Other" ]
         format.html { render :action => "new" }
         format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
       end
@@ -59,7 +77,6 @@ class PaymentsController < ApplicationController
   # PUT /payments/1.xml
   def update
     @payment = Payment.find(params[:id])
-    @invoice = @payment.invoice
 
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
@@ -84,9 +101,11 @@ class PaymentsController < ApplicationController
         else
           Invoice.update_status(@invoice.id, "Paid")
         end
-        format.html { redirect_to invoice_path(:id => @invoice, :notice => 'Payment was successfully updated.') }
+
+        format.html { redirect_to(edit_payment_path(@payment), :notice => 'Payment was successfully updated.') }
         format.xml  { head :ok }
       else
+        @payment_types = [ "Cash", "Check", "Credit card", "Money order", "Other" ]
         format.html { render :action => "edit" }
         format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
       end
@@ -97,7 +116,6 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1.xml
   def destroy
     @payment = Payment.find(params[:id])
-    @invoice = @payment.invoice
     @payment.destroy
 
     # TODO: Calculate remaining invoice balance and mark "Partially Paid" or "Paid" if necessary
@@ -117,7 +135,7 @@ class PaymentsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to invoice_path(:id => @invoice, :notice => 'Payment was successfully removed.') }
+      format.html { redirect_to(@invoice) }
       format.xml  { head :ok }
     end
   end

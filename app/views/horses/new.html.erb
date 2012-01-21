@@ -1,10 +1,13 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "CUSTOMER", @horse.customer %>
+  << <%= link_to 'CUSTOMERS', customers_path %> << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
 </div>
 
-<fieldset>
-    <legend>Horse Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
-</fieldset>
+<h1 class="title">Horses</h1>
+
+<p class="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>

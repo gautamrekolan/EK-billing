@@ -12,18 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Category type" %>
-    <%= select("category", "category", @types.collect {|p| [ p, p ]}) %>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
   </div>
   <div class="field">
-    <%= f.label "Category name" %>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label "Base amount $" %>
-    <%= f.text_field :amount, :style => "width: 75px" %>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <%= hidden_field("category", "organization_id", :value => @category.organization_id)  %>
 <% end %>

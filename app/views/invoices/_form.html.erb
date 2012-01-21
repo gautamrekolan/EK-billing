@@ -1,4 +1,3 @@
-
 <%= form_for(@invoice) do |f| %>
   <% if @invoice.errors.any? %>
     <div id="error_explanation">
@@ -33,27 +32,19 @@
     <%= f.date_select :due_date %>
   </div>
   <div class="field">
-    <label>Amount $</label>
-    <%= f.text_field :amount, :style => "width: 75px" %>
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
   </div>
-  <div class="field">
-    <label>Notes</label>
-    <%= f.text_area :notes, :style => "width: 250px; height: 100px; border: 1px solid grey" %>
-  </div>
-  <div class="field">
-    <%= f.label "Customer" %>
-    <% if @invoice.customer_id.nil? == false %>
-        <%= link_to @invoice.customer.first_name + " " + @invoice.customer.last_name, customer_path(@invoice.customer) %>
-        <%= hidden_field("invoice", "customer_id", :value => @invoice.customer_id) %>
-    <% else %>
-        <% if Customer.all.count() > 0 %>
-            <%= select("invoice", "customer_id", Customer.all.collect {|p| [ p.last_name + ", " + p.first_name, p.id ] }, { :include_blank => true}, { :class => "not_date" }) %>
-        <% else %>
-            You cannot add an invoice without any customers. <%= link_to 'Add a customer now.', new_customer_path %>
-        <% end %>
-    <% end %>
-  </div>
+  <% if @invoice.customer_id.blank? %>
+    <%= f.label :customer_id, "Customer" %>
+    <%= select("invoice", "customer_id", Customer.find_all_by_organization_id(@invoice.organization_id).collect { |p| [ p.last_name + ", " + p.first_name, p.id ] }) %>
+  <% else %>
+    <%= hidden_field("invoice", "customer_id", :value => @invoice.customer_id) %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <%= hidden_field("invoice", "organization_id", :value => @invoice.organization_id) %>
 <% end %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyString
+  notes: MyString
+  filename: MyString
+  extension: MyString
+  organization_id: 1
+  customer_id: 1
+  horse_id: 1
+
+two:
+  description: MyString
+  notes: MyString
+  filename: MyString
+  extension: MyString
+  organization_id: 1
+  customer_id: 1
+  horse_id: 1

@@ -1,12 +1,13 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "CUSTOMERS", customers_path %>
-  <<
-  <%= link_to "CUSTOMER DETAILS", @customer %>
+  << <%= link_to 'CUSTOMERS', customers_path %>
 </div>
 
-<fieldset>
-    <legend>Customer Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
-</fieldset>
+<h1 class="title"><%= @customer.first_name %> <%= @customer.last_name %></h1>
+
+<p class="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>

@@ -1,4 +1,6 @@
 class Document < ActiveRecord::Base
+
+  belongs_to :organization
   belongs_to  :customer
   belongs_to  :horse
 

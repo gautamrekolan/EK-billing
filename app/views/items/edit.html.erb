@@ -1,17 +1,13 @@
 <div class="breadcrumb">
-    <<
-    <%= link_to "INVOICE", @item.invoice %>
+  << <%= link_to 'CUSTOMER', customer_path(@item.customer) %> << <%= link_to 'INVOICE', invoice_path(@item.invoice) %>
 </div>
 
-<fieldset>
-    <legend>Item Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
+<h1 class="title"><%= @item.invoice.name %></h1>
 
-    <% if @item.invoice_id > 0 %>
-        <%= link_to 'Return to invoice', invoice_path(@item.invoice_id) %>
-    <% else %>
-        <%= link_to 'Return to admin panel', admin_path %>
-    <% end %>
+<p class="notice"><%= notice %></p>
 
-</fieldset>
+<%= render 'form' %>
+
+</div>

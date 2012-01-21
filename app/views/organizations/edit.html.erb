@@ -1,6 +1,18 @@
+<% if session[:user][:access] == "admin" %>
+    <div class="breadcrumb">
+      << <%= link_to 'ORGANIZATIONS', organizations_path %>
+    </div>
+<% end %>
+
 <div class="list">
 
-<h1 class="title"><%= @organization.name %></h1>
+<% if session[:user][:admin] == "admin" %>
+    <h1 class="title"><%= @organization.name %></h1>
+<% else %>
+    <h1 class="title">Your Barn</h1>
+<% end %>
+
+<p id="notice"><%= notice %></p>
 
 <%= render 'form' %>
 

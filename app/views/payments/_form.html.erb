@@ -12,33 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Invoice" %>
-    <%= @payment.invoice.name %>
+    <%= f.label :date %>
+    <%= f.date_select :date %>
   </div>
   <div class="field">
-    <%= f.label "Customer" %>
-    <%= @payment.customer.first_name + " " + @payment.customer.last_name %>
+    <%= f.label :type %>
+    <%= select("payment", "payment_type", @payment_types.collect {|p| [ p, p ]}, :include_blank => true) %>
   </div>
   <div class="field">
-    <%= f.label :date_received %>
-    <%= f.date_select :date_received %>
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
   </div>
   <div class="field">
-    <%= f.label :payment_method %>
-    <%= f.text_field :payment_method %>
+    <%= f.label :amount, "Amount $" %>
+    <%= f.text_field :amount %>
   </div>
-  <div class="field">
-    <%= f.label :payment_notes %>
-    <%= f.text_field :payment_notes %>
-  </div>
-  <div class="field">
-    <%= f.label :payment_amount %>
-    <%= f.text_field :payment_amount %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 
-    <%= hidden_field("payment", "invoice_id", :value => @payment.invoice_id) %>
-    <%= hidden_field("payment", "customer_id", :value => @payment.customer_id) %>
+  <%= hidden_field("payment", "invoice_id", :value => @payment.invoice_id) %>
 <% end %>

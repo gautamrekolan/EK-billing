@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  category: MyString
+  name: MyString
+  amount: 9.99
+  organization_id: 1
+
+two:
+  category: MyString
+  name: MyString
+  amount: 9.99
+  organization_id: 1

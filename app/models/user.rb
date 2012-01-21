@@ -16,15 +16,16 @@ require 'digest'
 class User < ActiveRecord::Base
   belongs_to :organization
 
-  attr_accessor :password
-  attr_accessible :username, :password, :password_confirmation, :email, :name, :access, :organization_id
+  attr_accessor :password, :update_password
+  attr_accessible :username, :password, :password_confirmation, :update_password, :email, :name, :access, :organization_id
 
   validates :username, :presence => true,
                        :length => { :maximum => 50 },
                        :uniqueness => { :case_sensitive => false }
   validates :password, :presence => true,
                        :confirmation => true,
-                       :length => { :within => 6..50 }
+                       :length => { :within => 6..50 },
+                       :if => :update_password?
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,    :presence => true,
@@ -34,6 +35,13 @@ class User < ActiveRecord::Base
                        :length => { :maximum => 50 }
 
   before_save :encrypt_password
+
+  def update_password?()
+    if self.update_password
+      true
+    end
+    false
+  end
 
   # Returns true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -52,10 +60,12 @@ class User < ActiveRecord::Base
 
   private
     def encrypt_password
-      # must use self.encrypted_password, otherwise Ruby will create local var
-      # don't have to use self.password for param to encrypt
-      self.salt = make_salt unless has_password?(password)
-      self.encrypted_password = encrypt(password)
+      if self.update_password
+        # must use self.encrypted_password, otherwise Ruby will create local var
+        # don't have to use self.password for param to encrypt
+        self.salt = make_salt unless has_password?(password)
+        self.encrypted_password = encrypt(password)
+      end
     end
 
     def encrypt(string)

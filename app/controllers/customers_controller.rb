@@ -1,11 +1,15 @@
 class CustomersController < ApplicationController
 
-  # before_filter :login_required, :except => [ :change_delivery ]
+  before_filter :login_required
 
   # GET /customers
   # GET /customers.xml
   def index
-    @customers = Customer.all(:order => "active desc, last_name asc, first_name asc")
+    if session[:user].nil? == false
+      if session[:user][:organization_id].blank? == false
+        @customers = Customer.find_all_by_organization_id(session[:user][:organization_id], :order => "last_name asc, first_name asc")
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,6 +32,8 @@ class CustomersController < ApplicationController
   # GET /customers/new.xml
   def new
     @customer = Customer.new
+    @customer.organization_id = session[:user][:organization_id]
+
     @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
                "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
                "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
@@ -56,15 +62,17 @@ class CustomersController < ApplicationController
   # POST /customers.xml
   def create
     @customer = Customer.new(params[:customer])
-    # Remove all non-digit characters from the phone number
-    # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    @customer.phone = @customer.phone.gsub(/\D/, '')
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
+        format.html { redirect_to(edit_customer_path(@customer), :notice => 'Customer was successfully created.') }
         format.xml  { render :xml => @customer, :status => :created, :location => @customer }
       else
+        @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+               "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+               "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+               "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+        @methods = ["Email", "Mail"]
         format.html { render :action => "new" }
         format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
       end
@@ -75,15 +83,17 @@ class CustomersController < ApplicationController
   # PUT /customers/1.xml
   def update
     @customer = Customer.find(params[:id])
-    # Remove all non-digit characters from the phone number
-    # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    params[:customer][:phone] = params[:customer][:phone].gsub(/\D/, '')
 
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
+        format.html { redirect_to(edit_customer_path(@customer), :notice => 'Customer was successfully updated.') }
         format.xml  { head :ok }
       else
+        @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+               "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+               "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+               "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+        @methods = ["Email", "Mail"]
         format.html { render :action => "edit" }
         format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
       end
@@ -101,47 +111,4 @@ class CustomersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-
-  def change_delivery
-    @customer = Customer.find(params[:customer])
-    if @customer.nil? == false
-      @customer.update_attribute("delivery_method", "Mail")
-    end
-  end
-
-  def create_invoices
-    @customers = Customer.all(:order => "last_name asc, first_name asc")
-    @invoice = Invoice.new
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @customers }
-    end
-  end
-
-  def build_invoices
-    params[:customer_id].each do |customer|
-      customer_id = Integer(customer)
-      if customer_id > 0
-        @customer = Customer.find(customer_id)
-        if @customer.nil? == false
-          @invoice = Invoice.new(params[:invoice])
-          @invoice.customer_id = customer_id
-          @invoice.created_at = Time.now
-          @invoice.updated_at = Time.now
-          @invoice.status_code = 1
-          @invoice.status = "Opened"
-          if @invoice.save
-            Invoice.update_status(@invoice.id, "Opened")
-          end
-        end
-      end
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(invoices_path, :notice => 'Invoices were successfully created.') }
-      format.xml  { head :ok }
-    end
-  end
-
 end

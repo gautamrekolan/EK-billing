@@ -10,7 +10,101 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120021857) do
+ActiveRecord::Schema.define(:version => 20120121204101) do
+
+  create_table "autos", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "add_day"
+    t.string   "description"
+    t.integer  "quantity"
+    t.decimal  "amount",      :precision => 8, :scale => 2
+    t.integer  "customer_id"
+    t.integer  "horse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "category"
+    t.string   "name"
+    t.decimal  "amount",          :precision => 8, :scale => 2
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customers", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "home"
+    t.string   "cell"
+    t.string   "work"
+    t.string   "email"
+    t.integer  "active"
+    t.string   "delivery_method"
+    t.integer  "auto_invoice"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", :force => true do |t|
+    t.string   "description"
+    t.string   "notes"
+    t.string   "filename"
+    t.string   "extension"
+    t.integer  "organization_id"
+    t.integer  "customer_id"
+    t.integer  "horse_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "horses", :force => true do |t|
+    t.string   "reg_name"
+    t.string   "barn_name"
+    t.string   "breed"
+    t.integer  "age"
+    t.string   "notes"
+    t.integer  "organization_id"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoices", :force => true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.date     "issued_date"
+    t.date     "due_date"
+    t.decimal  "amount",          :precision => 8, :scale => 2
+    t.integer  "status_code"
+    t.string   "status"
+    t.string   "notes"
+    t.integer  "organization_id"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", :force => true do |t|
+    t.integer  "category_id"
+    t.string   "description"
+    t.integer  "quantity"
+    t.decimal  "amount",          :precision => 8, :scale => 2
+    t.integer  "organization_id"
+    t.integer  "customer_id"
+    t.integer  "horse_id"
+    t.integer  "invoice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -22,6 +116,14 @@ ActiveRecord::Schema.define(:version => 20120120021857) do
     t.string   "email"
     t.string   "website"
     t.string   "contact"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.integer  "status_code"
+    t.string   "status"
+    t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

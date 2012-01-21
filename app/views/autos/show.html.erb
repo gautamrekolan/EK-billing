@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Start date:</b>
+  <%= @auto.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @auto.end_date %>
+</p>
+
+<p>
+  <b>Add day:</b>
+  <%= @auto.add_day %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @auto.description %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @auto.quantity %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @auto.amount %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @auto.customer_id %>
+</p>
+
+<p>
+  <b>Horse:</b>
+  <%= @auto.horse_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_auto_path(@auto) %> |
+<%= link_to 'Back', autos_path %>

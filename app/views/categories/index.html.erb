@@ -1,22 +1,28 @@
-<fieldset>
-    <legend>Categories</legend>
+<div class="list">
 
+<h1 class="title">Categories</h1>
+
+<p class="notice"><%= notice %></p>
+
+<% if session[:user][:organization_id] %>
     <%= link_to 'Add a new category', new_category_path, :class => "add_link" %>
 
     <% if @categories.empty? == false %>
         <table class="margin_above">
-        <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.category %></td>
-            <td><%= link_to category.name, category %></td>
-            <td><%= number_to_currency(category.amount) %></td>
-            <td><%= link_to 'Edit', edit_category_path(category) %></td>
-            <td><a href="#" onclick="confirm('Are you sure you want to delete this category?', '<%= category_delete_url(category.id) %>')">Remove</a></td>
-          </tr>
-        <% end %>
+            <% @categories.each do |category| %>
+              <tr>
+                <td><%= category.category %> - <%= category.name %></td>
+                <td><%= number_to_currency(category.amount) %></td>
+                <td><%= link_to 'Edit', edit_category_path(category) %></td>
+                <td><a href="#" onclick="confirm('Are you sure you want to delete this category?', '<%= delete_category_path(category) %>')">Remove</a></td>
+              </tr>
+            <% end %>
         </table>
     <% else %>
-        <p style="margin-top: 15px">You do not have any categories created.</p>
+        <p class="currently_no">There are currently no categories.</p>
     <% end %>
+<% else %>
+    <p class="currently_no">You can't start adding categories until you get your barn information entered. <%= link_to 'Click here', new_organization_path %> to do that now.</p>
+<% end %>
 
-</fieldset>
+</div>

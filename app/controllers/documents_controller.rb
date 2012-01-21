@@ -26,6 +26,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new.xml
   def new
     @document = Document.new
+    @document.organization_id = session[:user][:organization_id]
     @document.customer_id = params[:customer]
     @document.horse_id = params[:horse]
 

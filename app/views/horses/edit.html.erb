@@ -1,12 +1,17 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "CUSTOMER", @horse.customer %>
-  <<
-  <%= link_to "HORSE DETAILS", @horse %>
+  << <%= link_to 'CUSTOMERS', customers_path %> << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
 </div>
 
-<fieldset>
-    <legend>Horse Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
-</fieldset>
+<% if @horse.reg_name %>
+    <h1 class="title"><%= @horse.reg_name %> (<%= @horse.barn_name %>)</h1>
+<% else %>
+    <h1 class="title"><%= @horse.barn_name %></h1>
+<% end %>
+
+<p class="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>

@@ -1,15 +1,13 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "CATEGORIES", categories_path %>
-  <<
-  <%= link_to "CATEGORY DETAILS", @category %>
+  << <%= link_to 'CATEGORIES', categories_path %>
 </div>
 
-<fieldset>
-    <legend>Category Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
+<h1 class="title"><%= @category.name %></h1>
 
-    <%= link_to 'Show details', @category %>
+<p class="notice"><%= notice %></p>
 
-</fieldset>
+<%= render 'form' %>
+
+</div>

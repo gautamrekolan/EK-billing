@@ -1,10 +1,13 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "INVOICE", @payment.invoice %>
+  << <%= link_to 'INVOICES', invoices_path %> << <%= link_to @payment.invoice.name, @payment.invoice %>
 </div>
 
-<fieldset>
-    <legend>Payment Information</legend>
+<div class="list">
 
-    <%= render 'form' %>
-</fieldset>
+<h1 class="title">Payment</h1>
+
+<p id="notice"><%= notice %></p>
+
+<%= render 'form' %>
+
+</div>
