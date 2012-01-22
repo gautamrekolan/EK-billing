@@ -21,6 +21,7 @@ EkBilling::Application.routes.draw do
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout
 
+  match 'autos/destroy/:id'         => "autos#destroy",         :as => :delete_auto
   match 'categories/destroy/:id'    => "categories#destroy",    :as => :delete_category
   match 'customers/destroy/:id'     => "customers#destroy",     :as => :delete_customer
   match 'documents/destroy/:id'     => "documents#destroy",     :as => :delete_document

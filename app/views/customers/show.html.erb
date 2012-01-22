@@ -119,6 +119,26 @@
   </div>
 
   <div class="sub">
+    <h2 class="sub_title">Auto items</h2>
+    <%= link_to 'Add a new auto item', new_auto_path(:customer => @customer.id), :class => "link_button" %>
+    <% if @customer.autos.empty? == false %>
+        <table class="margin_above">
+          <% @customer.autos.each do |auto| %>
+            <tr>
+                <td><%= auto.category.category %> - <%= auto.category.name %></td>
+                <td><%= auto.description %></td>
+                <td><%= number_to_currency(auto.amount) %></td>
+                <td><%= link_to 'Edit', edit_auto_path(auto) %></td>
+                <td><a href="#" onclick="confirm('Are you sure you want to delete this auto item?', '<%= delete_auto_path(auto) %>')">Remove</a></td>
+            </tr>
+          <% end %>
+        </table>
+    <% else %>
+        <p class="currently_no">This customer does not currently have any documents.</p>
+    <% end %>
+  </div>
+
+  <div class="sub">
     <h2 class="sub_title">Documents</h2>
     <%= link_to 'Add a new document', new_document_path(:customer => @customer.id), :class => "link_button" %>
     <% if @customer.documents.empty? == false %>
