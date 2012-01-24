@@ -131,6 +131,14 @@ class InvoicesController < ApplicationController
             :to   => '(717) 658-4502', # @customer.cell,
             :body => "Just a reminder from " + @invoice.organization.name + " that your invoice is due on " + @invoice.due_date.strftime("%B %e, %Y") + ". Thank you!"
         )
+        success = Invoice.update_status(@invoice.id, "Reminded")
+        if success == true
+          redirect_to(@invoice, :notice => "Text message reminder was successfully sent.")
+        else
+          redirect_to(@invoice, :notice => "Something went wrong! Text message reminder was NOT successfully sent.")
+        end
+      else
+        redirect_to(@invoice, :notice => "Something went wrong! Text message reminder was NOT successfully sent.")
       end
     end
   end
@@ -149,7 +157,7 @@ class InvoicesController < ApplicationController
           InvoiceMailer.invoice_issued(@invoice).deliver
           success = Invoice.update_status(@invoice.id, "Emailed")
           if success == true
-            redirect_to(@invoice, :notice => "Email was successfully sent.")
+            redirect_to(@invoice, :notice => "Invoice email was successfully sent.")
           else
             redirect_to(@invoice, :notice => "Something went wrong! Email was NOT successfully sent.")
           end
@@ -187,9 +195,9 @@ class InvoicesController < ApplicationController
   def reminder
     @invoice = Invoice.find(params[:id])
     InvoiceMailer.invoice_reminder(@invoice).deliver
-    @success = Invoice.update_status(@invoice.id, "Reminded")
-    if @success == true
-      redirect_to(@invoice, :notice => "Reminder email was sent.")
+    success = Invoice.update_status(@invoice.id, "Reminded")
+    if success == true
+      redirect_to(@invoice, :notice => "Reminder email was successfully sent.")
     else
       redirect_to(@invoice, :notice => "Something went wrong! Reminder email was NOT successfully sent.")
     end
@@ -212,7 +220,7 @@ class InvoicesController < ApplicationController
           #InvoiceMailer.invoice_mailed(@invoice).deliver
         end
       end
-      redirect_to(@invoice, :notice => "Invoice is now marked as mailed.")
+      redirect_to(@invoice, :notice => "Invoice status was successfully updated.")
     else
       redirect_to(@invoice, :notice => "Something went wrong! Invoice status was NOT successfully updated.")
     end
@@ -230,7 +238,7 @@ class InvoicesController < ApplicationController
           #InvoiceMailer.invoice_paid(@invoice).deliver
         end
       end
-      redirect_to(@invoice, :notice => "Invoice is now marked as paid.")
+      redirect_to(@invoice, :notice => "Invoice status was successfully updated.")
     else
       redirect_to(@invoice, :notice => "Something went wrong! Invoice status was NOT successfully updated.")
     end
@@ -251,9 +259,16 @@ class InvoicesController < ApplicationController
     pdf.move_down 30
 
     pdf.font_size = 10
-    pdf.text "Please send payment to:", :style => :bold
-    pdf.text @invoice.organization.name
-    pdf.text @invoice.organization.contact
+    pdf.text "Please make checks payable to:", :style => :bold
+    if @invoice.organization.custom.nil? == false
+      if @invoice.organization.custom.checks_payable_to.blank? == false
+        pdf.text @invoice.organization.custom.checks_payable_to
+      else
+        pdf.text @invoice.organization.name + " or " + @invoice.organization.contact
+      end
+    else
+      pdf.text @invoice.organization.name + " or " + @invoice.organization.contact
+    end
     pdf.text @invoice.organization.address
     pdf.text @invoice.organization.city + ", " + @invoice.organization.state + " " + @invoice.organization.zip
     pdf.text number_to_phone(@invoice.organization.phone)
@@ -296,24 +311,52 @@ class InvoicesController < ApplicationController
     pdf.move_down 20
     pdf.text "AMOUNT DUE: " + number_to_currency(@invoice.amount), :size => 14, :align => :right, :style => :bold
 
-    pdf.move_down 20
-    pdf.text "Please contact " + @invoice.organization.contact + " if any of your information has changed:", :style => :bold
-    pdf.text @invoice.customer.first_name + " " + @invoice.customer.last_name
-    pdf.text @invoice.customer.address
-    pdf.text @invoice.customer.city + ", " + @invoice.customer.state + " " + @invoice.customer.zip
-    if @invoice.customer.cell.blank? == false
-      pdf.text "Cell: " + number_to_phone(@invoice.customer.cell, :area_code => true)
+    if @invoice.organization.custom.nil? == false
+      if @invoice.organization.custom.customer_info_check == 1
+        pdf.move_down 20
+        pdf.text "Please contact " + @invoice.organization.contact + " if any of your information has changed:", :style => :bold
+        pdf.text @invoice.customer.first_name + " " + @invoice.customer.last_name
+        pdf.text @invoice.customer.address
+        pdf.text @invoice.customer.city + ", " + @invoice.customer.state + " " + @invoice.customer.zip
+        if @invoice.customer.cell.blank? == false
+          pdf.text "Cell: " + number_to_phone(@invoice.customer.cell, :area_code => true)
+        end
+        if @invoice.customer.home.blank? == false
+          pdf.text "Home: " + number_to_phone(@invoice.customer.home, :area_code => true)
+        end
+        if @invoice.customer.work.blank? == false
+          pdf.text "Work: " + number_to_phone(@invoice.customer.work, :area_code => true)
+        end
+        pdf.text @invoice.customer.email
+      end
+    else
+      pdf.move_down 20
+        pdf.text "Please contact " + @invoice.organization.contact + " if any of your information has changed:", :style => :bold
+        pdf.text @invoice.customer.first_name + " " + @invoice.customer.last_name
+        pdf.text @invoice.customer.address
+        pdf.text @invoice.customer.city + ", " + @invoice.customer.state + " " + @invoice.customer.zip
+        if @invoice.customer.cell.blank? == false
+          pdf.text "Cell: " + number_to_phone(@invoice.customer.cell, :area_code => true)
+        end
+        if @invoice.customer.home.blank? == false
+          pdf.text "Home: " + number_to_phone(@invoice.customer.home, :area_code => true)
+        end
+        if @invoice.customer.work.blank? == false
+          pdf.text "Work: " + number_to_phone(@invoice.customer.work, :area_code => true)
+        end
+        pdf.text @invoice.customer.email
     end
-    if @invoice.customer.home.blank? == false
-      pdf.text "Home: " + number_to_phone(@invoice.customer.home, :area_code => true)
-    end
-    if @invoice.customer.work.blank? == false
-      pdf.text "Work: " + number_to_phone(@invoice.customer.work, :area_code => true)
-    end
-    pdf.text @invoice.customer.email
 
     pdf.move_down 30
-    pdf.text "Thank you for your prompt payment and continued business!", :size => 12, :style => :bold, :align => :right
+    if @invoice.organization.custom.nil? == false
+      if @invoice.organization.custom.signoff_line.blank? == false
+        pdf.text @invoice.organization.custom.signoff_line, :size => 12, :style => :bold, :align => :right
+      else
+        pdf.text "Thank you for your prompt payment and continued business!", :size => 12, :style => :bold, :align => :right
+      end
+    else
+      pdf.text "Thank you for your prompt payment and continued business!", :size => 12, :style => :bold, :align => :right
+    end
     return pdf
   end
 
