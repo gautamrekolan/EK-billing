@@ -8,9 +8,13 @@ EkBilling::Application.routes.draw do
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout
 
-  match 'invoices/confirm/'         => "invoices#confirm",      :as => :invoice_confirm
-  match 'invoices/request/'         => "invoices#request_mail", :as => :invoice_request
-  match 'invoices/issued/'          => "invoices#issued",       :as => :invoice_issued
+  match 'invoices/confirm/:id'      => "invoices#confirm",      :as => :invoice_confirm
+  match 'invoices/request/:id'      => "invoices#request_mail", :as => :invoice_request
+  match 'invoices/issued/:id'       => "invoices#issued",       :as => :invoice_issued
+  match 'invoices/text/:id'         => "invoices#text",         :as => :invoice_text
+  match 'invoices/mailed/:id'       => "invoices#mailed",       :as => :invoice_mailed
+  match 'invoices/reminder/:id'     => "invoices#reminder",     :as => :invoice_reminder
+  match 'invoices/paid/:id'         => "invoices#paid",         :as => :invoice_paid
 
   match 'autos/destroy/:id'         => "autos#destroy",         :as => :delete_auto
   match 'categories/destroy/:id'    => "categories#destroy",    :as => :delete_category

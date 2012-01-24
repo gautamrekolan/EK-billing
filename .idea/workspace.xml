@@ -27,10 +27,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="invoices_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invoices_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="10" selection-start="42" selection-end="42" vertical-scroll-proportion="0.026223777">
+            <state line="121" column="38" selection-start="4560" selection-end="4560" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="36" selection-start="960" selection-end="960" vertical-scroll-proportion="0.41025642">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice_issued.text.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoice_mailer/invoice_issued.text.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="124" selection-start="1752" selection-end="1752" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice_mailer.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="104" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,10 +85,10 @@
         <option value="$PROJECT_DIR$/app/views/invoices/request_mail.html.erb" />
         <option value="$PROJECT_DIR$/app/views/invoices/show.html.erb" />
         <option value="$PROJECT_DIR$/app/mailers/invoice_mailer.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/invoice_mailer/invoice_issued.text.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
       </list>
     </option>
   </component>
@@ -318,24 +345,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ek-billing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ek-billing" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mailers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -808,13 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="104" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -829,13 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="103" selection-start="575" selection-end="575" vertical-scroll-proportion="0.2820513">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="80" selection-start="1842" selection-end="1842" vertical-scroll-proportion="0.6666667">
@@ -843,16 +838,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="104" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoice_mailer/invoice_issued.text.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="130" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.6066434">
+        <state line="56" column="124" selection-start="1752" selection-end="1752" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="42" selection-end="42" vertical-scroll-proportion="0.026223777">
+        <state line="121" column="38" selection-start="4560" selection-end="4560" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="36" selection-start="960" selection-end="960" vertical-scroll-proportion="0.41025642">
           <folding />
         </state>
       </provider>

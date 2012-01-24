@@ -118,8 +118,8 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def send_text
-    @invoice = Invoice.find(params[:invoice])
+  def text
+    @invoice = Invoice.find(params[:id])
     if @invoice.nil? == false
       @customer = Customer.find(@invoice.customer_id)
       if @customer.cell.blank? == false
@@ -129,14 +129,14 @@ class InvoicesController < ApplicationController
         @client.account.sms.messages.create(
             :from => '(415) 599-2671',
             :to   => '(717) 658-4502', # @customer.cell,
-            :body => "Just a reminder from " + @invoice.organization.name + " that your invoice is due on " + @invoice.due_date.strftime("%B %e, %Y") + ". Thanks!"
+            :body => "Just a reminder from " + @invoice.organization.name + " that your invoice is due on " + @invoice.due_date.strftime("%B %e, %Y") + ". Thank you!"
         )
       end
     end
   end
 
   def issued
-    @invoice = Invoice.find(params[:invoice])
+    @invoice = Invoice.find(params[:id])
     if @invoice.nil? == false
       @customer = Customer.find_by_id(@invoice.customer_id)
       if @customer.nil? == false
@@ -164,7 +164,7 @@ class InvoicesController < ApplicationController
 
   def confirm
     # Decrypt encrypted id from params
-    @param = params[:invoice]
+    @param = params[:id]
     cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
     @decrypted = cipher.dec(@param) # @param
     @invoice = Invoice.find_by_id(@decrypted)
@@ -175,7 +175,7 @@ class InvoicesController < ApplicationController
 
   def request_mail
     # Decrypt encrypted id from params
-    @param = params[:invoice]
+    @param = params[:id]
     cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
     @decrypted = cipher.dec(@param) # @param
     @invoice = Invoice.find(@decrypted)
@@ -184,8 +184,8 @@ class InvoicesController < ApplicationController
     @notice = "Thank you for your request. We will get your invoice in the mail to you as soon as possible."
   end
 
-  def reminder_email
-    @invoice = Invoice.find(params[:invoice])
+  def reminder
+    @invoice = Invoice.find(params[:id])
     InvoiceMailer.invoice_reminder(@invoice).deliver
     @success = Invoice.update_status(@invoice.id, "Reminded")
     if @success == true
@@ -195,8 +195,8 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def mark_mailed
-    @invoice_id = params[:invoice]
+  def mailed
+    @invoice_id = params[:id]
     @method = params[:method]
     @invoice = Invoice.find_by_id(@invoice_id)
     if @method == "primary"
@@ -218,8 +218,8 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def mark_paid
-    @invoice_id = params[:invoice]
+  def paid
+    @invoice_id = params[:id]
     @invoice = Invoice.find_by_id(@invoice_id)
     @success = Invoice.update_status(@invoice.id, "Paid")
     if @success == true

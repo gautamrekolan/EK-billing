@@ -54,8 +54,8 @@ TOTAL DUE: <%= number_to_currency(@invoice.amount) %>
 
 Please also find a PDF of your invoice attached to this email for easier viewing.
 
-To confirm your receipt of this invoice, please copy and paste the following URL into your browser: <%= invoice_confirm_url(:invoice => @invoice_id) %>
-To request a hard copy of this invoice be mailed to you, copy and paste this link: <%= invoice_request_url(:invoice => @invoice_id) %>
+To confirm your receipt of this invoice, please copy and paste the following URL into your browser: <%= invoice_confirm_url(@invoice_id) %>
+To request a hard copy of this invoice be mailed to you, copy and paste this link: <%= invoice_request_url(@invoice_id) %>
 
 Thank you in advance for your prompt payment!
 
