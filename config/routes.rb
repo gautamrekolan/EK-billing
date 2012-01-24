@@ -1,18 +1,4 @@
 EkBilling::Application.routes.draw do
-  resources :autos
-
-  resources :documents
-
-  resources :payments
-
-  resources :categories
-
-  resources :customers
-  resources :horses
-  resources :invoices
-  resources :items
-  resources :organizations
-  resources :users
 
   root :to => 'pages#home'
   match '/about',                   :to => 'pages#about'
@@ -21,6 +7,10 @@ EkBilling::Application.routes.draw do
 
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout
+
+  match 'invoices/confirm/'         => "invoices#confirm",      :as => :invoice_confirm
+  match 'invoices/request/'         => "invoices#request_mail", :as => :invoice_request
+  match 'invoices/issued/'          => "invoices#issued",       :as => :invoice_issued
 
   match 'autos/destroy/:id'         => "autos#destroy",         :as => :delete_auto
   match 'categories/destroy/:id'    => "categories#destroy",    :as => :delete_category
@@ -32,6 +22,20 @@ EkBilling::Application.routes.draw do
   match 'organizations/destroy/:id' => "organizations#destroy", :as => :delete_organization
   match 'payments/destroy/:id'      => "payments#destroy",      :as => :delete_payment
   match 'users/destroy/:id'         => "users#destroy",         :as => :delete_user
+
+  match 'customs/sample'            => "customs#sample",        :as => :invoice_sample
+
+  resources :autos
+  resources :categories
+  resources :customers
+  resources :customs
+  resources :documents
+  resources :horses
+  resources :invoices
+  resources :items
+  resources :organizations
+  resources :payments
+  resources :users
 
 # match '/pagename' == pagename_path as named route
 

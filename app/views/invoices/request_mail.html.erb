@@ -1,0 +1,46 @@
+<div class="list">
+
+<h1 class="title"><%= @invoice.name %></h1>
+
+<p id="notice"><%= @notice %></p>
+
+<div class="field">
+    <label style="clear: left">Status</label>
+    <%= @invoice.status %>
+</div>
+
+<div class="field">
+    <label style="clear: left">Start date</label>
+    <%= @invoice.start_date.strftime("%B %e, %Y") %>
+</div>
+
+<div class="field">
+    <label style="clear: left">End date</label>
+    <%= @invoice.end_date.strftime("%B %e, %Y") %>
+</div>
+
+<div class="field">
+    <label style="clear: left">Issued date</label>
+    <%= @invoice.issued_date.strftime("%B %e, %Y") %>
+</div>
+
+<div class="field">
+    <label style="clear: left">Due date</label>
+    <%= @invoice.due_date.strftime("%B %e, %Y") %>
+</div>
+
+<div class="field">
+    <label style="clear: left">Amount</label>
+    <%= number_to_currency(@invoice.amount) %>
+</div>
+
+<div class="field" style="padding-bottom: 20px">
+    <label style="clear: left">Notes</label>
+    <% if @invoice.notes.blank? == false %>
+        <%= @invoice.notes %>
+    <% else %>
+        No notes have been entered
+    <% end %>
+</div>
+
+</div>

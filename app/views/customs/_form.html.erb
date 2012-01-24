@@ -1,0 +1,49 @@
+<%= form_for(@custom) do |f| %>
+  <% if @custom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@custom.errors.count, "error") %> prohibited this invoice customization from being saved:</h2>
+
+      <ul>
+      <% @custom.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :logo_filename, "Logo image" %>
+    <%= f.file_field :logo_filename %>
+  </div>
+
+  <div class="field">
+    <%= f.label :checks_payable_to, "Checks payable to" %>
+    <% if @custom.checks_payable_to.blank? %>
+        <%= f.text_field :checks_payable_to, :style => "width: 650px", :value => @custom.organization.contact + " or " + @custom.organization.name %>
+    <% else %>
+        <%= f.text_field :checks_payable_to, :style => "width: 650px" %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :customer_info_check, "Show customer contact information?" %>
+    <%= f.check_box :customer_info_check %>
+    <br /><br />
+    <label>&nbsp;</label>
+    <p class="notes">This will print the contact information that you currently have for each customer
+                     on their invoices, so that they will remember to keep their information up to date.</p>
+  </div>
+
+  <div class="field">
+    <%= f.label :signoff_line, "Sign-off line" %>
+    <% if @custom.signoff_line.blank? %>
+        <%= f.text_field :signoff_line, :style => "width: 650px", :value => "Thank you for your prompt payment and continued business!" %>
+    <% else %>
+        <%= f.text_field :signoff_line, :style => "width: 650px" %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Customize" %>
+  </div>
+<% end %>

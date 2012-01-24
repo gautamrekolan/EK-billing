@@ -1,6 +1,8 @@
+include ActionView::Helpers::NumberHelper
+
 class InvoicesController < ApplicationController
 
-  before_filter :login_required
+  before_filter :login_required, :except => [ :confirm, :request_mail ]
 
   # GET /invoices
   def index
@@ -133,7 +135,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def send_email
+  def issued
     @invoice = Invoice.find(params[:invoice])
     if @invoice.nil? == false
       @customer = Customer.find_by_id(@invoice.customer_id)
@@ -160,28 +162,26 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def confirm_email
-    # TODO - get this working
-
+  def confirm
     # Decrypt encrypted id from params
     @param = params[:invoice]
     cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
     @decrypted = cipher.dec(@param) # @param
     @invoice = Invoice.find_by_id(@decrypted)
-    @status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
+    #@status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
     @success = Invoice.update_status(@invoice.id, "Confirmed")
+    @notice = "Thank you for confirming this invoice, and thank you in advance for your prompt payment."
   end
 
-  def request_email
-    # TODO - get this working
-
+  def request_mail
     # Decrypt encrypted id from params
     @param = params[:invoice]
     cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
     @decrypted = cipher.dec(@param) # @param
     @invoice = Invoice.find(@decrypted)
-    @status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
+    #@status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
     @success = Invoice.update_status(@invoice.id, "Mail Requested")
+    @notice = "Thank you for your request. We will get your invoice in the mail to you as soon as possible."
   end
 
   def reminder_email
@@ -301,7 +301,15 @@ class InvoicesController < ApplicationController
     pdf.text @invoice.customer.first_name + " " + @invoice.customer.last_name
     pdf.text @invoice.customer.address
     pdf.text @invoice.customer.city + ", " + @invoice.customer.state + " " + @invoice.customer.zip
-    pdf.text number_to_phone(@invoice.customer.phone)
+    if @invoice.customer.cell.blank? == false
+      pdf.text "Cell: " + number_to_phone(@invoice.customer.cell, :area_code => true)
+    end
+    if @invoice.customer.home.blank? == false
+      pdf.text "Home: " + number_to_phone(@invoice.customer.home, :area_code => true)
+    end
+    if @invoice.customer.work.blank? == false
+      pdf.text "Work: " + number_to_phone(@invoice.customer.work, :area_code => true)
+    end
     pdf.text @invoice.customer.email
 
     pdf.move_down 30

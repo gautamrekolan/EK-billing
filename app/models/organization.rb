@@ -14,10 +14,11 @@ end
 
 class Organization < ActiveRecord::Base
 
-  has_many :users
-  has_many :customers
-  has_many :horses
-  has_many :invoices
+  has_many  :users
+  has_many  :customers
+  has_one   :custom
+  has_many  :horses
+  has_many  :invoices
 
   validates :name,      :presence => true, :length => { :maximum => 250 }
   validates :address,   :presence => true, :length => { :maximum => 250 }

@@ -11,6 +11,11 @@
     <h1 class="title"><%= @organization.name %></h1>
 <% else %>
     <h1 class="title">Your Barn</h1>
+    <% if @organization.custom.nil? == false %>
+        <%= link_to 'CUSTOMIZE YOUR INVOICES', edit_custom_path(@organization.custom), :class => "add_link" %>
+    <% else %>
+        <%= link_to 'CUSTOMIZE YOUR INVOICES', new_custom_path, :class => "add_link" %>
+    <% end %>
 <% end %>
 
 <p id="notice"><%= notice %></p>

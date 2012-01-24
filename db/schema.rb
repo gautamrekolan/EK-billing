@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121204101) do
+ActiveRecord::Schema.define(:version => 20120124214136) do
 
   create_table "autos", :force => true do |t|
     t.date     "start_date"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(:version => 20120121204101) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "customs", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "checks_payable_to"
+    t.string   "signoff_line"
+    t.integer  "customer_info_check"
+    t.string   "logo_extension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo_filename"
   end
 
   create_table "documents", :force => true do |t|
@@ -116,6 +127,17 @@ ActiveRecord::Schema.define(:version => 20120121204101) do
     t.string   "email"
     t.string   "website"
     t.string   "contact"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", :id => false, :force => true do |t|
+    t.integer  "id"
+    t.datetime "date"
+    t.string   "payment_type"
+    t.string   "notes"
+    t.decimal  "amount",       :precision => 8, :scale => 2
+    t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

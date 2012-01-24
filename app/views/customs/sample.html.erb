@@ -1,0 +1,54 @@
+<div class="list">
+
+<h1 class="title">Customize Your Invoices</h1>
+
+<p class="notice"><%= notice %></p>
+
+<% if @organization.custom.nil? == false %>
+    <%= link_to 'Edit customization', edit_custom_path(@organization.custom), :class => "add_link"  %>
+<% else %>
+    <%= link_to 'Edit customization', new_custom_path, :class => "add_link" %>
+<% end %>
+
+<iframe src="<%= @filename %>" height="900px" width="880px" style="margin-top: 20px"></iframe>
+
+<div class="field">
+  <label style="width: 250px">Checks payable to</label>
+  <% if @organization.custom.nil? == false %>
+    <% if @organization.custom.checks_payable_to.blank? == false %>
+        <%= @organization.custom.checks_payable_to %>
+    <% else %>
+        <%= @organization.contact %> or <%= @organization.name %>
+    <% end %>
+  <% else %>
+    <%= @organization.contact %> or <%= @organization.name %>
+  <% end %>
+</div>
+
+<div class="field">
+  <label style="width: 250px">Show customer contact info?</label>
+  <% if @organization.custom.nil? == false %>
+    <% if @organization.custom.customer_info_check == 1 %>
+        YES
+    <% else %>
+        NO
+    <% end %>
+  <% else %>
+    YES
+  <% end %>
+</div>
+
+<div class="field">
+  <label style="width: 250px">Sign-off line</label>
+  <% if @organization.custom.nil? == false %>
+    <% if @organization.custom.signoff_line.blank? == false %>
+        <%= @organization.custom.signoff_line %>
+    <% else %>
+        Thank you for your prompt payment and continued business!
+    <% end %>
+  <% else %>
+    Thank you for your prompt payment and continued business!
+  <% end %>
+</div>
+
+</div>

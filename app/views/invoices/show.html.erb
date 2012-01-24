@@ -8,7 +8,9 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="field">
+<%= link_to 'Email this invoice', invoice_issued_path(:invoice => @invoice), :class => "link_button" %>
+
+<div class="field" style="padding-top: 20px">
     <label style="clear: left">Status</label>
     <%= @invoice.status %>
 </div>
