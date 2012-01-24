@@ -4,22 +4,22 @@
 
 <div class="list">
 
-<h1 class="title"><%= @customer.first_name %> <%= @customer.last_name %></h1>
+<h1 class="title"><%= @category.name %></h1>
 
 <p id="notice"><%= notice %></p>
 
 <div class="field">
-  <label>Category:</label>
+  <label>Category</label>
   <%= @category.category %>
 </div>
 
 <div class="field">
-  <label>Name:</label>
+  <label>Name</label>
   <%= @category.name %>
 </div>
 
 <div class="field">
-  <label>Amount:</label>
+  <label>Amount</label>
   <%= number_to_currency(@category.amount) %>
 </div>
 

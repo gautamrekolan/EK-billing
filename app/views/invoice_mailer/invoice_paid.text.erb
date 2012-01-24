@@ -1,0 +1,32 @@
+Your payment has been received!
+=============================================
+
+Hi <%= @invoice.customer.first_name %>,
+
+Invoice name: <%= @invoice.name %>
+Start date: <%= @invoice.start_date.strftime("%B %d, %Y") %>
+End date: <%= @invoice.end_date.strftime("%B %d, %Y") %>
+Paid on: <%= @status.updated_at.strftime("%B %d, %Y") %>
+
+<% @invoice.items.each do |item| %>
+    <%
+       horse = ""
+       if item.horse.nil? == false
+            horse = item.horse.barn_name
+       else
+            horse = ""
+       end
+    %>
+    <%= item.category.name %> - <%= item.description %> ( <%= horse %> ) = <%= number_to_currency(item.amount) %><br />
+<% end %>
+Total Paid: <%= number_to_currency(@invoice.amount) %>
+
+
+Thank you for your continued business!
+
+<%= @invoice.organization.contact %>
+<%= @invoice.organization.address %>
+<%= @invoice.organization.city %>, <%= @invoice.organization.state %> <%= @invoice.organization.zip %>
+<%= number_to_phone(@invoice.organization.phone, :area_code => true) %>
+<%= @invoice.organization.email %>
+<%= @invoice.organization.website %>

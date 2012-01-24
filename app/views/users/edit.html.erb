@@ -1,6 +1,14 @@
 <div class="list">
 
-<h1 class="title">Your Profile</h1>
+<% if session[:user][:access] == "admin" %>
+    <div class="breadcrumb">
+      << <%= link_to 'USERS', users_path %>
+    </div>
+
+    <h1 class="title"><%= @user.name %></h1>
+<% else %>
+    <h1 class="title">Your Profile</h1>
+<% end %>
 
   <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
@@ -32,7 +40,7 @@
       <%= f.submit 'Update' %>
     </div>
 
-    <%= hidden_field("user", "organization_id",         :value => @user.organization_id) %>
+    <%= hidden_field("user", "organization_id", :value => @user.organization_id) %>
   <% end %>
 
 

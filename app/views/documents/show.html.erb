@@ -1,13 +1,10 @@
 <div class="breadcrumb">
-  <<
-  <%= link_to "BINDER", documents_path %>
+  << <%= link_to "BINDER", documents_path %>
   <% if @document.customer.nil? == false %>
-    <<
-    <%= link_to @document.customer.last_name.upcase, @document.customer %>
+    << <%= link_to @document.customer.last_name.upcase, @document.customer %>
   <% end %>
   <% if @document.horse.nil? == false %>
-    <<
-    <%= link_to @document.horse.barn_name.upcase, @document.horse %>
+    << <%= link_to @document.horse.barn_name.upcase, @document.horse %>
   <% end %>
 </div>
 

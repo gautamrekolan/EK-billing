@@ -1,38 +1,34 @@
 class ItemsController < ApplicationController
-  # GET /items
-  # GET /items.xml
-  def index
-    @items = Item.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @items }
-    end
-  end
 
   # GET /items/1
-  # GET /items/1.xml
   def show
     @item = Item.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @item }
-    end
   end
 
   # GET /items/new
-  # GET /items/new.xml
   def new
     @item = Item.new
-    @invoice = Invoice.find(params[:invoice])
-    @item.invoice_id = @invoice.id
-    @item.customer_id = @invoice.customer.id
-    @item.organization_id = @invoice.organization_id
+    if params[:category].nil? == false && params[:customer].nil? == false
+      @item.customer_id = params[:customer]
+      @item.category_id = params[:category]
+      @item.organization_id = session[:user][:organization_id]
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @item }
+      customer = Customer.find(@item.customer)
+      if customer.invoices.empty? == false
+        invoice = customer.invoices.last
+        if invoice.status_code < 8
+          @item.invoice_id = invoice.id
+        else
+          redirect_to(builder_path, :notice => "That customer does not currently have any open invoices.")
+        end
+      else
+        redirect_to(builder_path, :notice => "That customer does not currently have any open invoices.")
+      end
+    else
+      @invoice = Invoice.find(params[:invoice])
+      @item.invoice_id = @invoice.id
+      @item.customer_id = @invoice.customer.id
+      @item.organization_id = @invoice.organization_id
     end
   end
 
@@ -42,51 +38,41 @@ class ItemsController < ApplicationController
   end
 
   # POST /items
-  # POST /items.xml
   def create
     @item = Item.new(params[:item])
 
-    respond_to do |format|
-      if @item.save
-        @invoice = @item.invoice
-        new_amount = @invoice.amount + @item.amount
-        @invoice.update_attribute("amount", new_amount)
-        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
-        format.xml  { render :xml => @item, :status => :created, :location => @item }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
-      end
+    if @item.save
+      @invoice = @item.invoice
+      new_amount = @invoice.amount + @item.amount
+      @invoice.update_attribute("amount", new_amount)
+      redirect_to(@invoice, :notice => 'Item was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
   # PUT /items/1
-  # PUT /items/1.xml
   def update
     @item = Item.find(params[:id])
 
-    respond_to do |format|
-      if @item.update_attributes(params[:item])
-        @invoice = @item.invoice
-        items = Item.find_all_by_invoice_id(@invoice.id)
-        amount = 0
-        items.each do |item|
-          amount = amount + item.amount
-        end
-        @invoice.update_attribute("amount", amount)
-        format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+    if @item.update_attributes(params[:item])
+      @invoice = @item.invoice
+      items = Item.find_all_by_invoice_id(@invoice.id)
+      amount = 0
+      items.each do |item|
+        amount = amount + item.amount
       end
+      @invoice.update_attribute("amount", amount)
+      redirect_to(@invoice, :notice => 'Item was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
   # DELETE /items/1
-  # DELETE /items/1.xml
   def destroy
     @item = Item.find(params[:id])
+    @invoice = @item.invoice
     if @item.destroy
       items = Item.find_all_by_invoice_id(@invoice.id)
       amount = 0
@@ -96,9 +82,7 @@ class ItemsController < ApplicationController
       @invoice.update_attribute("amount", amount)
     end
 
-    respond_to do |format|
-      format.html { redirect_to(items_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(@invoice, :notice => 'Item was successfully deleted.')
   end
+
 end

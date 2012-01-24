@@ -8,6 +8,13 @@ gem 'rails', '3.0.9'
 gem 'capistrano'
 gem 'mysql'
 
+gem 'prawn'
+gem 'prawn-layout'
+gem 'twilio-ruby'
+gem 'gibberish'
+
+gem 'time_diff'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,5 +1,7 @@
 <div class="breadcrumb">
-  << <%= link_to 'INVOICES', invoices_path %> << <%= link_to @invoice.customer.last_name.upcase!, @invoice.customer %>
+  << <%= link_to 'INVOICES', invoices_path %>
+  << <%= link_to @invoice.customer.last_name.upcase!, @invoice.customer %>
+  << <%= link_to 'DETAILS', @invoice %>
 </div>
 
 <div class="list">

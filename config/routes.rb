@@ -15,8 +15,9 @@ EkBilling::Application.routes.draw do
   resources :users
 
   root :to => 'pages#home'
-  match '/about',               :to => 'pages#about'
-  match '/contact',             :to => 'pages#contact'
+  match '/about',                   :to => 'pages#about'
+  match '/contact',                 :to => 'pages#contact'
+  match '/builder',                 :to => 'pages#builder'
 
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout

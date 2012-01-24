@@ -68,7 +68,7 @@ EkBilling::Application.configure do
       :domain               => "gmail.com",
       :user_name            => "lowerhopewellfarm", #Your user name
       :password             => "bristolbay1", # Your password
-      :authentication       => :login,
+      :authentication       => "plain",
       :enable_starttls_auto => true
   }
 

@@ -371,8 +371,25 @@ textarea {
 }
 
 p.notes {
-    color: #ffff00;
+    color: #993333;
     font-size: 0.8em;
+}
+
+div.builder1 {
+    float: left;
+    width: 45%;
+    margin-right: 20px;
+    min-height: 575px;
+    padding: 10px;
+    overflow-y: auto;
+    border: 2px dotted #330000
+}
+
+div.builder2 {
+    min-height: 575px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 2px dotted #330000
 }
 
 div.single_item {

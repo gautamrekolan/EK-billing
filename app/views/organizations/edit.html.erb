@@ -1,6 +1,7 @@
 <% if session[:user][:access] == "admin" %>
     <div class="breadcrumb">
       << <%= link_to 'ORGANIZATIONS', organizations_path %>
+      << <%= link_to 'DETAILS', @organization %>
     </div>
 <% end %>
 

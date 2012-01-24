@@ -1,0 +1,44 @@
+<div class="list">
+    <h1 class="title">Invoice Builder</h1>
+    <% if notice.blank? == false %>
+        <p id="warning"><%= notice %></p>
+    <% end %>
+
+    <p class="notes">Drag an item category from the left side onto a customer from the right side to add an item of that type to that customer's invoice.</p>
+    <form>
+        <div class="builder1">
+            <h2 class="sub_title">Items</h2>
+            <p class="add_link"><%= link_to 'Manage item categories', categories_path %></p>
+            <% if (@categories.count() > 0) %>
+                <% @categories.each do |category| %>
+                    <div draggable="true" class="single_item">
+                        <p style="font-weight: bold; margin: 0; padding: 0; font-size: 0.9em"><%= category.category %></p>
+                        <p style="margin: 0; padding: 0; font-size: 0.9em"><%= category.name %></p>
+                        <p style="display: none">----<%= category.id %></p>
+                    </div>
+                <% end %>
+            <% else %>
+                <p>You can't build invoices without any items!</p>
+            <% end %>
+        </div>
+
+        <div class="builder2">
+            <h2 class="sub_title">Customers</h2>
+            <p class="add_link"><%= link_to 'Manage customers', customers_path %></p>
+            <% if (@customers.count() > 0) %>
+                <% index = 0 %>
+                <% @customers.each do |customer| %>
+                    <% String div_id = "dropTarget" + String(index) %>
+                    <div draggable="true" class="single_item" id="<%= div_id %>">
+                        <% String name = customer.last_name + ", " + customer.first_name %>
+                        <p style="font-weight: bold; margin: 0; padding: 0; font-size: 0.9em"><%= name %></p>
+                        <p style="display: none">----<%= customer.id %></p>
+                    </div>
+                    <% index += 1 %>
+                <% end %>
+            <% else %>
+                <p>You can't build an invoice without any customers!</p>
+            <% end %>
+        </div>
+    </form>
+</div>
