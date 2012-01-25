@@ -230,9 +230,17 @@ legend {
     font-weight: bold;
 }
 
+iframe {
+    border: 1px solid #330000;
+}
+
 table {
     margin: 0;
     padding: 0;
+}
+
+table a {
+    font-weight: bold;
 }
 
 table.margin_above
@@ -246,6 +254,11 @@ th {
 
 td {
     padding-right: 30px;
+}
+
+td.attention {
+    color: red;
+    font-weight: bold;
 }
 
 ul {
@@ -409,6 +422,11 @@ div.single_item {
 }
 
 #notice {
+    color: #006600;
+    margin-bottom: 25px;
+}
+
+.notice {
     color: #006600;
     margin-bottom: 25px;
 }

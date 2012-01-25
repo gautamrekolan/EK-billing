@@ -6,15 +6,14 @@ class InvoicesController < ApplicationController
 
   # GET /invoices
   def index
-    @invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id])
+    #@invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id])
 
     # pay-attention invoices
     # - invoices to be mailed ("Mail Requested" or ("Opened" and @customer.delivery_method == "Mail"))
-    # - invoices to be contacted ("Emailed" and updated >= 14 days ago)
     # - invoices past due ("Emailed", "Mailed", "Confirmed", "Mailed (Secondary)", "Partially Paid", "Reminded" where due_date < now)
     pastdue_status_codes = [1, 2, 3, 4, 5, 6, 7]
     @attention_invoices = Invoice.all(:order => 'end_date desc',
-                                      :conditions => [ "(status_code = '4') or (status_code = '1') or (status_code in (?) and due_date < ?)",
+                                      :conditions => [ "(status_code = '4') or (status_code in (?) and due_date < ?)",
                                       pastdue_status_codes, Date.today ])
 
     # open invoices

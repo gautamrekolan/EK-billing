@@ -25,13 +25,17 @@ class CustomsController < ApplicationController
   # POST /customs
   def create
     @custom = Custom.new(params[:custom])
-    @image_data = params[:custom][:filename]
-    @custom.logo_extension = @image_data.original_filename.split('.').last
-    @custom.logo_filename = nil
+    if params[:custom][:filename].nil? == false
+      @image_data = params[:custom][:filename]
+      @custom.logo_extension = @image_data.original_filename.split('.').last
+      @custom.logo_filename = nil
+    end
 
     if @custom.save
-      Custom.save_image(@custom.organization_id, @custom.logo_extension, @image_data)
-      redirect_to(@custom, :notice => 'Customization was successfully updated.')
+      if params[:custom][:filename].nil? == false
+        Custom.save_image(@custom.organization_id, @custom.logo_extension, @image_data)
+      end
+      redirect_to(edit_custom_path(@custom), :notice => 'Customization was successfully updated.')
     else
       render :action => "new"
     end
@@ -42,7 +46,7 @@ class CustomsController < ApplicationController
     @custom = Custom.find(params[:id])
 
     if @custom.update_attributes(params[:custom])
-      redirect_to(@custom, :notice => 'Customization was successfully updated.')
+      redirect_to(edit_custom_path(@custom), :notice => 'Customization was successfully updated.')
     else
       render :action => "edit"
     end

@@ -7,9 +7,59 @@
 <% if session[:user][:organization_id] %>
     <%= link_to 'Add a new invoice', new_invoice_path, :class => "add_link" %>
 
-    <% if @invoices.empty? == false %>
-        <table class="margin_above">
-            <% @invoices.each do |invoice| %>
+    <div class="sub">
+        <h2 class="sub_title" style="color: red">Pay Attention Invoices</h2>
+        <% if @attention_invoices.empty? == false %>
+            <table class="margin_above">
+            <% @attention_invoices.each do |invoice| %>
+              <tr>
+                <td><%= link_to invoice.name, invoice %></td>
+                <td><%= invoice.customer.last_name %>, <%= invoice.customer.first_name %></td>
+                <% if invoice.status_code == 4 %>
+                    <td class="attention"><%= invoice.status %></td>
+                <% else %>
+                    <td><%= invoice.status %></td>
+                <% end %>
+                <% if invoice.due_date < Date.today %>
+                    <td class="attention">Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% else %>
+                    <td>Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <% end %>
+                <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+                <td><a href="#" onclick="confirm('Are you sure you want to delete this invoice?', '<%= delete_invoice_path(invoice) %>')">Remove</a></td>
+              </tr>
+            <% end %>
+        </table>
+        <% else %>
+            <p class="currently_no">There are currently no invoices requiring immediate attention.</p>
+        <% end %>
+    </div>
+
+    <div class="sub">
+        <h2 class="sub_title" style="color: #006600">Open Invoices</h2>
+        <% if @open_invoices.empty? == false %>
+            <table class="margin_above">
+            <% @open_invoices.each do |invoice| %>
+              <tr>
+                <td><%= link_to invoice.name, invoice %></td>
+                <td><%= invoice.customer.last_name %>, <%= invoice.customer.first_name %></td>
+                <td><%= invoice.status %></td>
+                <td>Due <%= invoice.due_date.strftime("%B %e, %Y") %></td>
+                <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+                <td><a href="#" onclick="confirm('Are you sure you want to delete this invoice?', '<%= delete_invoice_path(invoice) %>')">Remove</a></td>
+              </tr>
+            <% end %>
+        </table>
+        <% else %>
+            <p class="currently_no">There are currently no open invoices.</p>
+        <% end %>
+    </div>
+
+    <div class="sub">
+        <h2 class="sub_title" style="color: #000000">Closed Invoices</h2>
+        <% if @closed_invoices.empty? == false %>
+            <table class="margin_above">
+            <% @closed_invoices.each do |invoice| %>
               <tr>
                 <td><%= link_to invoice.name, invoice %></td>
                 <td><%= invoice.customer.last_name %>, <%= invoice.customer.first_name %></td>
@@ -19,9 +69,10 @@
               </tr>
             <% end %>
         </table>
-    <% else %>
-        <p class="currently_no">There are currently no invoices.</p>
-    <% end %>
+        <% else %>
+            <p class="currently_no">There are currently no closed invoices.</p>
+        <% end %>
+    </div>
 <% else %>
     <p class="currently_no">You can't start adding invoices until you get your barn information entered. <%= link_to 'Click here', new_organization_path %> to do that now.</p>
 <% end %>
