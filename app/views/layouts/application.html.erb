@@ -52,7 +52,7 @@
                     <% end %>
                 <% else %>
                     <%#<li class="on">COMING SOON...</li>%>
-                    <li class="off"><a href="#" onclick="alert('Coming soon! Please check back.')">LOGIN</a><%#= link_to 'LOGIN', login_path %></li>
+                    <li class="off"><a href="#" onclick="">LOGIN</a><%#= link_to 'LOGIN', login_path %></li>
                 <% end %>
             </ul>
         </div>
@@ -73,8 +73,8 @@
                 <li><%= link_to 'MY BARN', edit_organization_path(session[:user][:organization_id]) %></li>
               <% end %>
             <% end %>
-            <li><a href="#" onclick="alert('Coming soon! Please check back.')">ABOUT</a><%#= link_to 'ABOUT', about_path %></li>
-            <li><a href="#" onclick="alert('Coming soon! Please check back.')">CONTACT</a><%#= link_to 'CONTACT', contact_path %></li>
+            <li><a href="">ABOUT</a><%#= link_to 'ABOUT', about_path %></li>
+            <li><a href="">CONTACT</a><%#= link_to 'CONTACT', contact_path %></li>
             <li><%#= link_to 'EASY KEEPER EQUINE', 'http://www.easykeeperequine.com' %></li>
         </ul>
     </div>

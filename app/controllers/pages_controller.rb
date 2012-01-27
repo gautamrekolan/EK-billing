@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  layout 'application', :except => [ :home, :signup ]
+
   def home
     @potential = Potential.new
   end
