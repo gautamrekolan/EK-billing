@@ -6,6 +6,7 @@ class AutosController < ApplicationController
   def new
     @auto = Auto.new
     @auto.customer_id = params[:customer]
+    @categories = Category.find_all_by_organization_id(session[:user][:organization_id], :order => "category asc, name asc")
   end
 
   # GET /autos/1/edit

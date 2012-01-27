@@ -20,8 +20,8 @@
     <%= f.date_select :end_date %>
   </div>
   <div class="field">
-    <%= f.label :add_day %>
-    <%= f.text_field :add_day %>
+    <%= f.label :category_id %>
+    <%= select("auto", "category_id", @categories.collect{ |p| [ p.category + " - " + p.name, p.id ] }) %>
   </div>
   <div class="field">
     <%= f.label :description %>

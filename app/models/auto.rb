@@ -1,5 +1,6 @@
 class Auto < ActiveRecord::Base
 
+  belongs_to :category
   belongs_to :customer
   belongs_to :horse
 

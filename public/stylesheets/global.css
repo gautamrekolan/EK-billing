@@ -161,6 +161,12 @@ div.full_centered {
     text-align: center;
 }
 
+div.full_centered p {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 div.list {
     margin: 20px;
     padding: 20px;
@@ -457,7 +463,7 @@ div.single_item {
 }
 
 .field_with_errors {
-
+    display: inline;
 }
 
 #error_explanation {
@@ -522,7 +528,57 @@ a.add_link:hover {
 
 #signup {
     text-align: center;
+    margin-top: 20px;
+}
+
+#signup_error_explanation {
+  width: 535px;
+  border: 1px solid #330000;
+  color: #330000;
+  padding: 5px;
+  margin-bottom: 0px;
+  background-color: #FF9999;
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#signup_error_explanation ul li {
+  font-size: 0.8em;
+  list-style: none;
+}
+
+#signup_form {
+
+}
+
+input[type="text"].signup_text {
+    padding: 6px;
+    margin-right: 20px;
+    font-size: 1.5em;
+    width: 400px;
+}
+
+input[type="submit"].signup_button {
+    padding: 6px;
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: #330000;
+    color: #ffffcc;
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
     margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="submit"].signup_button:hover {
+    background-color: #cc6633;
+    color: #ffffcc;
 }
 
 a.signup_button {

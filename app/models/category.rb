@@ -2,6 +2,8 @@ class Category < ActiveRecord::Base
 
   belongs_to :organization
 
+  has_many :autos
+
   validates :category,        :presence => true, :length => { :maximum => 250 }
   validates :name,            :presence => true, :length => { :maximum => 250 }
   validates :amount,          :format => { :with => /^[0-9]*(\.[0-9]{1,2})?$|^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]{1,2})?$/ }, :if => :amount?

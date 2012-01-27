@@ -8,6 +8,8 @@ EkBilling::Application.routes.draw do
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout
 
+  match 'pages/signup'              => 'pages#signup',          :as => :signup
+
   match 'invoices/confirm/:id'      => "invoices#confirm",      :as => :invoice_confirm
   match 'invoices/request/:id'      => "invoices#request_mail", :as => :invoice_request
   match 'invoices/issued/:id'       => "invoices#issued",       :as => :invoice_issued
