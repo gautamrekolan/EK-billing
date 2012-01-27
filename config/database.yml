@@ -2,8 +2,8 @@ development:
   adapter: mysql
   host: localhost
   database: ek_billing
-  username: root
-  password: root
+  username: ek_billing_usr
+  password: AwantsBBekBILL
   pool: 5
   timeout: 5000
 
@@ -23,7 +23,7 @@ production:
   adapter: mysql
   host: localhost
   database: ek_billing
-  username: root
-  password: root
+  username: ek_billing_usr
+  password: AwantsBBekBILL
   pool: 5
   timeout: 5000
