@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
 
       customer = Customer.find(@item.customer)
       if customer.invoices.empty? == false
+        @horses = Horse.find_all_by_customer_id(customer)
         invoice = customer.invoices.last
         if invoice.status_code < 8
           @item.invoice_id = invoice.id
@@ -29,6 +30,7 @@ class ItemsController < ApplicationController
       @item.invoice_id = @invoice.id
       @item.customer_id = @invoice.customer.id
       @item.organization_id = @invoice.organization_id
+      @horses = Horse.find_all_by_customer_id(customer)
     end
   end
 

@@ -3,41 +3,24 @@ class CustomersController < ApplicationController
   before_filter :login_required, :except => [ :change_delivery ]
 
   # GET /customers
-  # GET /customers.xml
   def index
     @customers = Customer.all(:order => "active desc, last_name asc, first_name asc")
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @customers }
-    end
   end
 
   # GET /customers/1
-  # GET /customers/1.xml
   def show
     @customer = Customer.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @customer }
-    end
   end
 
   # GET /customers/new
-  # GET /customers/new.xml
   def new
     @customer = Customer.new
+    @customer.organization_id = session[:user][:organization_id]
     @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
                "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
                "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
                "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
     @methods = ["Email", "Mail"]
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @customer }
-    end
   end
 
   # GET /customers/1/edit
@@ -53,59 +36,42 @@ class CustomersController < ApplicationController
   end
 
   # POST /customers
-  # POST /customers.xml
   def create
     @customer = Customer.new(params[:customer])
     # Remove all non-digit characters from the phone number
     # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    @customer.phone = @customer.phone.gsub(/\D/, '')
+    @customer.cell = @customer.cell.gsub(/\D/, '')
+    @customer.home = @customer.home.gsub(/\D/, '')
+    @customer.work = @customer.work.gsub(/\D/, '')
 
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        format.xml  { render :xml => @customer, :status => :created, :location => @customer }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
+    if @customer.save
+      redirect_to(@customer, :notice => 'Customer was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
   # PUT /customers/1
-  # PUT /customers/1.xml
   def update
     @customer = Customer.find(params[:id])
     # Remove all non-digit characters from the phone number
     # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    params[:customer][:phone] = params[:customer][:phone].gsub(/\D/, '')
+    params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
+    params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
+    params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
 
-    respond_to do |format|
-      if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
+    if @customer.update_attributes(params[:customer])
+      redirect_to(@customer, :notice => 'Customer was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
   # DELETE /customers/1
-  # DELETE /customers/1.xml
   def destroy
     @customer = Customer.find(params[:id])
-    @customer.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(customers_url) }
-      format.xml  { head :ok }
-    end
-  end
-
-  def change_delivery
-    @customer = Customer.find(params[:customer])
-    if @customer.nil? == false
-      @customer.update_attribute("delivery_method", "Mail")
+    if @customer.destroy
+      redirect_to(customers_path, :notice => 'Customer was successfully removed.')
     end
   end
 

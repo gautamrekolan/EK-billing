@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new.xml
   def new
     @category = Category.new
+    @category.organization_id = session[:user][:organization_id]
     @types = [ "Farm Expenses", "Show Expenses", "Other Expenses" ]
 
     respond_to do |format|

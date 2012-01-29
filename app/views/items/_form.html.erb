@@ -29,7 +29,12 @@
   </div>
   <div class="field">
     <%= f.label :horse_id, "Horse" %>
-    <%= select("item", "horse_id", Horse.find_all_by_customer_id(@item.customer_id).collect { |p| [ p.barn_name, p.id ] }, :include_blank => true) %>
+    <% if @horses.empty? == false %>
+        <%= select("item", "horse_id", @horses.collect { |p| [ p.barn_name, p.id ] }, :include_blank => true) %>
+    <% else %>
+        This customer does not have any horses.
+        <%= hidden_field("item", "horse_id", :value => 0) %>
+    <% end %>
   </div>
 
   <div class="actions">
@@ -38,6 +43,5 @@
 
   <%= hidden_field("item", "organization_id", :value => @item.organization_id) %>
   <%= hidden_field("item", "customer_id", :value => @item.customer_id) %>
-  <%= hidden_field("item", "horse_id", :value => @item.horse_id) %>
   <%= hidden_field("item", "invoice_id", :value => @item.invoice_id) %>
 <% end %>
