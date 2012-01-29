@@ -1,9 +1,9 @@
 development:
   adapter: mysql
   host: localhost
-  database: ek_billing
-  username: ek_billing_usr
-  password: hqvtwu4n5u
+  database: ek_billing_dev
+  username: root
+  password: root
   pool: 5
   timeout: 5000
 
@@ -13,7 +13,7 @@ development:
 # test:
   # adapter: mysql
   # host: localhost
-  # database: ek-billing
+  # database: ek-billing_test
   # username: root
   # password: root
   # pool: 5
@@ -23,7 +23,7 @@ production:
   adapter: mysql
   host: localhost
   database: ek_billing
-  username: ek_billing_usr
-  password: sqmsx0qtpm
+  username: root
+  password: root
   pool: 5
   timeout: 5000

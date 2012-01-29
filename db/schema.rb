@@ -132,9 +132,8 @@ ActiveRecord::Schema.define(:version => 20120127021802) do
     t.datetime "updated_at"
   end
 
-  create_table "payments", :id => false, :force => true do |t|
-    t.integer  "id"
-    t.datetime "date"
+  create_table "payments", :force => true do |t|
+    t.date     "date"
     t.string   "payment_type"
     t.string   "notes"
     t.decimal  "amount",       :precision => 8, :scale => 2

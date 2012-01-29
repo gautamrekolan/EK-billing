@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore the config files containing sensitive info
+/config/database.yml
+/config/smtp.yml

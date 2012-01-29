@@ -30,6 +30,7 @@ class OrganizationsController < ApplicationController
     if @organization.save
       @user = User.find(session[:user])
       @user.update_attribute("organization_id", @organization.id)
+      session[:user] = @user
       if session[:user][:access] == "admin"
         redirect_to(@organization, :notice => 'Organization was successfully created.')
       else
