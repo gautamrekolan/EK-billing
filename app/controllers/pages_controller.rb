@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   def signup
     @potential = Potential.new(params[:potential])
     if @potential.save
+
       redirect_to(root_path, :notice => 'Email successfully submitted. Thanks!')
     else
       render 'home'
