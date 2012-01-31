@@ -24,36 +24,26 @@ class AutosController < ApplicationController
   end
 
   # POST /customers
-  # POST /customers.xml
   def create
     @auto = Auto.new(params[:auto])
     @customer = Customer.find(@auto.customer_id)
 
-    respond_to do |format|
-      if @auto.save
-        format.html { redirect_to(@customer, :notice => 'Auto item was successfully created.') }
-        format.xml  { render :xml => @auto }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @auto.errors, :status => :unprocessable_entity }
-      end
+    if @auto.save
+      redirect_to(@customer, :notice => 'Auto item was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
   # PUT /customers/1
-  # PUT /customers/1.xml
   def update
     @auto = Auto.find(params[:id])
     @customer = Customer.find(@auto.customer_id)
 
-    respond_to do |format|
-      if @auto.update_attributes(params[:auto])
-        format.html { redirect_to(@customer, :notice => 'Auto item was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @auto.errors, :status => :unprocessable_entity }
-      end
+    if @auto.update_attributes(params[:auto])
+      redirect_to(@customer, :notice => 'Auto item was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
@@ -61,11 +51,8 @@ class AutosController < ApplicationController
   def destroy
     @auto = Auto.find(params[:id])
     @customer = Customer.find(@auto.customer_id)
-    @auto.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(@customer, :notice => 'Auto item was successfully canceled.') }
-      format.xml  { head :ok }
+    if @auto.destroy
+      redirect_to(@customer, :notice => 'Auto item was successfully canceled.')
     end
   end
 

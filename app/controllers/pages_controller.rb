@@ -1,8 +1,12 @@
 class PagesController < ApplicationController
 
-  layout 'application', :except => [ :home, :signup ]
+  layout 'application', :except => [ :splash, :signup ]
 
   def home
+
+  end
+
+  def splash
     @potential = Potential.new
   end
 
@@ -12,7 +16,7 @@ class PagesController < ApplicationController
       UserMailer.welcome(@potential.email).deliver
       redirect_to(root_path, :notice => 'Email successfully submitted. Thanks!')
     else
-      render 'home'
+      render 'splash'
     end
   end
 

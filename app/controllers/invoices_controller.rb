@@ -75,6 +75,10 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new
     @invoice.organization_id = session[:user][:organization_id]
     @invoice.customer_id = params[:customer]
+
+    if @invoice.customer_id.blank?
+      @customers = Customer.find_all_by_organization_id(@invoice.organization_id)
+    end
   end
 
   # GET /invoices/1/edit

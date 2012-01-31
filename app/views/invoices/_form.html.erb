@@ -37,7 +37,11 @@
   </div>
   <% if @invoice.customer_id.blank? %>
     <%= f.label :customer_id, "Customer" %>
-    <%= select("invoice", "customer_id", Customer.find_all_by_organization_id(@invoice.organization_id).collect { |p| [ p.last_name + ", " + p.first_name, p.id ] }) %>
+    <% if @customers.empty? == false %>
+        <%= select("invoice", "customer_id", @customers.collect { |p| [ p.last_name + ", " + p.first_name, p.id ] }) %>
+    <% else %>
+        You can't create an invoice without any customers. <%= link_to 'Add a customer now.', new_customer_path %>
+    <% end %>
   <% else %>
     <%= hidden_field("invoice", "customer_id", :value => @invoice.customer_id) %>
   <% end %>

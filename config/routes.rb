@@ -1,9 +1,10 @@
 EkBilling::Application.routes.draw do
 
-  root :to => 'pages#home'
+  root :to => 'pages#splash'
   match '/about',                   :to => 'pages#about'
-  match '/contact',                 :to => 'pages#contact'
   match '/builder',                 :to => 'pages#builder'
+  match '/contact',                 :to => 'pages#contact'
+  match '/home',                    :to => 'pages#home'
 
   match '/login'                    => 'users#login',           :as => :login
   match '/logout'                   => 'users#logout',          :as => :logout

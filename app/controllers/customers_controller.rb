@@ -78,11 +78,6 @@ class CustomersController < ApplicationController
   def create_invoices
     @customers = Customer.all(:order => "last_name asc, first_name asc")
     @invoice = Invoice.new
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @customers }
-    end
   end
 
   def build_invoices
@@ -104,10 +99,7 @@ class CustomersController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      format.html { redirect_to(invoices_path, :notice => 'Invoices were successfully created.') }
-      format.xml  { head :ok }
-    end
+    redirect_to(invoices_path, :notice => 'Invoices were successfully created.')
   end
 
 end
