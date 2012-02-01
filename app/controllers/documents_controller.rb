@@ -4,7 +4,11 @@ class DocumentsController < ApplicationController
 
   # GET /documents
   def index
-    @documents = Document.all(:order => "customer_id asc, horse_id asc, description asc")
+    if session[:user][:access] == "manager"
+      @documents = Document.find_all_by_organization_id(session[:user][:organization_id], :order => "customer_id asc, horse_id asc, description asc")
+    elsif session[:user][:access] == "customer"
+      @documents = Document.find_all_by_customer_id(session[:user][:customer_id], :order => "horse_id asc, description asc")
+    end
   end
 
   # GET /documents/1
@@ -63,9 +67,9 @@ class DocumentsController < ApplicationController
       @customer = @document.customer
     end
     if @document.destroy
-      if @horse.nil? == false
+      if @horse.nil? == false && session[:user][:access] != "customer"
         redirect_to(@horse, :notice => 'Document was successfully deleted.')
-      elsif @customer.nil? == false
+      elsif @customer.nil? == false && session[:user][:access] != "customer"
         redirect_to(@customer, :notice => 'Document was successfully deleted.')
       else
         redirect_to(documents_path, :notice => 'Document was successfully deleted.')

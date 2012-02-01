@@ -49,29 +49,23 @@
 <%= number_to_currency(@invoice.amount) %>
 </div>
 
-<% if session[:user][:access] == "manager" %>
-    <div class="field" style="padding-bottom: 20px">
-        <label style="clear: left">Notes</label>
-        <% if @invoice.notes.blank? == false %>
-            <%= @invoice.notes %>
-        <% else %>
-            No notes have been entered.
-        <% end %>
-    </div>
-<% else %>
-    <div class="field">
-        <label style="clear: left">Notes</label>
-        <% if @invoice.notes.blank? == false %>
-            <%= @invoice.notes %>
-        <% else %>
-            No notes have been entered.
-        <% end %>
-    </div>
-<% end %>
+<div class="field" style="padding-bottom: 20px">
+    <label style="clear: left">Notes</label>
+    <% if @invoice.notes.blank? == false %>
+        <%= @invoice.notes %>
+    <% else %>
+        No notes have been entered.
+    <% end %>
+</div>
 
     <% if session[:user][:access] == "manager" %>
         <%= link_to 'Edit details', edit_invoice_path(@invoice), :class => "link_button" %>
         <a href="#" onclick="confirm('Are you sure you want to delete this invoice?', '<%= delete_invoice_path(@invoice) %>')" class="link_button">Remove</a>
+    <% end %>
+
+    <% if session[:user][:access] == "customer" %>
+        <%= link_to 'Confirm this invoice', invoice_confirm_path(@invoice), :class => "link_button" %>
+        <%= link_to 'Request hard copy', invoice_request_path(@invoice), :class => "link_button" %>
     <% end %>
 
   <div class="sub">

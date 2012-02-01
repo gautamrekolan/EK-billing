@@ -1,35 +1,28 @@
-<h1>Listing horses</h1>
+<div class="list">
 
-<table>
-  <tr>
-    <th>Reg name</th>
-    <th>Barn name</th>
-    <th>Breed</th>
-    <th>Age</th>
-    <th>Notes</th>
-    <th>Organization</th>
-    <th>Customer</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1 class="title">My Horses</h1>
 
-<% @horses.each do |horse| %>
-  <tr>
-    <td><%= horse.reg_name %></td>
-    <td><%= horse.barn_name %></td>
-    <td><%= horse.breed %></td>
-    <td><%= horse.age %></td>
-    <td><%= horse.notes %></td>
-    <td><%= horse.organization_id %></td>
-    <td><%= horse.customer_id %></td>
-    <td><%= link_to 'Show', horse %></td>
-    <td><%= link_to 'Edit', edit_horse_path(horse) %></td>
-    <td><%= link_to 'Destroy', horse, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<p class="notice"><%= notice %></p>
+
+<% if session[:user][:access] == "customer" %>
+    <% if @horses.empty? == false %>
+        <table class="margin_above">
+          <% @horses.each do |horse| %>
+            <tr>
+              <% name = horse.barn_name %>
+              <% if horse.reg_name.blank? == false %>
+                <% name = horse.reg_name + " (" + horse.barn_name + ")" %>
+              <% end %>
+              <td><%= link_to name, horse %></td>
+              <td><%= link_to 'Edit', edit_horse_path(horse) %></td>
+            </tr>
+          <% end %>
+        </table>
+    <% else %>
+        <p class="currently_no">There are currently no horses listed for your account.</p>
+    <% end %>
+<% else %>
+
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Horse', new_horse_path %>
+</div>

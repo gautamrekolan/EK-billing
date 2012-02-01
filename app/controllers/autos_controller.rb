@@ -1,6 +1,7 @@
 class AutosController < ApplicationController
 
   before_filter :login_required
+  before_filter :manager_required
 
   # GET /autos/new
   # GET /autos/new.xml

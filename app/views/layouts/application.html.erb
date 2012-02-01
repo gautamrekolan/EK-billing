@@ -51,14 +51,24 @@
                         <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
                     <% elsif session[:user][:access] == "customer" %>
                         <% if params[:controller] == "customers" %>
-                            <li class="on"><%= link_to 'MY INFORMATION', validate_customer_path(session[:user][:customer_id]) %></li>
+                            <li class="on"><%= link_to 'MY INFO', validate_customer_path(session[:user][:customer_id]) %></li>
                         <% else %>
-                            <li class="off"><%= link_to 'MY INFORMATION', validate_customer_path(session[:user][:customer_id]) %></li>
+                            <li class="off"><%= link_to 'MY INFO', validate_customer_path(session[:user][:customer_id]) %></li>
+                        <% end %>
+                        <% if params[:controller] == "horses" %>
+                            <li class="on"><%= link_to 'MY HORSES', horses_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'MY HORSES', horses_path %></li>
                         <% end %>
                         <% if params[:controller] == "invoices" %>
                             <li class="on"><%= link_to 'INVOICES', invoices_path %></li>
                         <% else %>
                             <li class="off"><%= link_to 'INVOICES', invoices_path %></li>
+                        <% end %>
+                        <% if params[:controller] == "documents" %>
+                            <li class="on"><%= link_to 'BINDER', documents_path %></li>
+                        <% else %>
+                            <li class="off"><%= link_to 'BINDER', documents_path %></li>
                         <% end %>
                         <li class="off"><%= link_to 'LOGOUT', logout_path %></li>
                     <% end %>

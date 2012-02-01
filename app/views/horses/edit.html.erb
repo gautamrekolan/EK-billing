@@ -1,8 +1,10 @@
-<div class="breadcrumb">
-  << <%= link_to 'CUSTOMERS', customers_path %>
-  << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
-  << <%= link_to 'DETAILS', @horse %>
-</div>
+<% if session[:user][:access] == "manager" %>
+    <div class="breadcrumb">
+      << <%= link_to 'CUSTOMERS', customers_path %>
+      << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
+      << <%= link_to 'DETAILS', @horse %>
+    </div>
+<% end %>
 
 <div class="list">
 

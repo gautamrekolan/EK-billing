@@ -1,6 +1,7 @@
 class CustomsController < ApplicationController
 
   before_filter :login_required
+  before_filter :manager_required
 
   # GET /customs/sample/1
   def sample

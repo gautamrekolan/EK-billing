@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
 
   before_filter :login_required
+  before_filter :manager_required
 
   # GET /payments/1
   def show

@@ -1,6 +1,8 @@
-<div class="breadcrumb">
-  << <%= link_to 'CUSTOMERS', customers_path %> << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
-</div>
+<% if session[:user][:access] == "manager" %>
+    <div class="breadcrumb">
+      << <%= link_to 'CUSTOMERS', customers_path %> << <%= link_to @horse.customer.last_name.upcase!, @horse.customer %>
+    </div>
+<% end %>
 
 <div class="list">
 
@@ -12,19 +14,27 @@
 
 <p id="notice"><%= notice %></p>
 
-<% if @horse.breed %>
-    <label>Breed</label>
-    <%= @horse.breed %>
+<% if @horse.breed.blank? == false %>
+    <div class="field">
+        <label>Breed</label>
+        <%= @horse.breed %>
+    </div>
 <% end %>
 
-<% if @horse.age %>
-    <label>Age</label>
-    <%= @horse.age %>
+<% if @horse.age.blank? == false %>
+    <div class="field">
+        <label>Age</label>
+        <%= @horse.age %>
+    </div>
 <% end %>
 
-<% if @horse.notes %>
-    <label>Notes</label>
-    <%= @horse.notes %>
+<% if @horse.notes.blank? == false %>
+    <div class="field">
+        <label>Notes</label>
+        <%= @horse.notes %>
+    </div>
 <% end %>
+<br />
+<%= link_to 'Edit details', edit_horse_path(@horse), :class => "link_button" %>
 
 </div>

@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
 
+  before_filter :login_required
+  before_filter :manager_required
+
   # GET /items/1
   def show
     @item = Item.find(params[:id])

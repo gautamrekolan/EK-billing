@@ -1,6 +1,7 @@
 class CustomersController < ApplicationController
 
-  before_filter :login_required, :except => [ :change_delivery ]
+  before_filter :login_required
+  before_filter :manager_required, :except => [ :validate_customer, :update_info ]
 
   # GET /customers
   def index

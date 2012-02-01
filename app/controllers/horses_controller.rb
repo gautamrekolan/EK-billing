@@ -1,10 +1,15 @@
 class HorsesController < ApplicationController
 
   before_filter :login_required
+  before_filter :manager_required, :except => [ :index, :show, :edit, :update ]
 
   # GET /horses
   def index
-    @horses = Horse.find_all_by_organization_id(session[:user][:organization_id])
+    if session[:user][:access] == "customer"
+      @horses = Horse.find_all_by_customer_id(session[:user][:customer_id])
+    else
+      @horses = Horse.find_all_by_organization_id(session[:user][:organization_id])
+    end
   end
 
   # GET /horses/1

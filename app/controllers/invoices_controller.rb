@@ -2,7 +2,8 @@ include ActionView::Helpers::NumberHelper
 
 class InvoicesController < ApplicationController
 
-  before_filter :login_required, :except => [ :confirm, :request_mail ]
+  before_filter :login_required #, :except => [ :confirm, :request_mail ]
+  before_filter :manager_required, :except => [ :index, :show, :confirm, :request_mail ]
 
   # GET /invoices
   def index
@@ -177,24 +178,34 @@ class InvoicesController < ApplicationController
 
   def confirm
     # Decrypt encrypted id from params
-    @param = params[:id]
-    cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
-    @decrypted = cipher.dec(@param) # @param
-    @invoice = Invoice.find_by_id(@decrypted)
+    #@param = params[:id]
+    #cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
+    #@decrypted = cipher.dec(@param) # @param
+    #@invoice = Invoice.find_by_id(@decrypted)
+    @invoice = Invoice.find(params[:id])
     #@status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
-    @success = Invoice.update_status(@invoice.id, "Confirmed")
-    @notice = "Thank you for confirming this invoice, and thank you in advance for your prompt payment."
+    success = Invoice.update_status(@invoice.id, "Confirmed")
+    if success == true
+      redirect_to(@invoice, :notice => "Invoice was confirmed successfully. Thank you in advance for your prompt payment!")
+    else
+      redirect_to(@invoice, :notice => "Something went wrong! Invoice was NOT successfully confirmed.")
+    end
   end
 
   def request_mail
     # Decrypt encrypted id from params
-    @param = params[:id]
-    cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
-    @decrypted = cipher.dec(@param) # @param
-    @invoice = Invoice.find(@decrypted)
-    #@status = Status.find_by_invoice_id(@invoice.id, :order => "status_code desc", :limit => 1)
-    @success = Invoice.update_status(@invoice.id, "Mail Requested")
-    @notice = "Thank you for your request. We will get your invoice in the mail to you as soon as possible."
+    #@param = params[:id]
+    #cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
+    #@decrypted = cipher.dec(@param) # @param
+    #@invoice = Invoice.find(@decrypted)
+
+    @invoice = Invoice.find(params[:id])
+    success = Invoice.update_status(@invoice.id, "Mail Requested")
+    if success == true
+      redirect_to(@invoice, :notice => "Your request was submitted successfully. A copy of this invoice will be on its way to you soon!")
+    else
+      redirect_to(@invoice, :notice => "Something went wrong! Your request was NOT submitted successfully.")
+    end
   end
 
   def reminder
