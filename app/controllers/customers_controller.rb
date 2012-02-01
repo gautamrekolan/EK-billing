@@ -102,4 +102,26 @@ class CustomersController < ApplicationController
     redirect_to(invoices_path, :notice => 'Invoices were successfully created.')
   end
 
+  def validate_customer
+    @customer = Customer.find(params[:id])
+
+    @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+               "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+               "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+               "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+  end
+
+  def update_info
+    @customer = Customer.find(params[:customer][:id])
+    params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
+    params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
+    params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
+
+    if @customer.update_attributes(params[:customer])
+      redirect_to(validate_customer_path(@customer), :notice => 'Your information was successfully updated.')
+    else
+      render :action => "validate_customer"
+    end
+  end
+
 end

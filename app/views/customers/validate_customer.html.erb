@@ -1,0 +1,83 @@
+<div class="list">
+
+<h1 class="title">My Information</h1>
+
+This is the information that your barn currently has on file for you. If any of this has changed,
+  please update it in the fields below. Thanks for keeping us current!
+
+<div class="sub">
+    <%= @customer.address %>
+    <br />
+    <%= @customer.city %>, <%= @customer.state %> <%= @customer.zip %>
+    <br /><br />
+    <% if @customer.cell.blank? == false %>
+        Cell: <%= number_to_phone(@customer.cell, :area_code => true) %>
+        <br />
+    <% end %>
+    <% if @customer.home.blank? == false %>
+        Home: <%= number_to_phone(@customer.home, :area_code => true) %>
+        <br />
+    <% end %>
+    <% if @customer.work.blank? == false %>
+        Work: <%= number_to_phone(@customer.work, :area_code => true) %>
+        <br />
+    <% end %>
+    <%= @customer.email %>
+</div>
+
+<p class="notice" style="padding-top: 10px"><%= notice %></p>
+
+  <%= form_for(@customer, :url => :update_customer) do |f| %>
+  <% if @customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% @customer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+      <div class="field">
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+      </div>
+      <div class="field">
+        <%= f.label :city %>
+        <%= f.text_field :city %>
+      </div>
+      <div class="field">
+        <%= f.label :state %>
+        <%= select("customer", "state", @states.collect {|p| [ p, p ]}) %>
+      </div>
+      <div class="field">
+        <%= f.label :zip %>
+        <%= f.text_field :zip %>
+      </div>
+      <div class="field">
+        <%= f.label :home, "Home phone" %>
+        <%= f.text_field :home %>
+      </div>
+      <div class="field">
+        <%= f.label :cell, "Cell phone" %>
+        <%= f.text_field :cell %>
+      </div>
+      <div class="field">
+        <%= f.label :work, "Work phone" %>
+        <%= f.text_field :work %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+
+      <%= hidden_field("customer", "id", :value => @customer.id) %>
+  <% end %>
+
+</div>

@@ -33,6 +33,8 @@ EkBilling::Application.routes.draw do
   match 'customs/sample'            => "customs#sample",                :as => :invoice_sample
 
   match 'users/new_customer/:id'    => "users#create_customer_account", :as => :new_customer_account
+  match 'customers/validate/:id'    => "customers#validate_customer",   :as => :validate_customer
+  match 'customers/update'          => "customers#update_info",         :as => :update_customer
 
   resources :autos
   resources :categories
