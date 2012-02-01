@@ -8,7 +8,9 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="field">
+<%= link_to 'Create customer account', new_customer_account_path(@customer), :class => "link_button" %>
+
+<div class="field" style="margin-top: 20px">
     <label style="clear: left">Active</label>
     <% if @customer.active != 0 %>
         YES<br />

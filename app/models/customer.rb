@@ -7,6 +7,7 @@ end
 
 class Customer < ActiveRecord::Base
   belongs_to  :organization
+  has_one     :user
   has_many    :autos,         :dependent => :delete_all, :order => "start_date asc"
   has_many    :documents,     :dependent => :delete_all, :order => "description asc"
   has_many    :horses,        :dependent => :delete_all, :order => "barn_name asc"

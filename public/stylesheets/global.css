@@ -320,6 +320,10 @@ input[type="password"] {
     left: 2px;
     background-color: #ffffff;
     padding: 1px;
+    border: 1px solid #000000;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
 }
 
 input[type="submit"] {

@@ -7,4 +7,11 @@ class UserMailer < ActionMailer::Base
     # mail(:to => email, :subject => "Welcome to Easy Keeper Billing!")
   end
 
+  def new_customer(user)
+    @user = user
+    @login_path = login_path
+    mail(:to => "elysedougherty@gmail.com", :subject => "Invitation to Easy Keeper Billing")
+    # mail(:to => "elysedougherty@gmail.com", :subject => "Invitation to Easy Keeper Billing")
+  end
+
 end

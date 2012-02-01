@@ -15,7 +15,18 @@ class ApplicationController < ActionController::Base
       if session[:user][:access] == "admin"
         return true
       end
-      flash[:warning] = "You cannot access this area"
+      flash[:warning] = "Oops! You do not have permission to access this area."
+      session[:return_to] = request.request_uri
+      redirect_to :controller => 'pages', :action => 'home'
+    end
+  end
+
+  def manager_required
+    if session[:user]
+      if session[:user][:access] == "manager"
+        return true
+      end
+      flash[:warning] = "Oops! You do not have permission to access this area."
       session[:return_to] = request.request_uri
       redirect_to :controller => 'pages', :action => 'home'
     end

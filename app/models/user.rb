@@ -15,6 +15,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
   belongs_to :organization
+  belongs_to :customer
 
   attr_accessor :password, :update_password
   attr_accessible :username, :password, :password_confirmation, :update_password, :email, :name, :access, :organization_id
@@ -46,7 +47,36 @@ class User < ActiveRecord::Base
   # Returns true if the user's password matches the submitted password
   def has_password?(submitted_password)
     # Compare encrypted password with the encrypted version of submitted_password
-    encrypted_password == encrypt(submitted_password)
+    if encrypted_password.blank? == false
+      encrypted_password == encrypt(submitted_password)
+    else
+      temp_password == submitted_password
+    end
+  end
+
+  # Generates a random string from a set of easily readable characters
+  def self.generate_random_pwd(size = 10)
+    charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
+    (0...size).map{ charset.to_a[rand(charset.size)] }.join
+  end
+
+  def self.create_customer_acct(customer)
+    @user = User.new
+    @user.username = customer.email
+    @user.email= customer.email
+    @user.name = customer.first_name + " " + customer.last_name
+    @user.access = "customer"
+    @user.update_password = false
+    @user.temp_password = generate_random_pwd(10)
+    @user.encrypted_password = nil
+    @user.salt = nil
+    @user.organization_id = customer.organization_id
+    @user.customer_id = customer.id
+    if @user.save
+      @user
+    else
+      nil
+    end
   end
 
   # Checks if the submitted username and password are a valid combination

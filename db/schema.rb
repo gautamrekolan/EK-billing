@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120127021802) do
+ActiveRecord::Schema.define(:version => 20120201031332) do
 
   create_table "autos", :force => true do |t|
     t.date     "start_date"
@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(:version => 20120127021802) do
     t.string   "salt"
     t.string   "access"
     t.integer  "organization_id"
+    t.string   "temp_password"
+    t.integer  "customer_id"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

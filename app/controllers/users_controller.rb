@@ -78,4 +78,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_customer_account
+    @customer = Customer.find(params[:id])
+    @user = User.create_customer_acct(@customer)
+    if @user.nil? == false
+      UserMailer.new_customer(@user).deliver
+      redirect_to @customer, :notice => 'Customer account was successfully created. An email has been sent with a temporary password.'
+    else
+      redirect_to @customer
+    end
+  end
+
 end

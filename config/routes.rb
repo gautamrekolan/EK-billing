@@ -6,31 +6,33 @@ EkBilling::Application.routes.draw do
   match '/contact',                 :to => 'pages#contact'
   match '/home',                    :to => 'pages#home'
 
-  match '/login'                    => 'users#login',           :as => :login
-  match '/logout'                   => 'users#logout',          :as => :logout
+  match '/login'                    => 'users#login',                   :as => :login
+  match '/logout'                   => 'users#logout',                  :as => :logout
 
-  match 'pages/signup'              => 'pages#signup',          :as => :signup
+  match 'pages/signup'              => 'pages#signup',                  :as => :signup
 
-  match 'invoices/confirm/:id'      => "invoices#confirm",      :as => :invoice_confirm
-  match 'invoices/request/:id'      => "invoices#request_mail", :as => :invoice_request
-  match 'invoices/issued/:id'       => "invoices#issued",       :as => :invoice_issued
-  match 'invoices/text/:id'         => "invoices#text",         :as => :invoice_text
-  match 'invoices/mailed/:id'       => "invoices#mailed",       :as => :invoice_mailed
-  match 'invoices/reminder/:id'     => "invoices#reminder",     :as => :invoice_reminder
-  match 'invoices/paid/:id'         => "invoices#paid",         :as => :invoice_paid
+  match 'invoices/confirm/:id'      => "invoices#confirm",              :as => :invoice_confirm
+  match 'invoices/request/:id'      => "invoices#request_mail",         :as => :invoice_request
+  match 'invoices/issued/:id'       => "invoices#issued",               :as => :invoice_issued
+  match 'invoices/text/:id'         => "invoices#text",                 :as => :invoice_text
+  match 'invoices/mailed/:id'       => "invoices#mailed",               :as => :invoice_mailed
+  match 'invoices/reminder/:id'     => "invoices#reminder",             :as => :invoice_reminder
+  match 'invoices/paid/:id'         => "invoices#paid",                 :as => :invoice_paid
 
-  match 'autos/destroy/:id'         => "autos#destroy",         :as => :delete_auto
-  match 'categories/destroy/:id'    => "categories#destroy",    :as => :delete_category
-  match 'customers/destroy/:id'     => "customers#destroy",     :as => :delete_customer
-  match 'documents/destroy/:id'     => "documents#destroy",     :as => :delete_document
-  match 'horses/destroy/:id'        => "horses#destroy",        :as => :delete_horse
-  match 'invoices/destroy/:id'      => "invoices#destroy",      :as => :delete_invoice
-  match 'items/destroy/:id'         => "items#destroy",         :as => :delete_item
-  match 'organizations/destroy/:id' => "organizations#destroy", :as => :delete_organization
-  match 'payments/destroy/:id'      => "payments#destroy",      :as => :delete_payment
-  match 'users/destroy/:id'         => "users#destroy",         :as => :delete_user
+  match 'autos/destroy/:id'         => "autos#destroy",                 :as => :delete_auto
+  match 'categories/destroy/:id'    => "categories#destroy",            :as => :delete_category
+  match 'customers/destroy/:id'     => "customers#destroy",             :as => :delete_customer
+  match 'documents/destroy/:id'     => "documents#destroy",             :as => :delete_document
+  match 'horses/destroy/:id'        => "horses#destroy",                :as => :delete_horse
+  match 'invoices/destroy/:id'      => "invoices#destroy",              :as => :delete_invoice
+  match 'items/destroy/:id'         => "items#destroy",                 :as => :delete_item
+  match 'organizations/destroy/:id' => "organizations#destroy",         :as => :delete_organization
+  match 'payments/destroy/:id'      => "payments#destroy",              :as => :delete_payment
+  match 'users/destroy/:id'         => "users#destroy",                 :as => :delete_user
 
-  match 'customs/sample'            => "customs#sample",        :as => :invoice_sample
+  match 'customs/sample'            => "customs#sample",                :as => :invoice_sample
+
+  match 'users/new_customer/:id'    => "users#create_customer_account", :as => :new_customer_account
 
   resources :autos
   resources :categories
