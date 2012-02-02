@@ -1,8 +1,15 @@
 <div class="list">
-    <h4>Thank you for your payment!</h4>
+    <h3>Thank you for your payment!</h3>
 
-    <p>For your records, your transaction ID is: <b><%= @transaction_id %>.</b></p>
+    <div class="sub">
+        <p>Your payment of <%= number_to_currency(@payment.amount)%> was successfully submitted.</p>
 
-    <br /><br />
-    <%= link_to "Return to invoice", @invoice %>
+        <p>For your records, your transaction ID is <%= @payment.transaction_id %>.</p>
+
+        <p><%= link_to 'Print a copy of this receipt.', '#' %></p>
+    </div>
+
+    <div style="height: 20px">&nbsp;</div>
+    <%= link_to "Return to invoice", @invoice, :class => "link_button" %>
+    <div style="height: 20px">&nbsp;</div>
 </div>

@@ -111,6 +111,7 @@
           <% @invoice.payments.each do |payment| %>
             <tr>
                 <td><%= payment.payment_type %></td>
+                <td><%= payment.date.strftime("%B %e, %Y") %></td>
                 <td><%= payment.notes %></td>
                 <td><%= number_to_currency(payment.amount) %></td>
                 <% if session[:user][:access] == "manager" %>

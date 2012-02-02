@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201031332) do
+ActiveRecord::Schema.define(:version => 20120202053008) do
 
   create_table "autos", :force => true do |t|
     t.date     "start_date"
@@ -136,10 +136,11 @@ ActiveRecord::Schema.define(:version => 20120201031332) do
     t.date     "date"
     t.string   "payment_type"
     t.string   "notes"
-    t.decimal  "amount",       :precision => 8, :scale => 2
+    t.decimal  "amount",         :precision => 8, :scale => 2
     t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "transaction_id"
   end
 
   create_table "potentials", :force => true do |t|

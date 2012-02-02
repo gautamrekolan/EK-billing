@@ -4,8 +4,12 @@
       <%#= sim_fields(@sim_transaction) %>
 
         <div class="field">
+          <%= f.label 'payment_amount', 'Payment amount $' %>
+          <%= f.text_field 'payment_amount', :value => @invoice.amount, :style => "width: 100px" %>
+        </div>
+        <div class="field">
           <%= f.label 'card_num', 'Card number'%>
-          <%= f.text_field 'card_num', :value => '4007000000027', :size => 16 %>
+          <%= f.text_field 'card_num', :value => '4007000000027', :style => "width: 250px" %>
         </div>
         <div class="field">
           <%= f.label 'exp_date', 'Expiration date'%>
@@ -19,20 +23,20 @@
 
         <div class="field">
           <%= f.label 'first_name', 'First name'%>
-          <%= f.text_field 'first_name', :value => @invoice.customer.first_name, :size => 15 %>
+          <%= f.text_field 'first_name', :value => @invoice.customer.first_name, :style => "width: 250px" %>
         </div>
         <div class="field">
           <%= f.label 'last_name', 'Last name'%>
-          <%= f.text_field 'last_name', :value => @invoice.customer.last_name, :size => 15 %>
+          <%= f.text_field 'last_name', :value => @invoice.customer.last_name, :style => "width: 250px" %>
         </div>
 
         <div class="field">
           <%= f.label 'address', 'Address'%>
-          <%= f.text_field 'address', :value => @invoice.customer.address, :size => 26 %>
+          <%= f.text_field 'address', :value => @invoice.customer.address, :style => "width: 250px" %>
         </div>
         <div class="field">
           <%= f.label 'city', 'City'%>
-          <%= f.text_field 'city', :value => @invoice.customer.city, :size => 15 %>
+          <%= f.text_field 'city', :value => @invoice.customer.city, :style => "width: 250px" %>
         </div>
 
         <div class="field">

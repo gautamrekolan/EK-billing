@@ -27,19 +27,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="payments_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="payments_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="43" selection-start="4546" selection-end="4546" vertical-scroll-proportion="0.872093">
+            <state line="157" column="54" selection-start="5025" selection-end="5025" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receipt.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="show.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="113" column="56" selection-start="4037" selection-end="4037" vertical-scroll-proportion="-11.583333">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="receipt.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/payments/receipt.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="36" selection-start="145" selection-end="145" vertical-scroll-proportion="-2.5">
+            <state line="6" column="52" selection-start="237" selection-end="237" vertical-scroll-proportion="0.15817223">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/stylesheets/global.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -48,7 +66,7 @@
       <file leaf-file-name="creditcard.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/payments/creditcard.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="23" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
+            <state line="7" column="60" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -64,7 +82,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/documents/edit.html.erb" />
         <option value="$PROJECT_DIR$/config/authorize-net.text.erb" />
         <option value="$PROJECT_DIR$/config/authorize-net.yml" />
         <option value="$PROJECT_DIR$/config/initializers/authorize_net.rb" />
@@ -73,13 +90,14 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/authorize_net.yml" />
         <option value="$PROJECT_DIR$/app/views/payments/authorize.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/payments/receipt.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/payments/creditcard.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/config/authorize_net.yml.example" />
+        <option value="$PROJECT_DIR$/db/migrate/20120202053008_add_transaction_id_to_payments.rb" />
+        <option value="$PROJECT_DIR$/app/views/payments/creditcard.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/invoices/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/payments/receipt.html.erb" />
       </list>
     </option>
   </component>
@@ -721,20 +739,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/initializers/backtrace_silencers.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="40" selection-start="2507" selection-end="2507" vertical-scroll-proportion="1.7200675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="2" selection-start="1355" selection-end="1468" vertical-scroll-proportion="0.70826304">
@@ -784,27 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="53" selection-start="3724" selection-end="3724" vertical-scroll-proportion="-6.5833335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/payments/receipt.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="36" selection-start="145" selection-end="145" vertical-scroll-proportion="-2.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/payments/creditcard.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="23" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="25" selection-start="546" selection-end="546" vertical-scroll-proportion="0.0">
@@ -826,9 +809,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20120202053008_add_transaction_id_to_payments.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="44" selection-start="193" selection-end="193" vertical-scroll-proportion="0.15177065">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payments/creditcard.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="60" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="56" selection-start="4037" selection-end="4037" vertical-scroll-proportion="-11.583333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="43" selection-start="4546" selection-end="4546" vertical-scroll-proportion="0.872093">
+        <state line="157" column="54" selection-start="5025" selection-end="5025" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/global.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payments/receipt.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="52" selection-start="237" selection-end="237" vertical-scroll-proportion="0.15817223">
           <folding />
         </state>
       </provider>
