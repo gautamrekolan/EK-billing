@@ -36,6 +36,12 @@ EkBilling::Application.routes.draw do
   match 'customers/validate/:id'    => "customers#validate_customer",   :as => :validate_customer
   match 'customers/update'          => "customers#update_info",         :as => :update_customer
 
+  match 'payments/authorize/:id'    => "payments#authorize",            :as => :authorize
+  match 'payments/creditcard/:id'   => "payments#creditcard",           :as => :creditcard
+  match 'payments/relay_response'   => "payments#relay_response",       :as => :relay_response
+  match 'payments/receipt'          => "payments#receipt",              :as => :payment_receipt
+  match 'payments/error'            => "payments#error",                :as => :payment_error
+
   resources :autos
   resources :categories
   resources :customers

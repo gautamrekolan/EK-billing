@@ -15,6 +15,9 @@ gem 'gibberish'
 
 gem 'time_diff'
 
+gem 'authorize-net'
+gem 'activemerchant'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

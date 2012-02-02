@@ -103,7 +103,7 @@
     <% if session[:user][:access] == "manager" %>
         <%= link_to 'Add a new payment', new_payment_path(:invoice => @invoice.id), :class => "add_link" %>
     <% elsif session[:user][:access] == "customer" %>
-        <a href="#" class="add_link">Make a payment</a>
+        <%= link_to 'Make a payment', creditcard_path(@invoice), :class => "add_link" %>
     <% end %>
 
     <% if @invoice.payments.empty? == false %>

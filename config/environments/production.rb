@@ -65,4 +65,7 @@ EkBilling::Application.configure do
   email_settings = YAML::load(File.open("#{Rails.root}/config/smtp.yml"))
   config.action_mailer.smtp_settings = email_settings[Rails.env]
 
+  yml = YAML::load(File.open("#{Rails.root}/config/authorize_net.yml"))
+  AUTHORIZE_NET_CONFIG = yml['production']
+
 end

@@ -1,0 +1,53 @@
+<div class="list">
+
+    <% form_for 'payment', :url => :authorize do |f| %>
+      <%#= sim_fields(@sim_transaction) %>
+
+        <div class="field">
+          <%= f.label 'card_num', 'Card number'%>
+          <%= f.text_field 'card_num', :value => '4007000000027', :size => 16 %>
+        </div>
+        <div class="field">
+          <%= f.label 'exp_date', 'Expiration date'%>
+          <%= select("payment", "month", @months.collect { |p| [ p, p ] }, :style => "margin-right: 20px") %>
+          <%= select("payment", "year", @years.collect { |p| [ p, p ] }) %>
+        </div>
+        <div class="field">
+          <%= f.label 'card_code', 'CCV'%>
+          <%= f.text_field 'card_code', :value => '123', :style => "width: 100px" %>
+        </div>
+
+        <div class="field">
+          <%= f.label 'first_name', 'First name'%>
+          <%= f.text_field 'first_name', :value => @invoice.customer.first_name, :size => 15 %>
+        </div>
+        <div class="field">
+          <%= f.label 'last_name', 'Last name'%>
+          <%= f.text_field 'last_name', :value => @invoice.customer.last_name, :size => 15 %>
+        </div>
+
+        <div class="field">
+          <%= f.label 'address', 'Address'%>
+          <%= f.text_field 'address', :value => @invoice.customer.address, :size => 26 %>
+        </div>
+        <div class="field">
+          <%= f.label 'city', 'City'%>
+          <%= f.text_field 'city', :value => @invoice.customer.city, :size => 15 %>
+        </div>
+
+        <div class="field">
+          <%= f.label 'state', 'State'%>
+          <%= f.text_field 'state', :value => @invoice.customer.state, :style => "width: 100px" %>
+        </div>
+        <div class="field">
+          <%= f.label 'zip', 'Zip Code'%>
+          <%= f.text_field 'zip', :value => @invoice.customer.zip, :style => "width: 100px" %>
+        </div>
+
+      <%= submit_tag 'MAKE PAYMENT', :name => 'make_payment' %>
+
+      <%= hidden_field('x_test_request', :value => "TRUE") %>
+      <%= hidden_field('x_relay_response', :value => "TRUE") %>
+    <% end %>
+
+</div>

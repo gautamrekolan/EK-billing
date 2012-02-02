@@ -1,0 +1,9 @@
+development:
+  api_login_id: [your API login key]
+  api_transaction_key: [your API transaction key]
+  merchant_hash_value: [optional parameter that can be set in account settings/MD5]
+
+production:
+  api_login_id: [your API login key]
+  api_transaction_key: [your API transaction key]
+  merchant_hash_value: [optional parameter that can be set in account settings/MD5]

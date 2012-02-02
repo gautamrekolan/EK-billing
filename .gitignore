@@ -17,3 +17,4 @@
 # Ignore the config files containing sensitive info
 /config/database.yml
 /config/smtp.yml
+/config/authorize_net.yml
