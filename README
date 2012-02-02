@@ -1,12 +1,6 @@
-This is a web application written in Rails 3 with a MySQL backend. 
-It is my first foray into Ruby, Rails, and all the magic therein.
+This is a web application written in Rails 3 with a MySQL backend. It is my first foray into Ruby, Rails, and all the magic therein.
 
-That said, it exists as a simple and easy billing application to allow horse trainers, barn owners/managers and 
-anyone else running an equine operation the ability to build, track and maintain their customers and associated 
-invoices. It also allows these managers the ability to create accounts for their customers, who can then log in 
-and view their invoices, make credit card payments online (via authorize.net) against their invoices, keep their 
-personal information up to date, and more. The application also offers features like the uploading of documents 
-related to the barn, its customers, and their horses.
+That said, it exists as a simple and easy billing application to allow horse trainers, barn owners/managers and anyone else running an equine operation the ability to build, track and maintain their customers and associated invoices. It also allows these managers the ability to create accounts for their customers, who can then log in and view their invoices, make credit card payments online (via authorize.net) against their invoices, keep their personal information up to date, and more. The application also offers features like the uploading of documents related to the barn, its customers, and their horses.
 
 Future road map includes mobile apps for use on the go, as well as some awesome ideas for use on iPads and other tablets.
 
