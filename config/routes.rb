@@ -39,7 +39,7 @@ EkBilling::Application.routes.draw do
   match 'payments/authorize/:id'    => "payments#authorize",            :as => :authorize
   match 'payments/creditcard/:id'   => "payments#creditcard",           :as => :creditcard
   match 'payments/relay_response'   => "payments#relay_response",       :as => :relay_response
-  match 'payments/receipt'          => "payments#receipt",              :as => :payment_receipt
+  match 'payments/receipt/:id'      => "payments#receipt",              :as => :payment_receipt
   match 'payments/error'            => "payments#error",                :as => :payment_error
 
   resources :autos

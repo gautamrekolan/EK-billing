@@ -41,13 +41,24 @@ class CustomersController < ApplicationController
     @customer = Customer.new(params[:customer])
     # Remove all non-digit characters from the phone number
     # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    @customer.cell = @customer.cell.gsub(/\D/, '')
-    @customer.home = @customer.home.gsub(/\D/, '')
-    @customer.work = @customer.work.gsub(/\D/, '')
+    if @customer.cell.blank? == false
+      @customer.cell = @customer.cell.gsub(/\D/, '')
+    end
+    if @customer.home.blank? == false
+      @customer.home = @customer.home.gsub(/\D/, '')
+    end
+    if @customer.work.blank? == false
+      @customer.work = @customer.work.gsub(/\D/, '')
+    end
 
     if @customer.save
       redirect_to(@customer, :notice => 'Customer was successfully created.')
     else
+      @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+                 "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+                 "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+                 "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+      @methods = ["Email", "Mail"]
       render :action => "new"
     end
   end
@@ -57,13 +68,24 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     # Remove all non-digit characters from the phone number
     # (Source: http://stackoverflow.com/questions/3368016/rails-on-ruby-validating-and-changing-a-phone-number)
-    params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
-    params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
-    params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
+    if params[:customer][:cell].blank? == false
+      params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
+    end
+    if params[:customer][:home].blank? == false
+      params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
+    end
+    if params[:customer][:work].blank? == false
+      params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
+    end
 
     if @customer.update_attributes(params[:customer])
       redirect_to(@customer, :notice => 'Customer was successfully updated.')
     else
+      @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+               "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+               "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+               "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+      @methods = ["Email", "Mail"]
       render :action => "edit"
     end
   end
@@ -114,13 +136,23 @@ class CustomersController < ApplicationController
 
   def update_info
     @customer = Customer.find(params[:customer][:id])
-    params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
-    params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
-    params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
+    if params[:customer][:cell].blank? == false
+      params[:customer][:cell] = params[:customer][:cell].gsub(/\D/, '')
+    end
+    if params[:customer][:home].blank? == false
+      params[:customer][:home] = params[:customer][:home].gsub(/\D/, '')
+    end
+    if params[:customer][:work].blank? == false
+      params[:customer][:work] = params[:customer][:work].gsub(/\D/, '')
+    end
 
     if @customer.update_attributes(params[:customer])
       redirect_to(validate_customer_path(@customer), :notice => 'Your information was successfully updated.')
     else
+      @states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID",
+               "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+               "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+               "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
       render :action => "validate_customer"
     end
   end

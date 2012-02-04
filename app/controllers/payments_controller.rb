@@ -157,15 +157,24 @@ class PaymentsController < ApplicationController
         new_amount = @invoice.amount - amount_to_charge
         @invoice.update_attribute("amount", new_amount)
       end
-      redirect_to(payment_receipt_path(:payment => @payment.id, :invoice => @invoice.id))
+      redirect_to(payment_receipt_path(@payment.id))
     else
       render :text => 'Fail: ' + response.message.to_s and return
     end
   end
 
   def receipt
-    @payment = Payment.find(params[:payment])
-    @invoice = Invoice.find(params[:invoice])
+    @payment = Payment.find(params[:id])
+    @invoice = @payment.invoice
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.pdf {
+        render :layout => false
+      }
+    end
   end
+
+
 
 end

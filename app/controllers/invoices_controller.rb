@@ -71,6 +71,13 @@ class InvoicesController < ApplicationController
         end
       end
     end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.pdf {
+        render :layout => false
+      }
+    end
   end
 
   # GET /invoices/new
@@ -261,12 +268,6 @@ class InvoicesController < ApplicationController
   end
 
   def build_pdf(pdf, invoice)
-    # TODO:
-    # Allow uploading of organization logo
-    # Allow submission of 'Checks payable to'
-    # Allow toggle of customer information validation/check
-    # Allow submission of sign-off line - default = 'Thank you for your prompt payment and continued business!'
-
     @invoice = invoice
 
     #logopath = "#{Rails.root}/public/images/logo.jpg"

@@ -58,13 +58,14 @@
     <% end %>
 </div>
 
+    <%= link_to 'Download PDF', invoice_path(@invoice, :format => :pdf), :class => 'link_button' %>
+
     <% if session[:user][:access] == "manager" %>
         <%= link_to 'Edit details', edit_invoice_path(@invoice), :class => "link_button" %>
         <a href="#" onclick="confirm('Are you sure you want to delete this invoice?', '<%= delete_invoice_path(@invoice) %>')" class="link_button">Remove</a>
     <% end %>
 
     <% if session[:user][:access] == "customer" %>
-        <%= link_to 'Confirm this invoice', invoice_confirm_path(@invoice), :class => "link_button" %>
         <%= link_to 'Request hard copy', invoice_request_path(@invoice), :class => "link_button" %>
     <% end %>
 
@@ -114,6 +115,7 @@
                 <td><%= payment.date.strftime("%B %e, %Y") %></td>
                 <td><%= payment.notes %></td>
                 <td><%= number_to_currency(payment.amount) %></td>
+                <td><%= link_to 'Receipt (PDF)', payment_receipt_path(payment, :format => :pdf) %></td>
                 <% if session[:user][:access] == "manager" %>
                     <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
                     <td><a href="#" onclick="confirm('Are you sure you want to delete this payment?', '<%= delete_payment_path(payment) %>')">Remove</a></td>

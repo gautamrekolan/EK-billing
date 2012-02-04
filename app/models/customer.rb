@@ -19,9 +19,9 @@ class Customer < ActiveRecord::Base
   validates :city,            :presence => true, :length => { :maximum => 50 }
   validates :state,           :presence => true, :length => { :maximum => 2 }
   validates :zip,             :presence => true, :length => { :maximum => 10 }
-  validates :home,            :length => { :minimum => 10, :maximum => 25 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }
-  validates :cell,            :length => { :minimum => 10, :maximum => 25 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }
-  validates :work,            :length => { :minimum => 10, :maximum => 25 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }
+  validates :home,            :length => { :maximum => 13 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }, :if => :home?
+  validates :cell,            :length => { :maximum => 13 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }, :if => :cell?
+  validates :work,            :length => { :maximum => 13 }, :format => { :with => /\A\S[0-9\+\/\(\)\s\-]*\z/i }, :if => :work?
   validates :email,           :email => true, :length => { :maximum => 250 }, :if => :email?
   #validates :active
   #validates :delivery_method
@@ -30,6 +30,27 @@ class Customer < ActiveRecord::Base
 
   def email?()
     if self.email.blank? == false
+      true
+    end
+    false
+  end
+
+  def cell?()
+    if self.cell.blank? == false
+      true
+    end
+    false
+  end
+
+  def home?()
+    if self.home.blank? == false
+      true
+    end
+    false
+  end
+
+  def work?()
+    if self.work.blank? == false
       true
     end
     false

@@ -1,3 +1,7 @@
+<div class="breadcrumb">
+  << <%= link_to 'INVOICE', @payment.invoice %>
+</div>
+
 <div class="list">
     <h3>Thank you for your payment!</h3>
 
@@ -6,7 +10,7 @@
 
         <p>For your records, your transaction ID is <%= @payment.transaction_id %>.</p>
 
-        <p><%= link_to 'Print a copy of this receipt.', '#' %></p>
+        <p><%= link_to 'Print PDF of this receipt', payment_receipt_path(@payment, :format => :pdf) %></p>
     </div>
 
     <div style="height: 20px">&nbsp;</div>
