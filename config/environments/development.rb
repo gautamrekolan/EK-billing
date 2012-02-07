@@ -36,8 +36,6 @@ EkBilling::Application.configure do
 
   yml = YAML::load(File.open("#{Rails.root}/config/authorize_net.yml"))
   AUTHORIZE_NET_CONFIG = yml['development']
-  #AUTHORIZE_NET_CONFIG.merge!(yml[Rails.env]) unless yml[Rails.env].nil?
-  #AUTHORIZE_NET_CONFIG.freeze
 
 end
 

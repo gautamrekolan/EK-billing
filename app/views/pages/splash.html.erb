@@ -2,7 +2,11 @@
 <html>
 <head>
   <title>Easy Keeper Billing</title>
-  <%= stylesheet_link_tag    "global.css" %>
+  <% if mobile_device? %>
+    <%= stylesheet_link_tag    "mobile.css" %>
+  <% else %>
+    <%= stylesheet_link_tag    "global.css" %>
+  <% end %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 

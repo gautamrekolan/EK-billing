@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  layout 'application', :except => [ :splash, :signup ]
+  layout :which_layout, :except => [ :splash, :signup ]
 
   def home
 
