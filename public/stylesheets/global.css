@@ -1,5 +1,6 @@
 body {
     background-color: #ffffcc;
+    width: 1000px;
 }
 
 body, p, ol, ul, td {
@@ -43,19 +44,21 @@ div {
 }
 
 #top_nav {
+    float: right;
     text-align: right;
     height: 60px;
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     top: 20px;
     font-weight: bold;
     right: 0;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 5px 0 0 !important;
 }
 
 #top_nav ul {
     padding: 0;
-    margin: 0 25px 0 0;
+    margin: 0;
 }
 
 #top_nav li {

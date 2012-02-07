@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #before_filter :prepare_for_mobile
-
   def login_required
     if session[:user]
       return true
@@ -57,11 +55,6 @@ class ApplicationController < ActionController::Base
       end
     end
     helper_method :mobile_device?
-
-    def prepare_for_mobile
-      session[:mobile_param] = params[:mobile] if params[:mobile]
-      request.format = :mobile if mobile_device?
-    end
 
     layout :which_layout
     def which_layout
