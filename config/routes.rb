@@ -10,6 +10,7 @@ EkBilling::Application.routes.draw do
   match '/logout'                   => 'users#logout',                  :as => :logout
 
   match 'pages/signup'              => 'pages#signup',                  :as => :signup
+  match 'pages/access_denied'       => 'pages#access_denied',           :as => :access_denied
 
   match 'invoices/confirm/:id'      => "invoices#confirm",              :as => :invoice_confirm
   match 'invoices/request/:id'      => "invoices#request_mail",         :as => :invoice_request

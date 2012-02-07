@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :prepare_for_mobile
+
   def login_required
     if session[:user]
       return true
@@ -17,18 +19,18 @@ class ApplicationController < ActionController::Base
       end
       flash[:warning] = "Oops! You do not have permission to access this area."
       session[:return_to] = request.request_uri
-      redirect_to :controller => 'pages', :action => 'home'
+      redirect_to :controller => 'pages', :action => 'access_denied'
     end
   end
 
   def manager_required
     if session[:user]
-      if session[:user][:access] == "manager"
+      if session[:user][:access] == "manager" || session[:user][:access] == "admin"
         return true
       end
       flash[:warning] = "Oops! You do not have permission to access this area."
       session[:return_to] = request.request_uri
-      redirect_to :controller => 'pages', :action => 'home'
+      redirect_to :controller => 'pages', :action => 'access_denied'
     end
   end
 
@@ -44,4 +46,25 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => 'pages', :action => 'home'
     end
   end
+
+  private
+
+    def mobile_device?
+      if session[:mobile_param]
+        session[:mobile_param] == "1"
+      else
+        request.user_agent =~ /Mobile|webOS/
+      end
+    end
+    helper_method :mobile_device?
+
+    def prepare_for_mobile
+      session[:mobile_param] = params[:mobile] if params[:mobile]
+      request.format = :mobile if mobile_device?
+    end
+
+    layout :which_layout
+    def which_layout
+      mobile_device? ? 'mobile' : 'application'
+    end
 end
