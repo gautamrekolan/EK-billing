@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+    background-color: #ffcccc;
 }
 
 body, p, ol, ul, td {
@@ -16,7 +16,7 @@ div {
 }
 
 #page {
-    padding: 0px 15px 15px 15px;
+    padding: 0px 10px 10px 10px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -24,8 +24,10 @@ div {
 
 #header {
     background-color: #330000;
-    color: #ffffcc;
-    height: 60px;
+    color: #ffcccc;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 40px;
 }
 
 #logo {
@@ -37,16 +39,22 @@ div {
     font-weight: bold;
 }
 
+#logo h1 {
+    position: relative;
+    top: -5px;
+    font-size: 1.4em;
+}
+
 #logo a {
     text-decoration: none;
-    color: #ffffcc;
+    color: #ffcccc;
 }
 
 #top_nav {
     text-align: right;
     height: 60px;
     position: absolute;
-    top: 20px;
+    top: 15px;
     font-weight: bold;
     right: 0;
     padding: 0 !important;
@@ -68,7 +76,7 @@ div {
 
 #top_nav li.on a {
     text-decoration: none;
-    color: #ffffcc;
+    color: #ffcccc;
     background-color: #cc6633;
     padding: 5px;
     border-radius: 2px 2px 2px 2px;
@@ -77,12 +85,12 @@ div {
 }
 #top_nav li.off a {
     text-decoration: none;
-    color: #ffffcc;
+    color: #ffcccc;
     padding: 5px;
 }
 #top_nav li a:hover {
     text-decoration: none;
-    color: #ffffff;
+    color: #ffcccc;
     background-color: #cc6633;
     padding: 5px;
     border-radius: 2px 2px 2px 2px;
@@ -101,7 +109,7 @@ div {
 #footer {
     text-align: center;
     background-color: #330000;
-    color: #ffffcc;
+    color: #ffffff;
     min-height: 20px;
     margin-top: 20px;
     padding: 10px;
@@ -123,7 +131,7 @@ div {
 }
 #footer li a {
     text-decoration: none;
-    color: #ffffcc;
+    color: #ffcccc;
     padding: 5px;
 }
 #footer li a:hover {
@@ -148,7 +156,7 @@ div.full {
     margin: 20px;
     padding: 20px;
     border: 2px solid #330000;
-    background-color: #ffffcc;
+    background-color: #ffcccc;
     min-height: 560px;
 }
 
@@ -156,7 +164,7 @@ div.full_centered {
     margin: 20px;
     padding: 20px;
     border: 2px solid #330000;
-    background-color: #ffffcc;
+    background-color: #ffcccc;
     min-height: 560px;
     text-align: center;
 }
@@ -171,14 +179,14 @@ div.list {
     margin: 20px;
     padding: 20px;
     border: 2px solid #330000;
-    background-color: #ffffcc;
+    background-color: #ffcccc;
 }
 
 div.sub {
     margin: 30px 10px 10px 10px;
     padding: 10px;
     border: 2px dotted #330000;
-    background-color: #ffffcc;
+    background-color: #ffcccc;
     color: #330000;
 }
 
@@ -329,7 +337,7 @@ input[type="password"] {
 input[type="submit"] {
     padding: 4px;
     background-color: #330000;
-    color: #ffffff;
+    color: #ffcccc;
     font-size: 1em;
     font-weight: bold;
     border: 2px solid black;
@@ -344,7 +352,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #cc6633;
-    color: #ffffff;
+    color: #ffcccc;
 }
 
 a.button {
@@ -523,7 +531,7 @@ div.single_item {
     padding: 20px;
     margin: 20px;
     overflow-y: scroll;
-    background-color: #ffffff;
+    background-color: #ffcccc;
 }
 
 .popup td {
@@ -533,7 +541,7 @@ div.single_item {
 a.add_link {
     padding: 4px;
     background-color: #330000;
-    color: #ffffcc;
+    color: #ffcccc;
     font-weight: bold;
     border: 2px solid black;
     cursor: pointer;
@@ -546,7 +554,7 @@ a.add_link {
 
 a.add_link:hover {
     background-color: #cc6633;
-    color: #ffffcc;
+    color: #ffcccc;
 }
 
 #signup {
@@ -588,7 +596,7 @@ input[type="submit"].signup_button {
     font-size: 1.5em;
     font-weight: bold;
     background-color: #330000;
-    color: #ffffcc;
+    color: #ffcccc;
     border: 2px solid black;
     cursor: pointer;
     border-radius: 3px 3px 3px 3px;
@@ -601,7 +609,7 @@ input[type="submit"].signup_button {
 
 input[type="submit"].signup_button:hover {
     background-color: #cc6633;
-    color: #ffffcc;
+    color: #ffcccc;
 }
 
 a.signup_button {
@@ -609,7 +617,7 @@ a.signup_button {
     font-size: 1.4em;
     font-weight: bold;
     background-color: #330000;
-    color: #ffffcc;
+    color: #ffcccc;
     border: 2px solid black;
     cursor: pointer;
     text-decoration: none;
@@ -623,14 +631,14 @@ a.signup_button {
 
 a.signup_button:hover {
     background-color: #cc6633;
-    color: #ffffcc;
+    color: #ffcccc;
 }
 
 a.link_button {
     height: 26px;
     padding: 5px;
     background-color: #330000;
-    color: #ffffcc;
+    color: #ffcccc;
     font-weight: bold;
     border: 2px solid black;
     cursor: pointer;
@@ -644,7 +652,7 @@ a.link_button {
 
 a.link_button:hover {
     background-color: #cc6633;
-    color: #ffffcc;
+    color: #ffcccc;
 }
 
 #document_image {
