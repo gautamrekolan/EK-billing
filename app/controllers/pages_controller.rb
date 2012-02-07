@@ -8,6 +8,11 @@ class PagesController < ApplicationController
 
   def splash
     @potential = Potential.new
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.mobile
+    end
   end
 
   def signup
