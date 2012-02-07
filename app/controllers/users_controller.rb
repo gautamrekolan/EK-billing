@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.update_password = true
+    @user.access = 'manager'
 
    if @user.save
       session[:user] = @user
