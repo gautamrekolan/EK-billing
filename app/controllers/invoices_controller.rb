@@ -2,7 +2,7 @@ include ActionView::Helpers::NumberHelper
 
 class InvoicesController < ApplicationController
 
-  before_filter :login_required #, :except => [ :confirm, :request_mail ]
+  before_filter :login_required, :except => [ :request_mail ] #, :except => [ :confirm, :request_mail ]
   before_filter :manager_required, :except => [ :index, :show, :confirm, :request_mail ]
 
   # GET /invoices
