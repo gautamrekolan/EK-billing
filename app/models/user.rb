@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   belongs_to :customer
 
   attr_accessor :password, :update_password
-  attr_accessible :username, :password, :password_confirmation, :update_password, :email, :name, :access, :organization_id
+  attr_accessible :username, :temp_password, :password, :password_confirmation, :update_password, :email, :name, :access, :organization_id
 
   validates :username, :presence => true,
                        :length => { :maximum => 50 },
