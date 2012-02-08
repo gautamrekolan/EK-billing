@@ -5,6 +5,7 @@ class InvoiceMailer < ActionMailer::Base
   def invoice_issued(invoice)
     # @invoice = invoice
     @invoice_id = encrypt_invoice(invoice.id.to_s)
+    @request_url = invoice_request_url(@invoice_id)
     attachments[invoice.name + "-" + invoice.customer.last_name + ".pdf"] = File.read("#{Rails.root}/public/files/pdfs/issued/" + invoice.id.to_s + ".pdf")
     @invoice = Invoice.find(invoice.id)
     mail(:to => "elysedougherty@gmail.com", :subject => "New Lower Hopewell Invoice")

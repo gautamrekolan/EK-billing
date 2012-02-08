@@ -55,7 +55,7 @@ TOTAL DUE: <%= number_to_currency(@invoice.amount) %>
 Please also find a PDF of your invoice attached to this email for easier viewing.
 
 To request a hard copy of this invoice be mailed to you, click this link or copy and paste this URL into your browser:
-<%= invoice_request_url(@invoice_id) %>
+<%= @request_url %>
 
 Thank you in advance for your prompt payment!
 
