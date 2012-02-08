@@ -14,9 +14,12 @@ class InvoicesController < ApplicationController
       # - invoices to be mailed ("Mail Requested" or ("Opened" and @customer.delivery_method == "Mail"))
       # - invoices past due ("Emailed", "Mailed", "Confirmed", "Mailed (Secondary)", "Partially Paid", "Reminded" where due_date < now)
       pastdue_status_codes = [1, 2, 3, 4, 5, 6, 7]
-      @attention_invoices = Invoice.all(:order => 'end_date desc',
-                                        :conditions => [ "(status_code = '4') or (status_code in (?) and due_date < ?)",
-                                        pastdue_status_codes, Date.today ])
+      @attention_invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id],
+                                                                :order => 'end_date desc',
+                                                                :conditions => [ "(status_code = '4')
+                                                                                  or (status_code in (?)
+                                                                                  and due_date < ?",
+                                                                                  pastdue_status_codes, Date.today ])
 
       # open invoices
       # - "Opened", "Emailed", "Mailed", "Confirmed", "Mailed (Secondary)", "Reminded" where due_date > now
@@ -24,16 +27,19 @@ class InvoicesController < ApplicationController
       # @open_invoices = Invoice.where([ "status in ?" ], [ "Opened", "Emailed", "Mailed", "Confirmed",
       #                                  "Mailed (Secondary)", "Reminded" ]).and.where([ "due_date < " ], Time.now)
       open_status_codes = [1, 2, 3, 4, 5, 6, 7]
-      @open_invoices = Invoice.all(:order => 'end_date desc',
-                                   :conditions => [ "status_code in (?) and due_date >= ?",
-                                                  open_status_codes, Date.today ])
+      @open_invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id],
+                                                           :order => 'end_date desc',
+                                                           :conditions => [ "status_code in (?)
+                                                                             and due_date >= ?",
+                                                                             open_status_codes, Date.today ])
 
       # closed invoices
       # - "Paid"
       closed_status_codes = [8]
-      @closed_invoices = Invoice.all(:order => 'end_date desc',
-                                   :conditions => [ "status_code in (?)",
-                                                  closed_status_codes ])
+      @closed_invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id],
+                                                            :order => 'end_date desc',
+                                                            :conditions => [ "status_code in (?)",
+                                                                              closed_status_codes ])
     end
   end
 

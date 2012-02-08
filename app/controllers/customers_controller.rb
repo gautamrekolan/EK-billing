@@ -5,7 +5,8 @@ class CustomersController < ApplicationController
 
   # GET /customers
   def index
-    @customers = Customer.all(:order => "active desc, last_name asc, first_name asc")
+    @customers = Customer.find_all_by_organization_id(session[:user][:organization_id],
+                                                      :order => "active desc, last_name asc, first_name asc")
   end
 
   # GET /customers/1

@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
   before_filter :manager_required
 
   def index
-    @categories = Category.all(:order => "category ASC, name ASC  ")
+    @categories = Category.find_all_by_organization_id(session[:user][:organization_id],
+                                                       :order => "category ASC, name ASC")
   end
 
   # GET /categories/new
