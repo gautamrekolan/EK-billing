@@ -18,3 +18,7 @@
 /config/database.yml
 /config/smtp.yml
 /config/authorize_net.yml
+
+/log/emails.txt
+
+.idea/

@@ -79,6 +79,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.create_manager_acct(name, email, organization)
+    @user = User.new
+    @user.username = email
+    @user.email = email
+    @user.name = name
+    @user.access = "manager"
+    @user.update_password = false
+    @user.temp_password = generate_random_pwd(10)
+    @user.encrypted_password = nil
+    @user.salt = nil
+    @user.organization_id = organization
+    if @user.save
+      @user
+    else
+      nil
+    end
+  end
+
   # Checks if the submitted username and password are a valid combination
   # If the user exists, the user entity is returned
   # Else, nil is returned

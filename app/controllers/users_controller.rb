@@ -22,7 +22,12 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.find_all_by_organization_id(session[:user][:organization_id],
+                                              :order => "access desc, name asc",
+                                              :conditions => [ "id != ?", session[:user][:id] ])
+    @customers = Customer.find_all_by_organization_id(session[:user][:organization_id],
+                                                      :order => "last_name asc, first_name asc")
+    @user = User.new
   end
 
   # GET /users/1
@@ -84,9 +89,32 @@ class UsersController < ApplicationController
     @user = User.create_customer_acct(@customer)
     if @user.nil? == false
       UserMailer.new_customer(@user).deliver
-      redirect_to @customer, :notice => 'Customer account was successfully created. An email has been sent with a temporary password.'
+      redirect_to @customer, :notice => 'Customer account was successfully created. An email has been sent to this customer with temporary login credentials.'
     else
       redirect_to @customer
+    end
+  end
+
+  def customer_acct_from_form
+    @customer = Customer.find(params[:user][:customer_id])
+    @user = User.create_customer_acct(@customer)
+    if @user.nil? == false
+      UserMailer.new_customer(@user).deliver
+      redirect_to users_path, :notice => 'Customer account was successfully created. An email has been sent to this customer with temporary login credentials.'
+    else
+      redirect_to users_path
+    end
+  end
+
+  def manager_acct_from_form
+    name = params[:user][:name]
+    email = params[:user][:email]
+    @user = User.create_manager_acct(name, email, session[:user][:organization_id])
+    if @user.nil? == false
+      UserMailer.new_manager(@user).deliver
+      redirect_to users_path, :notice => 'Manager account was successfully created. An email has been sent to this user with temporary login credentials.'
+    else
+      redirect_to users_path
     end
   end
 

@@ -93,6 +93,7 @@
               <li><%= link_to 'MY PROFILE', edit_user_path(session[:user]) %></li>
               <% if session[:user][:access] == "manager" && session[:user][:organization_id].blank? == false %>
                 <li><%= link_to 'MY BARN', edit_organization_path(session[:user][:organization_id]) %></li>
+                  <li><%= link_to 'MY USERS', users_path %></li>
               <% end %>
             <% end %>
             <li><a href="">ABOUT</a><%#= link_to 'ABOUT', about_path %></li>

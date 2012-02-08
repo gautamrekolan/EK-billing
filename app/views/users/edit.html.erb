@@ -1,8 +1,9 @@
 <div class="list">
 
-<% if session[:user][:access] == "admin" %>
+<% if session[:user][:access] == "admin" || session[:user][:access] == "manager" %>
     <div class="breadcrumb">
       << <%= link_to 'USERS', users_path %>
+      << <%= link_to 'DETAILS', user_path(@user) %>
     </div>
 
     <h1 class="title"><%= @user.name %></h1>

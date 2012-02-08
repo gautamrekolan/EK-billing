@@ -1,13 +1,28 @@
 <div class="list">
 
+<div class="breadcrumb">
+  << <%= link_to 'USERS', users_path %>
+</div>
+
 <h1 class="title"><%= @user.name %></h1>
 
-Username: <%= @user.username %>
-<br />
-<% if @user.organization.nil? == false %>
-    <%= @user.organization.name %>
-    <br />
-<% end %>
-<%= link_to @user.email, "mailto:" + @user.email %>
+<div class="field">
+    <label>User type</label>
+    <%= @user.access.capitalize %>
+</div>
+
+<div class="field">
+    <label>Username</label>
+    <%= @user.username %>
+</div>
+
+<div class="field" style="padding-bottom: 20px">
+    <label>Email</label>
+    <%= link_to @user.email, "mailto:" + @user.email %>
+</div>
+
+<%= link_to 'Edit details', edit_user_path(@user), :class => "link_button" %>
+<a href="#" onclick="confirm('Are you sure you want to delete this user?', '<%= delete_user_path(@user) %>')" class="link_button">Remove</a>
+
 
 </div>
