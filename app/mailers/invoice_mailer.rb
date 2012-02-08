@@ -11,8 +11,8 @@ class InvoiceMailer < ActionMailer::Base
     # mail(:to => @invoice.customer.email, :subject => "New Lower Hopewell Invoice")
 
     # log sending of email
-    f = File.new("#{Rails.root}/log/emails.txt", 'a')
-    f.puts Time.now.strftime("%m/%d/%Y %l:%M %p") + " - Initial email for " + invoice.name + " to " + invoice.customer.first_name + " " + invoice.customer.last_name + " at " + invoice.customer.email + "; copied elysedougherty@gmail.com."
+    #f = File.new("#{Rails.root}/log/emails.txt", 'a')
+    #f.puts Time.now.strftime("%m/%d/%Y %l:%M %p") + " - Initial email for " + invoice.name + " to " + invoice.customer.first_name + " " + invoice.customer.last_name + " at " + invoice.customer.email + "; copied elysedougherty@gmail.com."
   end
 
   def invoice_reminder(invoice)
