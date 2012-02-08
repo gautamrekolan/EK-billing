@@ -209,9 +209,19 @@ class InvoicesController < ApplicationController
     #@invoice = Invoice.find(params[:id])
     success = Invoice.update_status(@invoice.id, "Mail Requested")
     if success == true
-      redirect_to(@invoice, :notice => "Your request was submitted successfully. A copy of this invoice will be on its way to you soon!")
+      if session[:user]
+        redirect_to(@invoice, :notice => "Your request was submitted successfully. A copy of this invoice will be on its way to you soon!")
+      else
+        @notice = "Your request was submitted successfully. A copy of this invoice will be on its way to you soon!"
+        render 'request_mail'
+      end
     else
-      redirect_to(@invoice, :notice => "Something went wrong! Your request was NOT submitted successfully.")
+      if session[:user]
+        redirect_to(@invoice, :notice => "Something went wrong! Your request was NOT submitted successfully.")
+      else
+        @notice = ""
+        render 'request_mail'
+      end
     end
   end
 
