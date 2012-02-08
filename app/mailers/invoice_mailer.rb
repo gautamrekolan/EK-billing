@@ -1,6 +1,5 @@
 class InvoiceMailer < ActionMailer::Base
   default :from => "lowerhopewellfarm@gmail.com"
-  default :host => "localhost:3000"
 
   def invoice_issued(invoice)
     # @invoice = invoice
