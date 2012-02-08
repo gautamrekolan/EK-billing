@@ -13,7 +13,7 @@ EkBilling::Application.routes.draw do
   match 'pages/access_denied'       => 'pages#access_denied',           :as => :access_denied
 
   match 'invoices/confirm/:id'      => "invoices#confirm",              :as => :invoice_confirm
-  match 'invoices/request/:id'      => "invoices#request_mail",         :as => :invoice_request
+  match 'invoices/request_mail/:id' => "invoices#request_mail",         :as => :invoice_request
   match 'invoices/issued/:id'       => "invoices#issued",               :as => :invoice_issued
   match 'invoices/text/:id'         => "invoices#text",                 :as => :invoice_text
   match 'invoices/mailed/:id'       => "invoices#mailed",               :as => :invoice_mailed
