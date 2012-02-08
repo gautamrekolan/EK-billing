@@ -12,9 +12,9 @@
 <% else %>
     <h1 class="title">Your Barn</h1>
     <% if @organization.custom.nil? == false %>
-        <%= link_to 'CUSTOMIZE YOUR INVOICES', edit_custom_path(@organization.custom), :class => "add_link" %>
+        <%= link_to 'Customize your invoices', edit_custom_path(@organization.custom), :class => "add_link" %>
     <% else %>
-        <%= link_to 'CUSTOMIZE YOUR INVOICES', new_custom_path, :class => "add_link" %>
+        <%= link_to 'Customize your invoices', new_custom_path, :class => "add_link" %>
     <% end %>
 <% end %>
 
