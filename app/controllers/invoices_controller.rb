@@ -201,12 +201,12 @@ class InvoicesController < ApplicationController
 
   def request_mail
     # Decrypt encrypted id from params
-    #@param = params[:id]
-    #cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
-    #@decrypted = cipher.dec(@param) # @param
-    #@invoice = Invoice.find(@decrypted)
+    @param = params[:id]
+    cipher = Gibberish::AES.new("snoopyandlowerhopewellfarm")
+    @decrypted = cipher.dec(@param) # @param
+    @invoice = Invoice.find(@decrypted)
 
-    @invoice = Invoice.find(params[:id])
+    #@invoice = Invoice.find(params[:id])
     success = Invoice.update_status(@invoice.id, "Mail Requested")
     if success == true
       redirect_to(@invoice, :notice => "Your request was submitted successfully. A copy of this invoice will be on its way to you soon!")
