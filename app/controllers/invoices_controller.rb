@@ -16,9 +16,9 @@ class InvoicesController < ApplicationController
       pastdue_status_codes = [1, 2, 3, 4, 5, 6, 7]
       @attention_invoices = Invoice.find_all_by_organization_id(session[:user][:organization_id],
                                                                 :order => 'end_date desc',
-                                                                :conditions => [ "(status_code = '4')
+                                                                :conditions => [ "status_code = '4'
                                                                                   or (status_code in (?)
-                                                                                  and due_date < ?",
+                                                                                  and due_date < ?)",
                                                                                   pastdue_status_codes, Date.today ])
 
       # open invoices
