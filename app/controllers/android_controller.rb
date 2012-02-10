@@ -3,7 +3,7 @@ class AndroidController < ApplicationController
   def get_all_customers
     @customers = Customer.find_all_by_organization_id(params[:organization_id])
 
-    @encoded = ActiveSupport::JSON.encode(@customers)
+    render :json => @customers
   end
 
 end
