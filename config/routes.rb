@@ -45,6 +45,8 @@ EkBilling::Application.routes.draw do
   match 'payments/receipt/:id'      => "payments#receipt",              :as => :payment_receipt
   match 'payments/error'            => "payments#error",                :as => :payment_error
 
+  match 'android/getAllCustomers', :to => "android#get_all_customers"
+
   resources :autos
   resources :categories
   resources :customers

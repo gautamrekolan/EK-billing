@@ -22,3 +22,6 @@
 /log/emails.txt
 
 .idea/
+
+#/app/controllers/android_controller.rb
+#/app/views/android/
